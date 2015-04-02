@@ -1,4 +1,39 @@
 #+TITLE: Notes and ideas for the "Introduction to biostatistical computing (SS2015)"
 #+OPTIONS: num:nil
 
+In general try to bring a bit more structure in this
 
+* Quick intro to R?
+
+  - data types
+  - get help (sos package, mailing list, stack overflow). Google in
+    English
+  - Install packages
+  - debugging
+
+* Reproducible research
+  - keep a bit of the intro as motivation for reproducible research
+  - Insist on good coding practice (comments, file and directory
+    structure, write functions)
+  - (If available) introduce git
+  - Start right away
+  - only do knitr
+  - Would need some intro into markdown and latex  
+
+* Data manipulation
+
+  1. Reading/Writing data
+  2. Factors and dates
+  3. Strings
+  4. Data aggregation/manipulation/reshaping/merging
+
+* Graphics
+
+  - A bit of theory
+  - do a tiny bit of base graphics (for using plot methods mostly)
+  - ggplot2
+
+* Simulations
+
+  - Try to do a bit more than last year.
+  - By product: test code and debug
