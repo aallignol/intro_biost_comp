@@ -1,0 +1,4 @@
+#+TITLE: Notes and ideas for the "Introduction to biostatistical computing (SS2015)"
+#+OPTIONS: num:nil
+
+
