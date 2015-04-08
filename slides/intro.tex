@@ -123,6 +123,14 @@
   \vskip0pt%
 }
 \makeatother
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -139,14 +147,6 @@
 \end{frame}
 }
 %%%%%%
-
-
-
-\begin{kframe}
-\begin{alltt}
-\hlstd{a} \hlkwb{<-} \hlnum{1}
-\end{alltt}
-\end{kframe}
 
 
 \frame{\tableofcontents[currentsection]}
@@ -196,7 +196,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Introduction}
+  \frametitle{Reproducible Analysis}
   {\em An article about computational science in a scientific
     publication is not the scholarship itself, it is merely advertising
     of the scholarship. The actual scholarship is the complete software
@@ -411,7 +411,7 @@ Examples:
   \frametitle{Literate Programming}
   In R
   \begin{itemize}
-  \item The {\bf Sweave} package: Embed R code in \LaTeX files. A
+  \item The {\bf Sweave} package: Embed R code in \LaTeX{} files. A
     pass through Sweave converts the file to a {\tt .tex} file, in which
     code, tables, graphics are included 
   \item The {\bf knitr} package: An evolution of {\bf Sweave}. {\bf
@@ -434,14 +434,17 @@ Examples:
   \begin{itemize}
   \item Text in the code that are not compiled/executed by the program
   \item Explain what difficult pieces of code do, e.g.,
-\begin{kframe}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwa{for} \hlstd{(i} \hlkwa{in} \hlkwd{seq_along}\hlstd{(times)) \{}
-    \hlstd{dna[}\hlkwd{cbind}\hlstd{(ii, ii, i)]} \hlkwb{<-} \hlopt{-}\hlstd{(}\hlkwd{.rowSums}\hlstd{(nev[, , i],} \hlkwd{dim}\hlstd{(nev)[}\hlnum{1}\hlstd{],} \hlkwd{dim}\hlstd{(nev)[}\hlnum{1}\hlstd{],} \hlnum{FALSE}\hlstd{))} \hlopt{/}
+    \hlstd{dna[}\hlkwd{cbind}\hlstd{(ii, ii, i)]} \hlkwb{<-} \hlopt{-}\hlstd{(}\hlkwd{.rowSums}\hlstd{(nev[, , i],} \hlkwd{dim}\hlstd{(nev)[}\hlnum{1}\hlstd{],}
+                                        \hlkwd{dim}\hlstd{(nev)[}\hlnum{1}\hlstd{],} \hlnum{FALSE}\hlstd{))} \hlopt{/}
         \hlstd{nrisk[i, ]}
 \hlstd{\}}
 \end{alltt}
 \end{kframe}
+\end{knitrout}
 
 {\scriptsize
 \begin{verbatim}
@@ -506,6 +509,71 @@ Examples:
   \end{itemize}
 \end{frame}
 
+\section{Real Life Data}
+
+\begin{frame}[fragile]
+  \ft{Real Life Data}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(fortunes)}
+\hlkwd{fortune}\hlstd{(}\hlstr{"Tolstoy"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Happy families are all alike; every unhappy family is
+## unhappy in its own way.
+## Leo Tolstoy
+## 
+## and every messy data is messy in its own way - it's easy to
+## define the characteristics of a clean dataset (rows are
+## observations, columns are variables, columns contain values
+## of consistent types). If you start to look at real life
+## data you'll see every way you can imagine data being messy
+## (and many that you can't)!
+##    -- Hadley Wickham (answering 'in what way messy data
+##       sets are messy')
+##       R-help (January 2008)
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \includegraphics[width=8cm]{graphics/real_life_data2.jpeg}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \ft{Real Life Data}
+  {\em The problems}
+  \begin{itemize}
+  \item Bad structure
+  \item Non ascii characters (e.g., Umlaut)
+  \item Variable names with spaces; on several lines, \dots
+  \item Colour coding
+  \item No consistent definition of missing values
+  \item Free text
+  \item (Wrong input, e.g., person who die twice)
+  \item \dots
+  \end{itemize}\pause
+  Often data need to be transformed/reshaped for fitting a particular model
+\end{frame}
+
+\begin{frame}
+  \ft{Real Life Data}
+  
+  {\em The tools needed}
+  \begin{itemize}
+  \item Read data
+  \item Work with strings/characters variables
+  \item Factors and dates
+  \item Data manipulation, reshaping, merging
+  \end{itemize}
+
+\end{frame}
+
 \section{Simulation Studies}
 
 \begin{frame}
@@ -523,6 +591,7 @@ Examples:
     \end{itemize}
   \end{description}
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Simulation Studies}
@@ -580,6 +649,53 @@ How does that work?
   \end{itemize}
 \end{frame}
 
+\section{Further Topics}
 
+\begin{frame}
+  \ft{Further Topics}
+  \fst{Graphics}
+  
+  {\bf Why do we need graphics?}
+  \begin{itemize}
+  \item Data exploration
+    \begin{itemize}
+    \item Look for trends and/or associations between variable
+    \item The first step before modelling
+    \item $\rightarrow$ quick and dirty graphs
+    \end{itemize}
+  \item Check assumptions of statistical models
+  \item These graphics are usually for you
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \ft{Further Topics}
+  \fst{Graphics}
+  
+  {\bf Why do we need graphics?}
+  \begin{itemize}
+  \item Information visualisation/Communication
+    \begin{itemize}
+    \item Need a lot of polishing
+    \item Iteration is crucial
+    \item Think about where you present the graphics, e.g, colour,
+      line thickness for a beamer presentation
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \ft{Minard's Flow Map}
+  \centering
+  \includegraphics[width=\linewidth]{graphics/1024px-Minard.png}
+\end{frame}
+
+\begin{frame}
+  \ft{Further Topics}
+  \begin{itemize}
+  \item Debugging
+  \item Something you might want to hear about?
+  \end{itemize}
+\end{frame}
 
 \end{document}

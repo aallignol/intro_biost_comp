@@ -27,7 +27,7 @@
 <<setup, echo = FALSE>>=
 library(knitr)
 options(width = 60)
-opts_chunk$set(fig.path = "graphics/", echo = TRUE, results = "asis", size='footnotesize')
+opts_chunk$set(fig.path = "graphics/", echo = TRUE, results = "markup", size = "scriptsize")
 @ 
 
 
@@ -79,6 +79,14 @@ opts_chunk$set(fig.path = "graphics/", echo = TRUE, results = "asis", size='foot
 }
 \makeatother
 
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
 \begin{document}
 
 % \newcommand{\onlyframenumber}{yes}
@@ -94,12 +102,6 @@ opts_chunk$set(fig.path = "graphics/", echo = TRUE, results = "asis", size='foot
 \end{frame}
 }
 %%%%%%
-
-
-
-<<sd, size = "tiny">>=
-a <- 1
-@ %def 
 
 
 \frame{\tableofcontents[currentsection]}
@@ -149,7 +151,7 @@ a <- 1
 \end{frame}
 
 \begin{frame}
-  \frametitle{Introduction}
+  \frametitle{Reproducible Analysis}
   {\em An article about computational science in a scientific
     publication is not the scholarship itself, it is merely advertising
     of the scholarship. The actual scholarship is the complete software
@@ -364,7 +366,7 @@ Examples:
   \frametitle{Literate Programming}
   In R
   \begin{itemize}
-  \item The {\bf Sweave} package: Embed R code in \LaTeX files. A
+  \item The {\bf Sweave} package: Embed R code in \LaTeX{} files. A
     pass through Sweave converts the file to a {\tt .tex} file, in which
     code, tables, graphics are included 
   \item The {\bf knitr} package: An evolution of {\bf Sweave}. {\bf
@@ -389,7 +391,8 @@ Examples:
   \item Explain what difficult pieces of code do, e.g.,
 <<eval=FALSE>>=
 for (i in seq_along(times)) {
-    dna[cbind(ii, ii, i)] <- -(.rowSums(nev[, , i], dim(nev)[1], dim(nev)[1], FALSE)) / 
+    dna[cbind(ii, ii, i)] <- -(.rowSums(nev[, , i], dim(nev)[1], 
+                                        dim(nev)[1], FALSE)) / 
         nrisk[i, ]
 }
 @ %def 
@@ -457,6 +460,51 @@ for (i in seq_along(times)) {
   \end{itemize}
 \end{frame}
 
+\section{Real Life Data}
+
+\begin{frame}[fragile]
+  \ft{Real Life Data}
+<<hadley>>=
+library(fortunes)
+fortune("Tolstoy")
+@ %def 
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \includegraphics[width=8cm]{graphics/real_life_data2.jpeg}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \ft{Real Life Data}
+  {\em The problems}
+  \begin{itemize}
+  \item Bad structure
+  \item Non ascii characters (e.g., Umlaut)
+  \item Variable names with spaces; on several lines, \dots
+  \item Colour coding
+  \item No consistent definition of missing values
+  \item Free text
+  \item (Wrong input, e.g., person who die twice)
+  \item \dots
+  \end{itemize}\pause
+  Often data need to be transformed/reshaped for fitting a particular model
+\end{frame}
+
+\begin{frame}
+  \ft{Real Life Data}
+  
+  {\em The tools needed}
+  \begin{itemize}
+  \item Read data
+  \item Work with strings/characters variables
+  \item Factors and dates
+  \item Data manipulation, reshaping, merging
+  \end{itemize}
+
+\end{frame}
+
 \section{Simulation Studies}
 
 \begin{frame}
@@ -474,6 +522,7 @@ for (i in seq_along(times)) {
     \end{itemize}
   \end{description}
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Simulation Studies}
@@ -531,6 +580,53 @@ How does that work?
   \end{itemize}
 \end{frame}
 
+\section{Further Topics}
 
+\begin{frame}
+  \ft{Further Topics}
+  \fst{Graphics}
+  
+  {\bf Why do we need graphics?}
+  \begin{itemize}
+  \item Data exploration
+    \begin{itemize}
+    \item Look for trends and/or associations between variable
+    \item The first step before modelling
+    \item $\rightarrow$ quick and dirty graphs
+    \end{itemize}
+  \item Check assumptions of statistical models
+  \item These graphics are usually for you
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \ft{Further Topics}
+  \fst{Graphics}
+  
+  {\bf Why do we need graphics?}
+  \begin{itemize}
+  \item Information visualisation/Communication
+    \begin{itemize}
+    \item Need a lot of polishing
+    \item Iteration is crucial
+    \item Think about where you present the graphics, e.g, colour,
+      line thickness for a beamer presentation
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \ft{Minard's Flow Map}
+  \centering
+  \includegraphics[width=\linewidth]{graphics/1024px-Minard.png}
+\end{frame}
+
+\begin{frame}
+  \ft{Further Topics}
+  \begin{itemize}
+  \item Debugging
+  \item Something you might want to hear about?
+  \end{itemize}
+\end{frame}
 
 \end{document}
