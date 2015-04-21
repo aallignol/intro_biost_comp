@@ -1,0 +1,49 @@
+The television data set
+========================================================
+author: Arthur Allignol
+date: 
+
+```{r include=FALSE}
+require(knitr)
+opts_chunk$set(size="scriptsize", fig.path = "graphics/")
+```
+
+
+Read the data
+========================================================
+
+- we read the data using the following command
+```{r}
+tele <- read.csv("/data/Ulm/Teaching/SS_2014/Intro_Biostat_Comp/Illustrations/Television/data/television.csv", 
+                 stringsAsFactors = FALSE, na.strings = "*")
+```
+- and an excerpt of the data is presented below
+```{r, size = "footnotesize"}
+head(tele)
+```
+
+The variables
+===================================
+- `Country` 
+- `life` Life expectancy
+- `tv` Number of persons per tv set
+- `phys` Number of persons per physician
+
+A simple histogram
+========================================================
+
+```{r fig.cap="Histograms of {\\tt tv} and {\\tt phys}", fig.height=6, fig.width=10, fig.show="hold"}
+oldpar <- par(no.readonly = TRUE)
+par(mfrow = c(1, 2))
+hist(tele$tv, main = "Number of people per TV")
+hist(tele$life, main = "Life expectancy")
+par(oldpar)
+```
+
+Some maths
+==========
+
+We may want to use a linear model to model these data
+$$
+Y = \beta_0 + \beta_1 \cdot X_1 + \dots + \beta_p \cdot X_p + \varepsilon
+$$
