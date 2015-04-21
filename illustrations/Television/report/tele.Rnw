@@ -1,0 +1,37 @@
+\documentclass{article}
+
+\title{An analysis of the television data set}
+\author{Arthur Allignol}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+<<setup, include=FALSE>>=
+require(knitr)
+opts_chunk$set(size="scriptsize", fig.path = "graphics/")
+@
+
+We read the data using the follwing commands
+<<>>=
+tele <- read.csv("/data/Ulm/Teaching/SS_2014/Intro_Biostat_Comp/Illustrations/Television/data/television.csv", 
+                 stringsAsFactors = FALSE, na.strings = "*")
+@
+and an excerpt of the data are displayed below.
+<<>>=
+head(tele)
+@
+\verb=Country= is the country name, \verb=life= is the life expectancy at birth, while \verb=tv= and \verb=phys= 
+are the number of people of television set and the number of people per physicians, respectively.
+
+<<fig.cap="Histograms of {\\tt tv} and {\\tt phys}", fig.height=8, fig.width=15, out.width="0.7\\textwidth">>=
+oldpar <- par(no.readonly = TRUE)
+par(mfrow = c(1, 2))
+hist(tele$tv, main = "Number of people per TV")
+hist(tele$life, main = "Life expectancy")
+par(oldpar)
+@
+
+
+\end{document}
