@@ -48,7 +48,7 @@ W[W>2 & W<7]
 which(W>2)        #determine indices where a condition holds
 
 ###Matrix Operations
-A=matrix(0,nrow=2,ncol=3)   #Initialize 2x3 matrix including Nulls
+A=matrix(0,nrow=2,ncol=3)   #Initialize 2x3 matrix including 0
 A
 A[1,3]=5          #allocate single value at position (1,3)
 A

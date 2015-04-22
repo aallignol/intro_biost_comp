@@ -193,7 +193,7 @@ A</code></pre>
 <pre><code> [1] 1 2 3 5 9 7 3 3 3 3 3</code></pre>
 </section>
 <section id="vector-operations-1" class="slide level1">
-<h1>Vector Operations</h1>
+<h1>Vector operations</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># vector with values from 1 to 10 with stepsize 2</span>
 Y &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>)     
 Y</code></pre>
@@ -211,6 +211,318 @@ W*Y</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># element-wise multiplication with a scalar</span>
 <span class="dv">5</span>*W               </code></pre>
 <pre><code>[1]  5 10 15 25 45 35</code></pre>
+</section>
+<section id="vector-operations-2" class="slide level1">
+<h1>Vector operations</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(W)         <span class="co">#determine length of vector</span></code></pre>
+<pre><code>[1] 6</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(W)%*%Y          <span class="co">#transposition and vector multiplication</span></code></pre>
+<pre><code>     [,1]
+[1,]  188</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">W[<span class="dv">4</span>]              <span class="co">#select specific element</span></code></pre>
+<pre><code>[1] 5</code></pre>
+</section>
+<section id="vector-operations-3" class="slide level1">
+<h1>Vector operations</h1>
+<pre class="sourceCode r"><code class="sourceCode r">W[W&gt;<span class="dv">2</span>]</code></pre>
+<pre><code>[1] 3 5 9 7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">W[W&gt;<span class="dv">2</span> &amp;<span class="st"> </span>W&lt;<span class="dv">7</span>]</code></pre>
+<pre><code>[1] 3 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(W&gt;<span class="dv">2</span>)        <span class="co">#determine indices where a condition holds</span></code></pre>
+<pre><code>[1] 3 4 5 6</code></pre>
+</section>
+<section id="matrix-operations" class="slide level1">
+<h1>Matrix operations</h1>
+<pre class="sourceCode r"><code class="sourceCode r">A=<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">3</span>)   <span class="co">#Initialize 2x3 matrix including 0</span>
+A</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    0    0    0
+[2,]    0    0    0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">A[<span class="dv">1</span>,<span class="dv">3</span>]=<span class="dv">5</span>          <span class="co">#allocate single value at position (1,3)</span>
+A</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    0    0    5
+[2,]    0    0    0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">A[,<span class="dv">2</span>]=<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)      <span class="co">#allocate values to a whole column (analogously with rows)</span>
+A</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    0    1    5
+[2,]    0    2    0</code></pre>
+</section>
+<section id="matrix-operations-1" class="slide level1">
+<h1>Matrix operations</h1>
+<pre class="sourceCode r"><code class="sourceCode r">A[-<span class="dv">3</span>]             <span class="co"># A without the third element</span></code></pre>
+<pre><code>[1] 0 0 2 5 0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">B=<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>),<span class="dv">3</span>,<span class="dv">3</span>) <span class="co">#Initialize matrix with single values</span>
+B</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    1    2    3
+[3,]    1    2    3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">C=<span class="kw">diag</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))  <span class="co">#diagonal matrix</span>
+C         </code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    0    0
+[2,]    0    2    0
+[3,]    0    0    3</code></pre>
+</section>
+<section id="matrix-operations-2" class="slide level1">
+<h1>Matrix operations</h1>
+<pre class="sourceCode r"><code class="sourceCode r">B *<span class="st"> </span>C               <span class="co">#element-wise operations</span></code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    0    0
+[2,]    0    4    0
+[3,]    0    0    9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">B +<span class="st"> </span>C</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    2    2    3
+[2,]    1    4    3
+[3,]    1    2    6</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">B %*%<span class="st"> </span>C             <span class="co"># matrix multiplication</span></code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    9
+[2,]    1    4    9
+[3,]    1    4    9</code></pre>
+</section>
+<section id="matrix-operations-3" class="slide level1">
+<h1>Matrix operations</h1>
+<pre class="sourceCode r"><code class="sourceCode r">A</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    0    1    5
+[2,]    0    2    0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">(A &lt;-<span class="st"> </span><span class="kw">rbind</span>(A, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">5</span>))) <span class="co">#add row</span></code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    0    1    5
+[2,]    0    2    0
+[3,]    0    1    5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">(A &lt;-<span class="st"> </span><span class="kw">cbind</span>(A, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>))) <span class="co">#add column</span></code></pre>
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    0    1    5    0
+[2,]    0    2    0    1
+[3,]    0    1    5    4</code></pre>
+</section>
+<section id="control-flow" class="slide level1">
+<h1>Control flow</h1>
+<ul>
+<li><code>for</code> loops</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">3</span>) {
+    <span class="kw">print</span>(i)
+}</code></pre>
+<pre><code>[1] 1
+[1] 2
+[1] 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">item &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Apple&quot;</span>, <span class="st">&quot;Orange&quot;</span>, <span class="st">&quot;Tomato&quot;</span>)
+for (i in item)
+    <span class="kw">print</span>(i)</code></pre>
+<pre><code>[1] &quot;Apple&quot;
+[1] &quot;Orange&quot;
+[1] &quot;Tomato&quot;</code></pre>
+</section>
+<section id="control-flow-1" class="slide level1">
+<h1>Control flow</h1>
+<ul>
+<li><code>while</code> loop</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">i &lt;-<span class="st"> </span><span class="dv">5</span>
+while(i &lt;<span class="st"> </span><span class="dv">10</span>){      
+    <span class="kw">print</span>(i)
+    i &lt;-<span class="st"> </span>i +<span class="st"> </span><span class="dv">1</span>
+}</code></pre>
+<pre><code>[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9</code></pre>
+</section>
+<section id="control-flow-2" class="slide level1">
+<h1>Control flow</h1>
+<ul>
+<li><code>if-then-else</code></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">8</span>
+y &lt;-<span class="st"> </span><span class="dv">7</span>
+if (x &lt;<span class="st"> </span>y) {          
+    <span class="kw">print</span>(x)
+} else {
+      <span class="kw">print</span>(y)
+  }</code></pre>
+<pre><code>[1] 7</code></pre>
+</section>
+<section id="control-flow-3" class="slide level1">
+<h1>Control flow</h1>
+<ul>
+<li><code>ifelse()</code></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">(z &lt;-<span class="st"> </span><span class="kw">ifelse</span>(x &lt;<span class="st"> </span>y, x, y))</code></pre>
+<pre><code>[1] 7</code></pre>
+<ul>
+<li><code>ifelse</code> works with vectors</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">8</span>)
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">9</span>)
+<span class="kw">ifelse</span>(a &lt;<span class="st"> </span>b, a, b)</code></pre>
+<pre><code>[1] 3 6 8</code></pre>
+</section>
+<section id="distributions" class="slide level1">
+<h1>Distributions</h1>
+<ul>
+<li>Normal distribution</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Value of a N(5,34) density function of at point x=2</span>
+<span class="kw">dnorm</span>(<span class="dt">x=</span><span class="dv">2</span>, <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span> <span class="dv">7</span>)     </code></pre>
+<pre><code>[1] 0.05199096</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Value of a N(0,1) distribution function at point x=2   </span>
+<span class="kw">pnorm</span>(<span class="dt">q=</span><span class="dv">2</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)     </code></pre>
+<pre><code>[1] 0.9772499</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># p-quantile of a N(0,1) distribution</span>
+<span class="kw">qnorm</span>(<span class="dt">p=</span><span class="fl">0.25</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)  </code></pre>
+<pre><code>[1] -0.6744898</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulation of 50 N(0,1)-distributed random variables</span>
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)  </code></pre>
+</section>
+<section id="distributions-1" class="slide level1">
+<h1>Distributions</h1>
+<ul>
+<li>Other distributions</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">1</span>)   <span class="co"># exponential distribution</span></code></pre>
+<pre><code>[1] 4.5224090 0.4065422 0.1168759 0.3278900 1.3803991</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">punif</span>(<span class="fl">1.5</span>, <span class="dv">1</span>, <span class="dv">2</span>)      <span class="co"># Uniform distribution [1,2]</span></code></pre>
+<pre><code>[1] 0.5</code></pre>
+<p>See the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Distributions.html">distribution help page</a> and the <a href="http://cran.r-project.org/web/views/Distributions.html">Distribution task view</a> for all distributions available</p>
+</section>
+<section id="some-math-functions" class="slide level1">
+<h1>Some math functions</h1>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">abs</span>(<span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="dv">2</span>, <span class="dv">2</span>)) <span class="co">#abs: absolute value</span>
+
+<span class="kw">sqrt</span>(x)    <span class="co">#square root</span>
+<span class="kw">exp</span>(x)     <span class="co">#exponential function</span>
+<span class="kw">log</span>(x)     <span class="co">#logarithm</span>
+<span class="kw">sin</span>(x)     <span class="co">#sinus</span>
+<span class="kw">cos</span>(x)     <span class="co">#cosinus</span>
+<span class="kw">sort</span>(x)    <span class="co">#sort entries</span>
+<span class="kw">quantile</span>(x,<span class="fl">0.25</span>)  <span class="co">#sample 25%-quantile</span>
+
+<span class="kw">mean</span>(x)    <span class="co">#sample mean</span>
+<span class="kw">var</span>(x)     <span class="co">#sample variance</span>
+<span class="kw">sd</span>(x)      <span class="co">#sample standard deviation</span>
+<span class="kw">sqrt</span>(<span class="kw">var</span>(x))
+<span class="kw">median</span>(x)  <span class="co">#sample median</span>
+<span class="kw">min</span>(x)     <span class="co">#sample minimum</span>
+<span class="kw">max</span>(x)     <span class="co">#sample maximum</span>
+<span class="kw">summary</span>(x) <span class="co">#Overview of important sample parameters</span></code></pre>
+</section>
+<section id="user-defines-functions" class="slide level1">
+<h1>User defines functions</h1>
+<ul>
+<li>A function with one parameter</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">myFun &lt;-<span class="st"> </span>function(x) {
+    x^<span class="dv">2</span> +<span class="st"> </span><span class="dv">1</span>
+}
+<span class="kw">myFun</span>(<span class="dv">3</span>)</code></pre>
+<pre><code>[1] 10</code></pre>
+</section>
+<section id="user-defined-functions" class="slide level1">
+<h1>User defined functions</h1>
+<ul>
+<li>A function with more parameters</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">complicated_function &lt;-<span class="st"> </span>function(x, <span class="dt">y =</span> <span class="dv">2</span>, <span class="dt">text =</span> <span class="st">&quot;apple&quot;</span>) {
+    length_text &lt;-<span class="st"> </span><span class="kw">nchar</span>(text)
+    if (y &gt;<span class="st"> </span><span class="dv">0</span>) {
+        res &lt;-<span class="st"> </span>x +<span class="st"> </span><span class="kw">log</span>(y) *<span class="st"> </span><span class="kw">length</span>(text)
+    } else {
+          res &lt;-<span class="st"> </span>x +<span class="st"> </span><span class="kw">log</span>(<span class="kw">abs</span>(y)) *<span class="st"> </span><span class="kw">length</span>(text)
+      }
+
+    res
+}</code></pre>
+</section>
+<section id="user-defined-function" class="slide level1">
+<h1>User defined function</h1>
+<pre class="sourceCode r"><code class="sourceCode r">(a &lt;-<span class="st"> </span><span class="kw">complicated_function</span>(<span class="dt">x =</span> <span class="dv">10</span>))</code></pre>
+<pre><code>[1] 10.69315</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">(b &lt;-<span class="st"> </span><span class="kw">complicated_function</span>(<span class="dv">10</span>, -<span class="dv">2</span>, <span class="st">&quot;fffff&quot;</span>))</code></pre>
+<pre><code>[1] 10.69315</code></pre>
+<ul>
+<li><a href="http://cran.r-project.org/doc/FAQ/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f">Careful</a> with floating points</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span>)
+a *<span class="st"> </span>a -<span class="st"> </span><span class="dv">2</span></code></pre>
+<pre><code>[1] 4.440892e-16</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">a *<span class="st"> </span>a ==<span class="st"> </span><span class="dv">2</span></code></pre>
+<pre><code>[1] FALSE</code></pre>
+</section>
+<section id="data-frames" class="slide level1">
+<h1>Data frames</h1>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Franz&quot;</span>, <span class="st">&quot;Anton&quot;</span>, <span class="st">&quot;Heinrich&quot;</span>)                   
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">1.7</span>, <span class="fl">2.7</span>)
+z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">95</span>, <span class="dv">85</span>, <span class="dv">67</span>)
+grades_list =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name=</span>x, <span class="dt">grade=</span>y, <span class="dt">points=</span>z)                             <span class="co">#create Data Frame</span>
+grades_list</code></pre>
+<pre><code>      name grade points
+1    Franz   1.0     95
+2    Anton   1.7     85
+3 Heinrich   2.7     67</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add a row</span>
+(grades_list &lt;-<span class="st"> </span><span class="kw">rbind</span>(grades_list,
+                     <span class="kw">data.frame</span>(<span class="dt">name=</span> <span class="st">&quot;Maria&quot;</span>, <span class="dt">grade =</span> <span class="fl">3.7</span>, <span class="dt">points =</span> <span class="dv">54</span>)) )</code></pre>
+<pre><code>      name grade points
+1    Franz   1.0     95
+2    Anton   1.7     85
+3 Heinrich   2.7     67
+4    Maria   3.7     54</code></pre>
+</section>
+<section id="data-frames-1" class="slide level1">
+<h1>Data frames</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create new gender vector</span>
+gender &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;m&quot;</span>, <span class="dv">3</span>), <span class="st">&quot;f&quot;</span>)
+grades_list &lt;-<span class="st"> </span><span class="kw">cbind</span>(grades_list, gender) <span class="co">#add column</span>
+grades_list</code></pre>
+<pre><code>      name grade points gender
+1    Franz   1.0     95      m
+2    Anton   1.7     85      m
+3 Heinrich   2.7     67      m
+4    Maria   3.7     54      f</code></pre>
+</section>
+<section id="data-frames-2" class="slide level1">
+<h1>Data frames</h1>
+<ul>
+<li>Column access</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">grades_list$points</code></pre>
+<pre><code>[1] 95 85 67 54</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">grades_list[, <span class="st">&quot;points&quot;</span>]</code></pre>
+<pre><code>[1] 95 85 67 54</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">grades_list[, <span class="dv">3</span>]</code></pre>
+<pre><code>[1] 95 85 67 54</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">grades_list[[<span class="dv">3</span>]]</code></pre>
+<pre><code>[1] 95 85 67 54</code></pre>
+</section>
+<section id="data-frames-3" class="slide level1">
+<h1>Data frames</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># determine mean grade of all male individuals</span>
+x &lt;-<span class="st"> </span><span class="kw">subset</span>(grades_list, gender ==<span class="st"> &quot;m&quot;</span>)$grade
+<span class="co"># equivalently</span>
+y &lt;-<span class="st"> </span>grades_list[grades_list$gender ==<span class="st"> &quot;m&quot;</span>, <span class="st">&quot;grade&quot;</span>]
+<span class="kw">mean</span>(x) ==<span class="st"> </span><span class="kw">mean</span>(y)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+</section>
+<section id="graphics" class="slide level1">
+<h1>Graphics</h1>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+<span class="kw">plot</span>(x, y, <span class="dt">col =</span> <span class="dv">1</span>)
+<span class="kw">abline</span>(<span class="kw">lm</span>(x~y), <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;royalblue2&quot;</span>)
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="st">&quot;regression</span><span class="ch">\n</span><span class="st">line&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;royalblue2&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="graphics/graphics-1.png" title="A plot" alt="A plot" width="400px" /></p>
+</section>
+<section id="graphics-1" class="slide level1">
+<h1>Graphics</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(x)</code></pre>
+<p><img src="graphics/hist-1.png" title="An histogram" alt="An histogram" width="400px" /></p>
 </section>
 <!-- {{{{ dzslides core
 #
