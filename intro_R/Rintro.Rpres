@@ -1,0 +1,113 @@
+% (Quick) Introduction to R
+% Arthur Allignol
+
+```{r include=FALSE}
+require(knitr)
+opts_chunk$set(size="scriptsize", fig.path = "graphics/", comment = NA)
+```
+
+What is R?
+==================================================
+
+- R is *an environment for statistical computing and graphics*
+	- free software (GPL license)
+	- Available for Linux, Solaris, Windows, Mac OSX
+
+- Derived from the S language
+  
+- http://www.r-project.org/
+
+- The strength of R is its community
+	- $\geq$ 6000 packages additional packages implementating the latest
+      statistical techniques
+	- http://cran.r-project.org/
+
+What is R?
+========================================
+
+- R is an interactive language
+	- Statements converted to machine instructions as they are
+      encountered
+	- Flexible but slower than compiled code
+
+- R provides excellent graphics functionality (base graphics and
+  additional packages)
+
+- Can be used both as a glorified calculator or as a "real"
+  programming language
+
+
+R as a calculator
+========================================
+
+```{r}
+1 + 1
+2 + 3 * 4
+sqrt(9)
+pi
+```
+
+
+R as a smart calculator
+=======================================
+
+```{r}
+x <- 5            #allocate value to an object
+x <- 5            #as above
+print(x)          # objects in console
+x                 #same
+a <- sqrt(81)     #square root
+b <- exp(2)       #exponential function
+c <- log(50)      #logarithm
+a * b + c         #basic operations
+```
+
+
+Getting help
+========================================
+	
+- At the R prompt
+```{r, eval = FALSE}
+help("fun")
+?fun
+```
+
+- The **sos** package (see next slide for installing packages) and the `findfn` function
+
+- On the internet
+	- [R mailing list](https://stat.ethz.ch/mailman/listinfo/r-help)
+	- [stackoverflow](http://stackoverflow.com/)
+	- [Cross Validated](http://stats.stackexchange.com/)
+
+
+# Vector operations
+
+```{r}
+# define vector by means of the
+# specification of its single elements
+W <- c(1,2,3,5,9,7)  
+W
+# vector with a 3 (repeated 5 times)
+X <- rep(3,5)        
+X
+# combine vectors 
+A <- c(W,X)
+A
+```
+
+# Vector Operations
+
+```{r}
+# vector with values from 1 to 10 with stepsize 2
+Y <- seq(0,10,2)     
+Y
+#equals seq(0,10,1)
+Z <- 0:10            
+Z
+# element-wise addition
+W+Y
+# element-wise multiplication
+W*Y
+# element-wise multiplication with a scalar
+5*W               
+```

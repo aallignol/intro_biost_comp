@@ -1,0 +1,5 @@
+"name","grade","gender","gender"
+"Franz",1,"m","m"
+"Anton",1.7,"m","m"
+"Heinrich",2.7,"m","m"
+"Maria",3.7,"f","f"
