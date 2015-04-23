@@ -26,7 +26,7 @@ What is R?
 	- Statements converted to machine instructions as they are
       encountered
 	- Flexible but slower than compiled code
-
+- Object oriented (kinda)
 - R provides excellent graphics functionality (base graphics and
   additional packages)
 
@@ -77,7 +77,7 @@ R as a smart calculator
 
 ```r
 x <- 5            #allocate value to an object
-x <- 5            #as above
+x = 5             #as above
 print(x)          # objects in console
 ```
 
@@ -121,6 +121,25 @@ help("fun")
 	- [R mailing list](https://stat.ethz.ch/mailman/listinfo/r-help)
 	- [stackoverflow](http://stackoverflow.com/)
 	- [Cross Validated](http://stats.stackexchange.com/)
+
+# Packages
+
+- Install package
+
+```r
+install.packages("new_package")
+install.packages(c("new_package1", "new_package2"))
+```
+
+- Update packages
+
+```r
+update.packages()
+```
+
+- Packages available from, e.g., [CRAN](http://cran.r-project.org/)
+- CRAN [task views](http://cran.r-project.org/web/views/) provide list of
+  packages grouped by theme
 
 
 # Vector operations
@@ -538,7 +557,7 @@ rexp(n = 5, rate = 1)   # exponential distribution
 ```
 
 ```
-[1] 4.5224090 0.4065422 0.1168759 0.3278900 1.3803991
+[1] 1.5626812 0.6879787 0.6191264 0.1072972 0.2525931
 ```
 
 ```r
@@ -579,7 +598,7 @@ max(x)     #sample maximum
 summary(x) #Overview of important sample parameters
 ```
 
-# User defines functions
+# User defined functions
 
 - A function with one parameter
 
@@ -601,9 +620,9 @@ myFun(3)
 complicated_function <- function(x, y = 2, text = "apple") {
     length_text <- nchar(text)
     if (y > 0) {
-        res <- x + log(y) * length(text)
+        res <- x + log(y) * length_text
     } else {
-          res <- x + log(abs(y)) * length(text)
+          res <- x + log(abs(y)) * length_text
       }
 
     res
@@ -618,7 +637,7 @@ complicated_function <- function(x, y = 2, text = "apple") {
 ```
 
 ```
-[1] 10.69315
+[1] 13.46574
 ```
 
 ```r
@@ -626,7 +645,7 @@ complicated_function <- function(x, y = 2, text = "apple") {
 ```
 
 ```
-[1] 10.69315
+[1] 13.46574
 ```
 
 - [Careful](http://cran.r-project.org/doc/FAQ/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
@@ -759,7 +778,8 @@ x <- rnorm(100)
 y <- rnorm(100)
 plot(x, y, col = 1)
 abline(lm(x~y), lwd = 3, col = "royalblue2")
-legend("topright", "regression\nline", col = "royalblue2", lwd = 3, cex = 2)
+legend("topright", "regression\nline", col = "royalblue2",
+       lwd = 3, cex = 2)
 ```
 
 <img src="graphics/graphics-1.png" title="A plot" alt="A plot" width="400px" />

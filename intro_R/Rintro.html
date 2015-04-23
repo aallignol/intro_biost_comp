@@ -130,6 +130,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Statements converted to machine instructions as they are encountered</li>
 <li>Flexible but slower than compiled code</li>
 </ul></li>
+<li>Object oriented (kinda)</li>
 <li><p>R provides excellent graphics functionality (base graphics and additional packages)</p></li>
 <li><p>Can be used both as a glorified calculator or as a “real” programming language</p></li>
 </ul>
@@ -148,7 +149,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <section id="r-as-a-smart-calculator" class="slide level1">
 <h1>R as a smart calculator</h1>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">5</span>            <span class="co">#allocate value to an object</span>
-x &lt;-<span class="st"> </span><span class="dv">5</span>            <span class="co">#as above</span>
+x =<span class="st"> </span><span class="dv">5</span>             <span class="co">#as above</span>
 <span class="kw">print</span>(x)          <span class="co"># objects in console</span></code></pre>
 <pre><code>[1] 5</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">x                 <span class="co">#same</span></code></pre>
@@ -174,6 +175,22 @@ a *<span class="st"> </span>b +<span class="st"> </span>c         <span class="c
 <li><a href="http://stackoverflow.com/">stackoverflow</a></li>
 <li><a href="http://stats.stackexchange.com/">Cross Validated</a></li>
 </ul></li>
+</ul>
+</section>
+<section id="packages" class="slide level1">
+<h1>Packages</h1>
+<ul>
+<li>Install package</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;new_package&quot;</span>)
+<span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;new_package1&quot;</span>, <span class="st">&quot;new_package2&quot;</span>))</code></pre>
+<ul>
+<li>Update packages</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update.packages</span>()</code></pre>
+<ul>
+<li>Packages available from, e.g., <a href="http://cran.r-project.org/">CRAN</a></li>
+<li>CRAN <a href="http://cran.r-project.org/web/views/">task views</a> provide list of packages grouped by theme</li>
 </ul>
 </section>
 <section id="vector-operations" class="slide level1">
@@ -387,7 +404,7 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n
 <li>Other distributions</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">1</span>)   <span class="co"># exponential distribution</span></code></pre>
-<pre><code>[1] 4.5224090 0.4065422 0.1168759 0.3278900 1.3803991</code></pre>
+<pre><code>[1] 1.5626812 0.6879787 0.6191264 0.1072972 0.2525931</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">punif</span>(<span class="fl">1.5</span>, <span class="dv">1</span>, <span class="dv">2</span>)      <span class="co"># Uniform distribution [1,2]</span></code></pre>
 <pre><code>[1] 0.5</code></pre>
 <p>See the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Distributions.html">distribution help page</a> and the <a href="http://cran.r-project.org/web/views/Distributions.html">Distribution task view</a> for all distributions available</p>
@@ -413,8 +430,8 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n
 <span class="kw">max</span>(x)     <span class="co">#sample maximum</span>
 <span class="kw">summary</span>(x) <span class="co">#Overview of important sample parameters</span></code></pre>
 </section>
-<section id="user-defines-functions" class="slide level1">
-<h1>User defines functions</h1>
+<section id="user-defined-functions" class="slide level1">
+<h1>User defined functions</h1>
 <ul>
 <li>A function with one parameter</li>
 </ul>
@@ -424,7 +441,7 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n
 <span class="kw">myFun</span>(<span class="dv">3</span>)</code></pre>
 <pre><code>[1] 10</code></pre>
 </section>
-<section id="user-defined-functions" class="slide level1">
+<section id="user-defined-functions-1" class="slide level1">
 <h1>User defined functions</h1>
 <ul>
 <li>A function with more parameters</li>
@@ -432,9 +449,9 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n
 <pre class="sourceCode r"><code class="sourceCode r">complicated_function &lt;-<span class="st"> </span>function(x, <span class="dt">y =</span> <span class="dv">2</span>, <span class="dt">text =</span> <span class="st">&quot;apple&quot;</span>) {
     length_text &lt;-<span class="st"> </span><span class="kw">nchar</span>(text)
     if (y &gt;<span class="st"> </span><span class="dv">0</span>) {
-        res &lt;-<span class="st"> </span>x +<span class="st"> </span><span class="kw">log</span>(y) *<span class="st"> </span><span class="kw">length</span>(text)
+        res &lt;-<span class="st"> </span>x +<span class="st"> </span><span class="kw">log</span>(y) *<span class="st"> </span>length_text
     } else {
-          res &lt;-<span class="st"> </span>x +<span class="st"> </span><span class="kw">log</span>(<span class="kw">abs</span>(y)) *<span class="st"> </span><span class="kw">length</span>(text)
+          res &lt;-<span class="st"> </span>x +<span class="st"> </span><span class="kw">log</span>(<span class="kw">abs</span>(y)) *<span class="st"> </span>length_text
       }
 
     res
@@ -443,9 +460,9 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n
 <section id="user-defined-function" class="slide level1">
 <h1>User defined function</h1>
 <pre class="sourceCode r"><code class="sourceCode r">(a &lt;-<span class="st"> </span><span class="kw">complicated_function</span>(<span class="dt">x =</span> <span class="dv">10</span>))</code></pre>
-<pre><code>[1] 10.69315</code></pre>
+<pre><code>[1] 13.46574</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">(b &lt;-<span class="st"> </span><span class="kw">complicated_function</span>(<span class="dv">10</span>, -<span class="dv">2</span>, <span class="st">&quot;fffff&quot;</span>))</code></pre>
-<pre><code>[1] 10.69315</code></pre>
+<pre><code>[1] 13.46574</code></pre>
 <ul>
 <li><a href="http://cran.r-project.org/doc/FAQ/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f">Careful</a> with floating points</li>
 </ul>
@@ -516,7 +533,8 @@ y &lt;-<span class="st"> </span>grades_list[grades_list$gender ==<span class="st
 y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
 <span class="kw">plot</span>(x, y, <span class="dt">col =</span> <span class="dv">1</span>)
 <span class="kw">abline</span>(<span class="kw">lm</span>(x~y), <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;royalblue2&quot;</span>)
-<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="st">&quot;regression</span><span class="ch">\n</span><span class="st">line&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;royalblue2&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</code></pre>
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="st">&quot;regression</span><span class="ch">\n</span><span class="st">line&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;royalblue2&quot;</span>,
+       <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</code></pre>
 <p><img src="graphics/graphics-1.png" title="A plot" alt="A plot" width="400px" /></p>
 </section>
 <section id="graphics-1" class="slide level1">
