@@ -2,7 +2,6 @@ An analysis of the television data set
 ===========================================
 
 
-
 ```{r include=FALSE}
 require(knitr)
 opts_chunk$set(size="scriptsize", fig.path = "graphics/")

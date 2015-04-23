@@ -27,7 +27,7 @@ tele$Country[which.max(tele$tv)]
 
 
 ### Explore the relationship between life expectancy and tv ###
-with(tele, plot(life, tv))
+plot(tele$life, tele$tv)
 
 ## log of tv
 with(tele, plot(life, log(tv)))
@@ -41,13 +41,16 @@ with(tele, plot(life, phys))
 with(tele, plot(life, log(phys)))
 
 cor.test(tele$life, tele$phys)
-
+ 
 
 ### Some regression models ###
 fit_tele <- lm(life ~ tv, tele)
-plot(fit_tele)
+plot(tele$tv, tele$life)
+abline(fit_tele, col = 2)
 
 fit_log_tele <- lm(life ~ I(log(tv)), tele)
-plot(fit_log_tele)
+with(tele, plot(log(tv), life))
+abline(fit_log_tele, col = 2)
 
 fit_log_phys <- lm(life ~ I(log(phys)), tele)
+

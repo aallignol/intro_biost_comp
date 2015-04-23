@@ -4,7 +4,6 @@ An analysis of the television data set
 
 
 
-
 We read the data using the follwing commands
 
 ```r
@@ -39,7 +38,3 @@ par(oldpar)
 ```
 
 ![Histograms of {\tt tv} and {\tt phys}](graphics/unnamed-chunk-4-1.png) 
-
-## rrhasdfgsdf
-
-### ksfdklfjsdklf
