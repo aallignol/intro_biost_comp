@@ -1,12 +1,16 @@
-
 ---
 title: 'A bit more on markdown'
 author: Arthur Allignol
 transition: cube
 smart: true
-theme: moon
+theme: white
 
 ---
 
-# Bouh
+# bouh
+
+```{r}
+a <- 2 + 3
+b <- 3 + 2
+```
 

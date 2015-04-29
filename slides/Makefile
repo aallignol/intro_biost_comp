@@ -1,6 +1,6 @@
 ## A Makefile for the presentations
 
-OPTIONS = --highlight-style espresso
+OPTIONS = --highlight-style pygments --variable revealjs-url=/data/git/reveal.js
 STYLE = revealjs
 
 SRC_PRES = $(wildcard *.Rpres)
@@ -12,7 +12,7 @@ all: $(HTML_PRES) $(MD_PRES)
 mds: $(MD_PRES)
 
 %.html: %.md
-	pandoc -st $(STYLE) $< -o $@ $(OPTIONS)
+	pandoc -S -st $(STYLE) $< -o $@ $(OPTIONS)
 
 %.md: %.Rpres
 	Rscript \
