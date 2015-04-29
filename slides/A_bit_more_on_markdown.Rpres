@@ -1,16 +1,279 @@
 ---
 title: 'A bit more on markdown'
 author: Arthur Allignol
+hlss: github
 transition: cube
 smart: true
 theme: white
+slideNumber: true
 
 ---
 
-# bouh
 
-```{r}
-a <- 2 + 3
-b <- 3 + 2
+```{r include=FALSE, cache = FALSE}
+require(knitr)
+require(ggplot2)
+
+tele <- read.csv("/data/Ulm/Teaching/SS_2014/Intro_Biostat_Comp/Illustrations/Television/data/television.csv", 
+                 stringsAsFactors = FALSE, na.strings = "*")
+
+opts_chunk$set(size="scriptsize", fig.path = "graphics/", comment = NA)
+
+knit_hooks$set(source = function(x, options){
+  if (!is.null(options$verbatim) && options$verbatim){
+    opts = gsub(",\\s*verbatim\\s*=\\s*TRUE\\s*", "", options$params.src)
+    bef = sprintf('\n\n        ```{r %s}\n', opts, "\n")
+    stringr::str_c(
+      bef, 
+      knitr:::indent_block(paste(x, collapse = '\n'), "        "), 
+      "\n        ```\n"
+    )
+  } else {
+    stringr::str_c("\n\n```", tolower(options$engine), "\n", 
+      paste(x, collapse = '\n'), "\n```\n\n"
+    )
+  }
+})
 ```
 
+
+# Markdown basics
+
+## Introduction
+
+- Simple formating language
+- Syntax close to plain text email, e.g
+
+```{markdown}
+# Simple Example
+
+This is a very simple document; here is word in *italics*,
+or in **bold**.
+
+Lists are also easily created, e.g.,
+- item 1
+- item 2
+- item 3
+
+`in-line code` is obtained with a back-tick.
+
+The following
+
+a header | a second header
+---------|----------------
+cell 1   | cell 2
+cell 3   | cell 4
+
+is a table
+
+```
+
+
+## Simple Example
+
+This is a very simple document; here is word in *italics*,
+or in **bold**.
+
+Lists are also easily created, e.g.,
+
+- item 1
+
+- item 2
+
+- item 3
+
+`in-line code` is obtained with a back-tick.
+
+The following
+
+a header | a second header
+---------|----------------
+cell 1   | cell 2
+cell 3   | cell 4
+
+is a table
+
+
+# Markdown syntax
+
+## Headers
+
+```{markdown}
+# Header 1
+
+## Header 2
+
+### Header 3
+```
+
+## Lists
+
+- Unordered lists
+
+```{markdown}
+- Item 1
+- Item 2
+    + Item 2a
+    + Item 2b
+```
+
+- Ordered lists
+
+```{markdown}
+1. Item 1
+2. Item 2
+3. Item 3
+    + Item 3a
+    + Item 3b
+```
+
+## Links and Images
+
+- Links
+```{markdown}
+http://www.uni-ulm.de/mawi/statistics.html
+[Our institute](http://www.uni-ulm.de/mawi/statistics.html)
+```
+	http://www.uni-ulm.de/mawi/statistics.html
+
+	[Our institute](http://www.uni-ulm.de/mawi/statistics.html)
+
+- Images
+	- Local file
+	```
+	![alt text](graphics/MagrittePipe.jpg)
+	```
+	- On the internet
+	```
+	![alt text](http://upload.wikimedia.org/wikipedia/en/b/b9/MagrittePipe.jpg)
+	```
+
+## Equations
+
+- Inline equation  
+```{latex}
+$Y = \beta_0 + \sum_{i = 1}^p \beta_i Z_i$
+```
+which gives $Y = \beta_0 + \sum_{i = 1}^p \beta_i Z_i$
+
+- Display equations  
+```{latex}
+$$Y = \beta_0 + \sum_{i = 1}^p \beta_i Z_i$$
+```
+which gives $$Y = \beta_0 + \sum_{i = 1}^p \beta_i Z_i$$
+
+
+# R code Chunks
+
+## Basic usage
+
+- Code chunks are delimited with
+  
+```{r, verbatim = TRUE}
+a <- 1
+```	
+
+- A chunk name can be given as well as options
+```
+{r chunk_name, options}
+```
+
+- Compiling:
+	- in Rstudio, just click
+	- in R use the `knit()` function
+
+# Figures and Tables
+
+## Tables
+
+```{r model}
+fit_lm <- lm(life ~ log(phys) + log(tv), data = tele)
+```
+
+- `kable()` function in **knitr**
+```{r, results = "asis", verbatim = TRUE}
+kable(summary(fit_lm)$coefficients,
+      digits = 2)
+```
+
+## Tables 
+
+```{r, results = "asis"}
+out <- summary(fit_lm)$coefficients
+out[, 1:3] <- round(out[, 1:3], 2)
+out[, 4] <- format.pval(out[, 4], digits = 2,
+                        eps = 10^(-3))
+kable(out)
+```
+
+## Tables
+
+### Using the **pander** package
+
+```{r, results = "asis"}
+library(pander)
+## A method to work directly with regression models objects
+pander(summary(fit_lm), style = "grid")
+```
+
+## Tables
+### Using the **pander** package
+
+```{r, results = "asis"}
+library(pander)
+pander(out, style = "grid")
+```
+
+## Tables
+### Using the **xtable** package
+
+```{r, results = "asis", verbatim = TRUE}
+library(xtable)
+print(xtable(out), type = "html")
+```
+
+## Figures
+
+```{r a_plot, fig.height = 6, fig.width = 10, out.width = "500px", verbatim = TRUE}
+ggplot(tele, aes(y = life, x = log(tv))) +
+  geom_point() +
+  stat_smooth(method = "lm")
+```
+
+# YAML header
+
+##
+
+- YAML is a human friendly data serialization
+  standard for all programming languages
+
+```
+---
+title: 'A bit more on markdown'
+author: Arthur Allignol
+hlss: github
+transition: cube
+smart: true
+theme: white
+slideNumber: true
+---
+```
+
+The **rmarkdown** package uses these, e.g,
+
+```
+---
+output: html_document
+---
+```
+
+tells the rmarkdown package to convert the document to html.
+Other possibilities are `pdf_document`, `word_document`,
+`ioslides_presentation`
+
+See the [rmarkdown documentation](http://rmarkdown.rstudio.com/)
+for all the possibilities
+
+
+
+	

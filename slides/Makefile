@@ -1,6 +1,6 @@
 ## A Makefile for the presentations
 
-OPTIONS = --highlight-style pygments --variable revealjs-url=/data/git/reveal.js
+OPTIONS = --slide-level 2 --mathml --no-highlight --variable revealjs-url=/data/git/reveal.js 
 STYLE = revealjs
 
 SRC_PRES = $(wildcard *.Rpres)
@@ -10,9 +10,10 @@ HTML_PRES = $(patsubst %.md, %.html, $(MD_PRES))
 
 all: $(HTML_PRES) $(MD_PRES)
 mds: $(MD_PRES)
+html: $(HTML_PRES)
 
 %.html: %.md
-	pandoc -S -st $(STYLE) $< -o $@ $(OPTIONS)
+	pandoc -st $(STYLE) $< -o $@ $(OPTIONS)
 
 %.md: %.Rpres
 	Rscript \
