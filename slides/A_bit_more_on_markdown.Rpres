@@ -43,6 +43,8 @@ knit_hooks$set(source = function(x, options){
 
 - Simple formating language
 - Syntax close to plain text email, e.g
+- `pandoc` is then used to transform the markdown file into
+  the required format
 
 ```{markdown}
 # Simple Example
@@ -76,12 +78,10 @@ or in **bold**.
 
 Lists are also easily created, e.g.,
 
-- item 1
-
-- item 2
-
-- item 3
-
+- item 1  
+- item 2  
+- item 3  
+	
 `in-line code` is obtained with a back-tick.
 
 The following

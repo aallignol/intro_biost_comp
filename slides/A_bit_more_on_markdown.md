@@ -19,6 +19,8 @@ slideNumber: true
 
 - Simple formating language
 - Syntax close to plain text email, e.g
+- `pandoc` is then used to transform the markdown file into
+  the required format
 
 ```{markdown}
 # Simple Example
@@ -52,12 +54,10 @@ or in **bold**.
 
 Lists are also easily created, e.g.,
 
-- item 1
-
-- item 2
-
-- item 3
-
+- item 1  
+- item 2  
+- item 3  
+	
 `in-line code` is obtained with a back-tick.
 
 The following
@@ -263,7 +263,7 @@ pander(out, style = "grid")
         print(xtable(out), type = "html")
         ```
 <!-- html table generated in R 3.2.0 by xtable 1.7-4 package -->
-<!-- Wed Apr 29 22:13:16 2015 -->
+<!-- Wed Apr 29 22:43:34 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Estimate </th> <th> Std. Error </th> <th> t value </th> <th> Pr(&gt;|t|) </th>  </tr>
   <tr> <td align="right"> (Intercept) </td> <td> 90.62 </td> <td> 4.36 </td> <td> 20.81 </td> <td> &lt;0.001 </td> </tr>
