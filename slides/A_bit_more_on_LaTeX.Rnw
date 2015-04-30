@@ -209,109 +209,109 @@ everything below is ignored
   
 \end{frame}
 
-\section{Newcommands}
+%% \section{Newcommands}
 
-\begin{frame}[fragile]
-  \frametitle{\LaTeX{} Commands and Newcommands}
-  Various builtin commands (macros) in \LaTeX
-  \begin{itemize}
-  \item Commands start with \textbackslash
-  \item May have arguments, e.g., \verb+\section{Newcommands}+
-  \item or none, e.g., \verb|\LaTeX| (that produces \LaTeX)
-  \end{itemize}\vspace{0.3cm}
-  In addition, the user may define his own commands. Useful for nasty
-  expressions that appear often
-  \begin{itemize}
-  \item \verb|\newcommand{\keyword}{definition}|
-  \item A \verb=newcommand= definition may appear anywhere in a .tex
-    file (though usually defined in the preamble)
-  \item A \verb=\newcommand= keyword may not contain numbers
-  \end{itemize}
-\end{frame}
+%% \begin{frame}[fragile]
+%%   \frametitle{\LaTeX{} Commands and Newcommands}
+%%   Various builtin commands (macros) in \LaTeX
+%%   \begin{itemize}
+%%   \item Commands start with \textbackslash
+%%   \item May have arguments, e.g., \verb+\section{Newcommands}+
+%%   \item or none, e.g., \verb|\LaTeX| (that produces \LaTeX)
+%%   \end{itemize}\vspace{0.3cm}
+%%   In addition, the user may define his own commands. Useful for nasty
+%%   expressions that appear often
+%%   \begin{itemize}
+%%   \item \verb|\newcommand{\keyword}{definition}|
+%%   \item A \verb=newcommand= definition may appear anywhere in a .tex
+%%     file (though usually defined in the preamble)
+%%   \item A \verb=\newcommand= keyword may not contain numbers
+%%   \end{itemize}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Newcommands}
+%% \begin{frame}[fragile]
+%%   \frametitle{Newcommands}
   
-  \newcommand{\com}{My command}
-  \newcommand{\Z}{\mathbb{Z}}
+%%   \newcommand{\com}{My command}
+%%   \newcommand{\Z}{\mathbb{Z}}
   
-  \begin{block}{Example}
-\begin{verbatim}
-\newcommand{\com}{My command}
-My first newcommand \com
-\end{verbatim}
-    \begin{itemize}
-    \item My first newcommand \com
-    \end{itemize}
-\begin{verbatim}
-\newcommand{\Z}{\mathbb{Z}}
-For $k \in \Z$
-\end{verbatim}
-    \begin{itemize}
-    \item For $k \in \Z$. Note that it works in math mode
-    \end{itemize}
-    \renewcommand{\Z}{\ensuremath{\mathbb{Z}}}
-\begin{verbatim}
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-Both $\Z$ and \Z{} work
-\end{verbatim}
-    \begin{itemize}
-    \item Both $\Z$ and \Z{} work
-    \end{itemize}
-  \end{block}
-\end{frame}
+%%   \begin{block}{Example}
+%% \begin{verbatim}
+%% \newcommand{\com}{My command}
+%% My first newcommand \com
+%% \end{verbatim}
+%%     \begin{itemize}
+%%     \item My first newcommand \com
+%%     \end{itemize}
+%% \begin{verbatim}
+%% \newcommand{\Z}{\mathbb{Z}}
+%% For $k \in \Z$
+%% \end{verbatim}
+%%     \begin{itemize}
+%%     \item For $k \in \Z$. Note that it works in math mode
+%%     \end{itemize}
+%%     \renewcommand{\Z}{\ensuremath{\mathbb{Z}}}
+%% \begin{verbatim}
+%% \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+%% Both $\Z$ and \Z{} work
+%% \end{verbatim}
+%%     \begin{itemize}
+%%     \item Both $\Z$ and \Z{} work
+%%     \end{itemize}
+%%   \end{block}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{Newcommands with arguments}
+%% \begin{frame}[fragile]
+%%   \ft{Newcommands with arguments}
   
-  \begin{itemize}
-  \item User-defined commands may receive arguments
-    \begin{block}{}
-\begin{verbatim}
-\newcommand{\keyword}[n]{definition}
-\end{verbatim}
-    \end{block}
-    where \verb=n= is the number of arguments (1-9)
-\item One refers to arguments in the definition using \verb=#k=,
-  \verb=k= $=1, \dots, n$
-\item Default values for possible optional arguments can be given
-  using the form
-  \begin{block}{}
-\begin{verbatim}
-\newcommand{\keyword}[n][default]{definition}
-\end{verbatim}
-  \end{block}
-\item Existing commands may be redefined using \verb=\renewcommand=
-  in a similar way
-\end{itemize}
-\end{frame}
+%%   \begin{itemize}
+%%   \item User-defined commands may receive arguments
+%%     \begin{block}{}
+%% \begin{verbatim}
+%% \newcommand{\keyword}[n]{definition}
+%% \end{verbatim}
+%%     \end{block}
+%%     where \verb=n= is the number of arguments (1-9)
+%% \item One refers to arguments in the definition using \verb=#k=,
+%%   \verb=k= $=1, \dots, n$
+%% \item Default values for possible optional arguments can be given
+%%   using the form
+%%   \begin{block}{}
+%% \begin{verbatim}
+%% \newcommand{\keyword}[n][default]{definition}
+%% \end{verbatim}
+%%   \end{block}
+%% \item Existing commands may be redefined using \verb=\renewcommand=
+%%   in a similar way
+%% \end{itemize}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{Newcommand with arguments}
+%% \begin{frame}[fragile]
+%%   \ft{Newcommand with arguments}
   
-  \newcommand{\norm}[1]{\lVert#1\rVert}
-  \newcommand{\subvec}[3]{\ensuremath{#1_{#2},\ldots,#1_{#3}}}
+%%   \newcommand{\norm}[1]{\lVert#1\rVert}
+%%   \newcommand{\subvec}[3]{\ensuremath{#1_{#2},\ldots,#1_{#3}}}
   
-  \begin{block}{}
-\begin{verbatim}
-\newcommand{\norm}[1]{\lVert#1\rVert}
-$\norm{f + g} \leq \norm{f} + \norm{g}$
-\end{verbatim}
-    \begin{itemize}
-    \item $\norm{f + g} \leq \norm{f} + \norm{g}$
-    \end{itemize}
-\begin{verbatim}
-\newcommand{\subvec}[3]{\ensuremath{#1_{#2},\ldots,#1_{#3}}}
-\subvec{a}{1}{n}
-\subvec{a}{ij}{kl}
-\end{verbatim}
-    \begin{itemize}
-    \item \subvec{a}{1}{n}
-    \item \subvec{a}{ij}{kl}
-    \end{itemize}
+%%   \begin{block}{}
+%% \begin{verbatim}
+%% \newcommand{\norm}[1]{\lVert#1\rVert}
+%% $\norm{f + g} \leq \norm{f} + \norm{g}$
+%% \end{verbatim}
+%%     \begin{itemize}
+%%     \item $\norm{f + g} \leq \norm{f} + \norm{g}$
+%%     \end{itemize}
+%% \begin{verbatim}
+%% \newcommand{\subvec}[3]{\ensuremath{#1_{#2},\ldots,#1_{#3}}}
+%% \subvec{a}{1}{n}
+%% \subvec{a}{ij}{kl}
+%% \end{verbatim}
+%%     \begin{itemize}
+%%     \item \subvec{a}{1}{n}
+%%     \item \subvec{a}{ij}{kl}
+%%     \end{itemize}
     
-  \end{block}
-\end{frame}
+%%   \end{block}
+%% \end{frame}
 
 \section{Tables, Graphics and Floats}
 
