@@ -1,0 +1,102 @@
+---
+title: 'Analysis of the television data set'
+author: Arthur Allignol
+output:
+  html_document:
+    toc: true
+    css: /data/Templates/GeneralStyle.css
+    fig_caption: true
+---
+
+
+```{r setup, include = FALSE}
+require(knitr)
+require(xtable)
+require(ggplot)
+require(ggthemes)
+opts_chunk$set(fig.path = "graphics/", size = "scriptsize")
+```
+
+We read the data using the following command
+```{r read_data}
+tele <- read.csv("/data/Ulm/Teaching/SS_2014/Intro_Biostat_Comp/Illustrations/Television/data/television.csv", 
+                 stringsAsFactors = FALSE, na.strings = "*")
+head(tele)
+```
+
+The aim of the analysis is to assess whether there exists a relation
+between the number of people per television set and life
+expectancy. 
+
+We first note a couple of facts:
+
+- `r tele$Country[which.max(tele$life)]` is the country with the highest
+  life expectancy while `r tele$Country[which.min(tele$life)]` has the
+  lowest;
+  
+- "Unsurprisingly", the `r tele$Country[which.min(tele$tv)]`
+  have the lower number of habitants per television set and is equal
+  to `r tele$tv[which.min(tele$tv)]`.
+
+We will first explore the data graphically in
+[Section 1][Graphical exploration] and perform a simple analysis in
+[Section 2][Linear model].
+
+## Graphical exploration
+
+We first display a scatterplot of `life` and `tv`. A trend is clearly
+to be seen but is non-linear.
+
+```{r trend_simple, fig.height = 8, fig.width = 10, fig.cap = "Scatterplot of life expectancy and number of individuals per television set", out.width = "500px", fig.show = "hold", fig.pos = "h", fig.align = "center"}
+ggplot(tele, aes(x = tv, y = life)) +
+  geom_jitter(size =3) +
+  geom_smooth(method = "lm") +
+  theme_economist()
+```
+
+We first display a scatterplot of `life` and `tv`. A trend is clearly
+to be seen but is non-linear.
+
+As a second step, we log-transform the variable `tv`. The relation
+between life expectancy and log televisions is in the next figure.
+The transformation leads to an (almost) perfect linear
+relation between these two variables. 
+```{r log, fig.height = 8, fig.width = 10, fig.cap = "Scatterplot of life expectancy and log number of individuals per television set", out.width = "500px", fig.show = "hold", fig.pos = "h", fig.align = "center"}
+tele$log_tv <- log(tele$tv)
+ggplot(tele, aes(x = log_tv, y = life)) +
+  geom_jitter(size =3) +
+  geom_smooth(method = "lm") +
+  theme_economist()
+```
+
+
+## Linear model
+
+We fit a linear model with life expectancy as outcome and the
+log-transformed number of individuals per television set.
+
+```{r model}
+fit_lm <- lm(life ~ log(tv), tele)
+```
+The results are displayed below
+```{r tab_lm, results = "asis"}
+out <- summary(fit_lm)$coefficients
+out[, 1:3] <- round(out[, 1:3], 2)
+out[, 4] <- format.pval(out[, 4], digits = 2,
+                        eps = 10^(-3))
+
+print(xtable(out),
+      caption.placement = "top", type = "html")
+```
+We can check the model fit by plotting the residuals versus the fitted
+values.
+```{r res_vs_fit, fig.height = 8, fig.width = 10, fig.cap = "Residuals VS fitted", out.width = "500px", fig.show = "hold", fig.pos = "h", fig.align = "center"}
+df <- fortify(fit_lm)
+ggplot(df, aes(.fitted, .resid)) +
+  geom_point(size = 2)  +
+  geom_smooth(se=FALSE) +
+  scale_x_continuous("Fitted Values") +
+  scale_y_continuous("Residual") +
+  labs(title = "Residuals vs fitted") +
+  theme_economist()
+```
