@@ -263,7 +263,7 @@ pander(out, style = "grid")
         print(xtable(out), type = "html")
         ```
 <!-- html table generated in R 3.2.0 by xtable 1.7-4 package -->
-<!-- Wed Apr 29 22:43:34 2015 -->
+<!-- Thu Apr 30 13:45:38 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Estimate </th> <th> Std. Error </th> <th> t value </th> <th> Pr(&gt;|t|) </th>  </tr>
   <tr> <td align="right"> (Intercept) </td> <td> 90.62 </td> <td> 4.36 </td> <td> 20.81 </td> <td> &lt;0.001 </td> </tr>
