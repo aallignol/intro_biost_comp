@@ -1,0 +1,150 @@
+\documentclass[a4,11pt]{article}
+
+%% \title{Analysis of the {\ttfamily GSOEP9402} data}
+%% \author{Arthur Allignol}
+%% \date{}
+
+\usepackage{booktabs}
+\usepackage[osf]{sourcesanspro}
+\usepackage{sourcecodepro}
+\usepackage[T1]{fontenc}
+%\renewcommand*{\ttdefault}{sourcecodepro}
+\usepackage{subcaption}
+\usepackage{graphicx,rotating,epsfig,multirow,multicol,hhline}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{url}
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sfmath}
+
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+
+
+\def\bea{\begin{eqnarray*}}
+\def\eea{\end{eqnarray*}}
+%Dense format
+\setlength{\parindent}{0em} \setlength{\textwidth}{16cm} \setlength{\textheight}{25cm}
+\setlength{\topmargin}{-0.5cm} \setlength{\oddsidemargin}{0cm} \setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+\newcommand{\nat}{{\it I\hspace{-0.12cm}N}}
+\pagestyle{empty}
+
+
+\newcommand{\p}{{\rm P}}
+\newcommand{\erw}{{\rm E}}
+\newcommand{\var}{{\rm var}}
+\newcommand{\eins}{{\bf 1}}%{\mathbf{1}}
+\newcommand{\dif}{{\rm d}}
+\newcommand{\cif}{{\rm CIF}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\D}{\mathrm{d}}
+
+%Special commands:
+\newcommand{\Bin}{\operatorname{Bin}} % Binomial Distribution
+\newcommand{\NegBin}{\operatorname{NegBin}} % Negative Bin
+\newcommand{\HypGeom}{\operatorname{HypGeom}} % Hypergeometric Distribution
+\newcommand{\Pois}{\operatorname{Po}} % Hypergeometric Distribution
+\newcommand{\Po}{\operatorname{Po}} %
+\newcommand{\Exp}{\operatorname{Exp}} %
+\newcommand{\Par}{\operatorname{Par}} %
+\newcommand{\Ga}{\mathcal{G}a} %
+\newcommand{\Be}{\mathcal{B}e} %
+\newcommand{\Var}{\operatorname{Var}} %
+\newcommand{\E}{\operatorname{E}} %
+\newcommand{\Cov}{\operatorname{Cov}} %
+\newcommand{\MSE}{\operatorname{MSE}}
+
+\DeclareMathOperator{\Nor}{N} % Normal -
+\DeclareMathOperator{\Log}{Log} % Logistische Verteilung -
+\newcommand{\ml}[2][1]{% % für Maximum-Likelihood-Schätzer von #1
+\ifthenelse{#1 = 1}%
+ {\hat{#2}_{\scriptscriptstyle{ML}}}%
+ {\hat{#2}^{#1}_{\scriptscriptstyle{ML}}}% z.B. für sigmadach^2
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environment for Aufgaben
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{ka}
+
+
+\newtheorem{exercise}{Problem}
+\newenvironment{aufgabe}{\begin{exercise}\sf}{\end{exercise} \bigskip}
+
+\newcommand{\footer}{ \vfill
+  \mbox{}\hrulefill\\
+  Return your solutions until 7.5.2015, 10h00 s.t. per email at
+  \url{arthur.allignol@uni-ulm.de} You may turn in solutions in pairs
+  (two students, one solution; but not more than two). You may answer
+  in German or English}
+%\xxivtime   Uhrzeit für letzte Änderung
+
+\pagestyle{empty}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\renewcommand{\baselinestretch}{1}
+
+\hrulefill\\
+{\bf Introduction to biostatistical computing} \hspace{\fill} Summer term 2015\\
+Arthur Allignol \quad\quad Maria Umlauft \hspace{\fill} 30.4.2014\\[-1.2ex]
+\mbox{}\hrulefill\\
+\newline \renewcommand{\baselinestretch}{1}
+\setcounter{ka}{0} \vspace{-0.5cm}
+
+
+
+\begin{center}
+\large{{\bf Exercise Sheet 2}}
+\end{center}
+
+<<setup, include = FALSE>>=
+require(knitr)
+opts_chunk$set(fig.path = "graphics/", echo = TRUE, size = "small")
+require(xtable)
+@ 
+
+\begin{aufgabe}
+  
+  The following code generate two variables $X_1$ and $X_2$ that are
+  normally distributed with mean 0 and standard deviation 1. Variable
+  $Y$ is simulated following a linear model that only depends on
+  $X_1$, i.e.,
+  \begin{equation*}
+    \label{eq:lin_mod}
+    Y = X_1 + \varepsilon,
+  \end{equation*}
+  where $\varepsilon \sim \mathcal{N}(0, 1)$ is the error term.   
+<<simul>>=
+
+set.seed(45028)
+x1 <- rnorm(100)
+x2 <- rnorm(100)
+
+y <- 5 + 3 * x1 + rnorm(100)
+@ %def 
+
+Use the tools of reproducible research to generate a .html or .pdf
+report that contains:
+\begin{enumerate}
+\item Two plots arranged side by side that explore the relation
+  between $Y$ and $X_1$, and $Y$ and $X_2$, respectively.
+\item The results of the following linear model fits
+  \begin{itemize}
+  \item $Y = \beta X_1 + \varepsilon$
+  \item $Y = \beta X_1 + \beta X_2 + \varepsilon$
+  \end{itemize}
+  in {\bf one} table. 
+\end{enumerate}
+Please return the source file as well as the resulting pdf or html
+file. 
+  
+\end{aufgabe}
+
+\footer
+
+\end{document}
