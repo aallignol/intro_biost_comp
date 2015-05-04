@@ -2559,8 +2559,98 @@ is sometimes slow
 \end{frame}
 
 \begin{frame}
+  \ft{The {\bf dplyr} package} 
+  
+  The {\bf dplyr} package proposes a ``grammar of data manipulation'',
+  i.e., it implements ``verbs'' useful for data manipulation.
+  
+  \begin{description}
+  \item[{\tt select}] column subset (select variables)
+  \item[{\tt filter}] row subset ($\Leftrightarrow$ {\tt subset} in
+    base R
+  \item[mutate] add new/modify rows
+  \item[summarise] summary statistics
+  \item[{\tt arrange}] re-order the rows
+  \item[{\tt do}] arbitrary action
+  \end{description}
+  
+  \begin{itemize}
+  \item {\bf dplyr} supports data.frames, data.tables (see later) as
+    well as data bases
+  \item Operations can be chained using a pipe operator
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]
   \ft{The {\bf dplyr} package}
   
+  Compute the mean sepal width by species for flower whose petal
+  length is longer than 4.8
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{unloadNamespace}\hlstd{(}\hlstr{"plyr"}\hlstd{)} \hlcom{# conflict with dplyr}
+\hlkwd{require}\hlstd{(dplyr)}
+
+\hlstd{iris} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Species)} \hlopt{%>%} \hlkwd{filter}\hlstd{(Petal.Length} \hlopt{>} \hlnum{4.8}\hlstd{)} \hlopt{%>%}
+  \hlkwd{summarise}\hlstd{(}\hlkwc{mean_width} \hlstd{=} \hlkwd{mean}\hlstd{(Petal.Width))}
+\end{alltt}
+\begin{verbatim}
+## Source: local data frame [2 x 2]
+## 
+##      Species mean_width
+## 1 versicolor   1.575000
+## 2  virginica   2.042553
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\bf dplyr} package}
+  
+  Compute a linear model per species and petal length and summarise
+  the results
+  
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{iris} \hlopt{%>%} \hlkwd{mutate}\hlstd{(}\hlkwc{Petal.Length.f} \hlstd{=} \hlkwd{factor}\hlstd{(iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{4.8}\hlstd{,}
+                \hlkwc{levels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{TRUE}\hlstd{),}
+                \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Small petals"}\hlstd{,} \hlstr{"Big petals"}\hlstd{)))} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(Species, Petal.Length.f)} \hlopt{%>%}
+  \hlkwd{do}\hlstd{(}\hlkwc{mod} \hlstd{=} \hlkwd{summary}\hlstd{(}\hlkwd{lm}\hlstd{(Sepal.Length} \hlopt{~} \hlstd{Petal.Length,} \hlkwc{data} \hlstd{= .))}\hlopt{$}\hlstd{coefficients)} \hlopt{%>%}
+  \hlkwd{do}\hlstd{(}\hlkwd{data.frame}\hlstd{(}
+         \hlkwc{Species} \hlstd{= .}\hlopt{$}\hlstd{Species,}
+         \hlkwc{Petal.Length.f} \hlstd{= .}\hlopt{$}\hlstd{Petal.Length.f,}
+         \hlkwc{var} \hlstd{=} \hlkwd{rownames}\hlstd{(.}\hlopt{$}\hlstd{mod),}
+         \hlkwc{coef} \hlstd{= .}\hlopt{$}\hlstd{mod[,} \hlnum{1}\hlstd{],}
+         \hlkwc{se} \hlstd{= .}\hlopt{$}\hlstd{mod[,} \hlnum{2}\hlstd{],}
+         \hlkwc{p} \hlstd{=} \hlkwd{format.pval}\hlstd{(.}\hlopt{$}\hlstd{mod[,} \hlnum{4}\hlstd{],} \hlkwc{eps} \hlstd{=} \hlnum{10}\hlopt{^}\hlstd{(}\hlopt{-}\hlnum{3}\hlstd{),} \hlkwc{digits} \hlstd{=} \hlnum{2}\hlstd{)))}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in rbind\_all(out[[1]]): Unequal factor levels: coercing to character}}\begin{verbatim}
+## Source: local data frame [10 x 6]
+## Groups: <by row>
+## 
+##       Species Petal.Length.f          var        coef          se      p
+## 1      setosa   Small petals  (Intercept)   4.2131682  0.41558877 <0.001
+## 2      setosa   Small petals Petal.Length   0.5422926  0.28231526  0.061
+## 3  versicolor   Small petals  (Intercept)   2.2844372  0.48523067 <0.001
+## 4  versicolor   Small petals Petal.Length   0.8587048  0.11498472 <0.001
+## 5  versicolor     Big petals  (Intercept)  19.5909091 11.55006708   0.23
+## 6  versicolor     Big petals Petal.Length  -2.6363636  2.32129915   0.37
+## 7   virginica   Small petals  (Intercept) -13.1000000  2.71477439  0.130
+## 8   virginica   Small petals Petal.Length   4.0000000  0.57735027  0.091
+## 9   virginica     Big petals  (Intercept)   1.1908726  0.49934706  0.021
+## 10  virginica     Big petals Petal.Length   0.9727855  0.08869172 <0.001
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
 \end{frame}
 
 \begin{frame}[fragile]

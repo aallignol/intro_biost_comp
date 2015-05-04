@@ -26,6 +26,7 @@ In general try to bring a bit more structure in this
   2. Factors and dates
   3. Strings
   4. Data aggregation/manipulation/reshaping/merging
+     tidyr, dplyr, data.table?
 
 * Graphics
 

@@ -1486,7 +1486,72 @@ is sometimes slow
 \end{frame}
 
 \begin{frame}
+  \ft{The {\bf dplyr} package} 
+  
+  The {\bf dplyr} package proposes a ``grammar of data manipulation'',
+  i.e., it implements ``verbs'' useful for data manipulation.
+  
+  \begin{description}
+  \item[{\tt select}] column subset (select variables)
+  \item[{\tt filter}] row subset ($\Leftrightarrow$ {\tt subset} in
+    base R)
+  \item[mutate] add new/modify rows
+  \item[summarise] summary statistics
+  \item[{\tt arrange}] re-order the rows
+  \item[{\tt do}] arbitrary action
+  \end{description}
+  
+  \begin{itemize}
+  \item {\bf dplyr} supports data.frames, data.tables (see later) as
+    well as data bases
+  \item Operations can be chained using a pipe operator
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]
   \ft{The {\bf dplyr} package}
+  
+  Compute the mean sepal width by species for flower whose petal
+  length is longer than 4.8
+<<dlyr_1>>=
+unloadNamespace("plyr") # conflict with dplyr
+require(dplyr)
+
+iris %>% group_by(Species) %>% filter(Petal.Length > 4.8) %>%
+  summarise(mean_width = mean(Petal.Width))
+@ %def 
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\bf dplyr} package}
+  
+  Compute a linear model per species and petal length and summarise
+  the results
+  
+<<dplyr_2, size = "tiny">>=
+iris %>% mutate(Petal.Length.f = factor(iris$Petal.Length > 4.8,
+                levels = c(FALSE, TRUE),
+                labels = c("Small petals", "Big petals"))) %>%
+  group_by(Species, Petal.Length.f) %>% 
+  do(mod = summary(lm(Sepal.Length ~ Petal.Length, data = .))$coefficients) %>%
+  do(data.frame(
+         Species = .$Species,
+         Petal.Length.f = .$Petal.Length.f,
+         var = rownames(.$mod),
+         coef = .$mod[, 1],
+         se = .$mod[, 2],
+         p = format.pval(.$mod[, 4], eps = 10^(-3), digits = 2)))
+
+@ %def 
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\bf data.table} package}
+  
+  
   
 \end{frame}
 
