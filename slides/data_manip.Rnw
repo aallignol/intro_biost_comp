@@ -323,8 +323,8 @@ close(myCon)
     \item A character vector to use as column names
     \end{itemize}
   \item[{\tt col\_types}] Override the default column types
-  \end{description}
-  
+  \end{description}\vspace{0.6cm}
+  Default to \verb|stringsAsFactors = FALSE|!
 \end{frame}
 
 \begin{frame}[fragile]
@@ -527,7 +527,8 @@ factor(c(as.character(a), as.character(b)))
       integer and the unique levels as character strings
     \item Nice output
 <<ex_out, results = "markup", tidy = FALSE, size = "scriptsize">>=
-table(factor(c(1, 2, 3), labels = c("Healthy", "Diseased", "Dead")))
+table(factor(c(1, 2, 3), 
+             labels = c("Healthy", "Diseased", "Dead")))
 @ %def 
     \end{itemize}
   \item Cons
@@ -824,7 +825,7 @@ df[order(df$x), ]
 \begin{frame}[fragile]
   \ft{The {\tt table} function}
   
-<<iris_intro, size = "small">>=
+<<iris_intro>>=
 data(iris)
 
 head(iris)
@@ -999,7 +1000,7 @@ with(iris, table(Species, sepal_widthNA, exclude = "setosa", useNA = "ifany"))
   \item \verb=sapply= tries to ``simplify'' the output
   \end{itemize}
 \pause
-<<lapply_1, size = "scriptsize">>=
+<<lapply_1, size = "tiny">>=
 myList <- list()
 for (i in 1:4) {
     myList[[i]] <- rnorm(n = 3 * i)
@@ -1049,7 +1050,7 @@ sapply(myList, quantile, probs = c(0.25, 0.75), na.rm = TRUE)
 \begin{frame}[fragile]
   \ft{Groups Defined as Lists Elements}
 
-<<lapply_8, size = "scriptsize">>=
+<<lapply_8, size = "tiny">>=
 ## A user defined function
 lapply(myList, function(x) {
     data.frame(
@@ -1304,7 +1305,7 @@ str(tt)
   \item First argument is a data frame, others are as in \verb=tapply=
   \item \verb=by= returns a list
   \end{itemize}
-<<by1, size = "scriptsize">>=
+<<by1, size = "tiny">>=
 ## Don't work, because iris is a data frame
 by(iris[, 1:4], iris$Species, mean)
 @ %def 
@@ -1361,7 +1362,7 @@ do.call(rbind, ex_by)
   \fst{Base R}
   \begin{itemize}
   \item Split by species
-<<sac_base1, size = "scriptsize">>=
+<<sac_base1, size = "tiny">>=
 s_iris <- split(iris, iris$Species)
 
 ## s_iris is a list with number of items 
@@ -1369,12 +1370,12 @@ s_iris <- split(iris, iris$Species)
 length(s_iris) == length(levels(iris$Species))
 @ %def
 \item Apply a function to each item of the list
-<<sac_base_2, size = "scriptsize">>=
+<<sac_base_2, size = "tiny">>=
 s_means <- lapply(s_iris, function(x) colMeans(x[1:4]))
 s_means[[1]]
 @ %def
 \item Combine
-<<sac_base3, size = "scriptsize">>=
+<<sac_base3, size = "tiny">>=
 (res <- do.call(rbind, s_means))
 @ %def 
 
@@ -1386,7 +1387,7 @@ s_means[[1]]
   \ft{Split-Apply-Combine}
   \fst{Base R}
   
-<<sac_base4, size = "scriptsize">>=
+<<sac_base4, size = "tiny">>=
 myLM <- function(x) {
     temp <- lm(Sepal.Length ~ Petal.Length, x)
     summary(temp)$coefficients
@@ -1484,8 +1485,15 @@ The only problem with {\bf plyr} is that it
 is sometimes slow
 \end{frame}
 
+\begin{frame}
+  \ft{The {\bf dplyr} package}
+  
+\end{frame}
+
 \begin{frame}[fragile]
   \ft{Your Turn}
+  
+  Other example (see dplyr examples)? 
   
   Consider \verb=WM_teams_2014.csv= data set that contains information
   on each player of the World Cup 2014, e.g., age, club, country, caps

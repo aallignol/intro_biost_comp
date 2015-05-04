@@ -380,8 +380,8 @@
     \item A character vector to use as column names
     \end{itemize}
   \item[{\tt col\_types}] Override the default column types
-  \end{description}
-  
+  \end{description}\vspace{0.6cm}
+  Default to \verb|stringsAsFactors = FALSE|!
 \end{frame}
 
 \begin{frame}[fragile]
@@ -739,7 +739,8 @@
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{table}\hlstd{(}\hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),} \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Healthy"}\hlstd{,} \hlstr{"Diseased"}\hlstd{,} \hlstr{"Dead"}\hlstd{)))}
+\hlkwd{table}\hlstd{(}\hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),}
+             \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Healthy"}\hlstd{,} \hlstr{"Diseased"}\hlstd{,} \hlstr{"Dead"}\hlstd{)))}
 \end{alltt}
 \begin{verbatim}
 ## 
@@ -1308,7 +1309,7 @@ See {\tt ?strptime} for a complete list of format symbols
 \begin{frame}[fragile]
   \ft{The {\tt table} function}
   
-\begin{knitrout}\small
+\begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{data}\hlstd{(iris)}
@@ -1718,7 +1719,7 @@ The {\tt useNA} argument is specific to {\tt table}
   \item \verb=sapply= tries to ``simplify'' the output
   \end{itemize}
 \pause
-\begin{knitrout}\scriptsize
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{myList} \hlkwb{<-} \hlkwd{list}\hlstd{()}
@@ -1834,7 +1835,7 @@ The {\tt useNA} argument is specific to {\tt table}
 \begin{frame}[fragile]
   \ft{Groups Defined as Lists Elements}
 
-\begin{knitrout}\scriptsize
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlcom{## A user defined function}
@@ -2273,7 +2274,7 @@ In this case, a matrix of lists is returned...
   \item First argument is a data frame, others are as in \verb=tapply=
   \item \verb=by= returns a list
   \end{itemize}
-\begin{knitrout}\scriptsize
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlcom{## Don't work, because iris is a data frame}
@@ -2377,7 +2378,7 @@ In this case, a matrix of lists is returned...
   \fst{Base R}
   \begin{itemize}
   \item Split by species
-\begin{knitrout}\scriptsize
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{s_iris} \hlkwb{<-} \hlkwd{split}\hlstd{(iris, iris}\hlopt{$}\hlstd{Species)}
@@ -2392,7 +2393,7 @@ In this case, a matrix of lists is returned...
 \end{kframe}
 \end{knitrout}
 \item Apply a function to each item of the list
-\begin{knitrout}\scriptsize
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{s_means} \hlkwb{<-} \hlkwd{lapply}\hlstd{(s_iris,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{colMeans}\hlstd{(x[}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{]))}
@@ -2405,7 +2406,7 @@ In this case, a matrix of lists is returned...
 \end{kframe}
 \end{knitrout}
 \item Combine
-\begin{knitrout}\scriptsize
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{(res} \hlkwb{<-} \hlkwd{do.call}\hlstd{(rbind, s_means))}
@@ -2427,7 +2428,7 @@ In this case, a matrix of lists is returned...
   \ft{Split-Apply-Combine}
   \fst{Base R}
   
-\begin{knitrout}\scriptsize
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{myLM} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) \{}
@@ -2557,8 +2558,15 @@ The only problem with {\bf plyr} is that it
 is sometimes slow
 \end{frame}
 
+\begin{frame}
+  \ft{The {\bf dplyr} package}
+  
+\end{frame}
+
 \begin{frame}[fragile]
   \ft{Your Turn}
+  
+  Other example (see dplyr examples)? 
   
   Consider \verb=WM_teams_2014.csv= data set that contains information
   on each player of the World Cup 2014, e.g., age, club, country, caps
