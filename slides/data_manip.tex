@@ -1,0 +1,2579 @@
+\documentclass[paper=screen,mathserif]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+\usetheme{CambridgeUS} 
+\useinnertheme{circles}
+\useoutertheme[footline=authortitle,subsection = false]{miniframes}
+\setbeamercolor{palette tertiary}{fg=white, bg=white!42!black}
+\setbeamercolor{alerted text}{fg=red!73!black}
+
+%%%%%%
+%\usepackage{Sweave}
+\usepackage{natbib}     % for references
+\usepackage[osf]{sourcesanspro}
+\usepackage{sourcecodepro}
+\usepackage{booktabs}
+\usepackage{eulervm}
+%\renewcommand{\ttdefault}{sourcecodepro}
+\usepackage{import}
+\usepackage{prodint}
+\usepackage{bbm}
+\usepackage{tabularx}
+\usepackage{dcolumn}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{graphicx,rotating,epsfig,multirow,multicol,hhline}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+
+\usepackage{listings}
+\lstset{
+  basicstyle=\tiny\ttfamily, % Standardschrift
+  % numbers=left,               % Ort der Zeilennummern
+  %numberstyle=\tiny,          % Stil der Zeilennummern
+  % stepnumber=2,               % Abstand zwischen den Zeilennummern
+  numbersep=5pt,              % Abstand der Nummern zum Text
+  tabsize=2,                  % Groesse von Tabs
+  extendedchars=true,         %
+  breaklines=true,            % Zeilen werden Umgebrochen
+  keywordstyle=\color{blue},
+  frame=b,         
+  stringstyle=\color{white}\ttfamily, % Farbe der String
+  showspaces=false,           % Leerzeichen anzeigen ?
+  showtabs=false,             % Tabs anzeigen ?
+}
+
+\usepackage{subcaption}
+
+\newcommand{\ft}[1]{\frametitle{#1}}
+\newcommand{\fst}[1]{\framesubtitle{#1}}
+
+\title[Data Manipulation]{Data Manipulation}
+
+\author{Arthur Allignol}
+
+\institute[]{\scriptsize{\url{arthur.allignol@uni-ulm.de}}}
+
+\date{}
+%%%%%%
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+%%%%%% title page
+\newcommand{\titlep}{yes}  % for titlepagelayout
+
+{
+\renewcommand{\insertframenumber}{}   % no page number on titlepage
+\begin{frame}
+\addtocounter{framenumber}{-1}
+\titlepage
+\end{frame}
+}
+
+
+
+\section{Reading and Writing Data}
+
+\begin{frame}[fragile]
+  \ft{Reading Data} 
+  \fst{{\tt scan()}}
+    
+  \verb=scan()= reads data into a vector or list from the console or
+  from file
+    
+    \begin{itemize}
+    \item \verb=scan= is more appropriate when all the data to be read
+      are of the same mode
+    \item Arguments:
+      \begin{itemize}
+      \item {\tt file}: Name of a file. When {\tt ""}, reads from the
+        console
+      \item {\tt what}: Type of {\tt what} gives the type of data to
+        be read.
+        
+        {\tt what} can also be a list
+      \item {\tt scan} calls can be embedded in a call to {\tt matrix}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{matrix}\hlstd{(}\hlkwd{scan}\hlstd{(),} \hlkwc{ncol} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{byrow} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \ft{Data Frames}
+  \fst{{\tt read.table}}
+  \begin{itemize}
+  \item The {\tt read.table} function is used to read data into R in
+    the form of a data frame, i.e., data with mixed modes
+  \item {\tt read.table} expects each field (variable) to be
+    separated by separators (by default,  spaces, tabs, newlines or
+    carriage returns)
+    \begin{itemize}
+    \item The {\tt sep} argument can be used to specify an
+      alternative separator
+    \end{itemize}
+  \item R provides convenience functions for reading comma- and
+    tab-separated data 
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{p{4cm}p{6cm}}
+      {\tt read.csv}   & Separated by {\tt ,} \\
+      {\tt read.csv2}  & Separated by {\tt ;} decimal point {\tt ,} \\
+      {\tt read.delim} & Separated by tabs    \\
+      {\tt read.delim2} & Separated by tabs, decimal point {\tt ,}    \\
+    \end{tabular}
+  \end{center}
+  {\small These functions are wrappers for {\tt read.table} with the
+    {\tt sep} argument set appropriately}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Data Frames}
+  \fst{{\tt read.table}: Useful options}
+  
+  \begin{center} 
+    {\scriptsize
+    \begin{tabular}{lp{7cm}} 
+      \toprule
+      {\tt file}                 & File to be read or a {\em connection}      \\
+      {\tt sep}                  & e.g., \verb="\t"=, {\tt ","}               \\
+      {\tt dec}                  & Specify decimal point (default is {\tt .}) \\
+      {\tt header}               & {\tt TRUE} if the the first line are the column
+      names (default to {\tt TRUE} for {\tt read.csv}...)                     \\
+      {\tt col.names}            & A vector of column names                   \\
+      {\tt stringsAsFactors}     & Logical. If {\tt FALSE}, prevent the
+      automatic conversion of character strings into factors                  \\
+      {\tt na.strings}           & By default, {\tt NA}, {\tt NaN}, {\tt Inf}
+      and {\tt -Inf} are considered as missing values. Change this
+      behaviour using {\tt na.strings}                                        \\ 
+      {\tt skip} and {\tt nrows} & Number of lines to skip and number
+      of lines to read, respectively                                          \\
+      {\tt fill}                 & If {\tt TRUE}, observations with
+      fewer variables are filled with {\tt NA}s or blanks                     \\
+      {\tt colClasses}           & Specify the modes of the columns to
+      be read                                                                 \\
+      \verb=fileEncoding=        & Encoding of the file. Useful for
+      non ASCII characters from other platforms                         \\
+      \bottomrule
+    \end{tabular}}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Data Frames}
+  \fst{Fixed Width Input Files}
+  \begin{itemize}
+  \item Files without delimiters but for which each variable is stored
+    in one column
+  \item Can be read in R using the {\tt read.fwf}
+    \begin{itemize}
+    \item {\tt file}: the file to be read
+    \item {\tt widths}: vector containing the widths of the fields to
+      be read
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{{\tt readLines}}
+  \begin{itemize}
+  \item {\tt readLines} reads some or all text lines from a file or a
+    connection
+  \item Useful, for example, if only some lines of an enormous file
+    need to be read
+    \begin{itemize}
+    \item {\tt con}: a connection or file name
+    \item {\tt n}: The maximal number of lines to read. Negative
+      values indicate that the whole file should be read
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Connections}
+  \begin{itemize}
+  \item Connections provide a flexible way to read data from a variety
+    of sources
+  \item Connections can be used as input for, e.g., {\tt read.table}
+    or {\tt readLines}
+  \end{itemize}
+  \begin{center}
+  \begin{tabular}{lp{7cm}}
+    \toprule
+    Function & Data source \\
+    \midrule
+    {\tt file} & Local files \\
+    {\tt url} & Remote read via http ot ftp \\
+    {\tt gzfile} & Local gzipped file \\
+    {\tt unz} & Local zip archive \\
+    {\tt pipe} & Output from a command \\
+    \dots & \\
+    \bottomrule
+  \end{tabular}
+\end{center}  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Connections}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{myCon} \hlkwb{<-} \hlkwd{url}\hlstd{(}\hlstr{"http://taz.de/"}\hlstd{)}
+\hlstd{aa} \hlkwb{<-} \hlkwd{readLines}\hlstd{(myCon,} \hlnum{3}\hlstd{)}
+\hlstd{aa}
+\end{alltt}
+\begin{verbatim}
+## [1] "<!DOCTYPE html SYSTEM \"about:legacy-compat\">"                                                                           
+## [2] "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:my=\"mynames\" xmlns:gf=\"http://www.taz.de/namespace/gitfilter\"><!--"
+## [3] "\t\tContent Management: openNewspaper www.opennewspaper.org based on TYPO3 www.typo3.org"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{close}\hlstd{(myCon)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Other useful functions}
+  \begin{center}
+    \begin{tabular}{lp{6cm}}
+      \toprule
+      Function & Format \\
+      \midrule
+      \verb=load= & Read R data format {\tt .rda}, {\tt .RData} \\
+      \verb=read.dta= & Read data saved by Stata ({\bf foreign} package)\\
+      \verb=read.spss= & Read data from SPSS ({\bf foreign})\\
+      \verb=read.ssd=, \verb=read.xport= & Read SAS files \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \begin{itemize}
+  \item Read a data from Excel
+    \begin{itemize}
+    \item \alert{Export from Excel into a .csv file}
+    \item On Windows, the {\bf RODBC} package permits to access Excel files
+    \item {\bf gdata} package --- for all platforms. Requires some specific
+      perl modules to be installed
+    \item {\bf xlsx} package. Requires Java / installation tricky
+    \item {\bf readxl} package. Not tested (released 15.4.2015)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\bf readr} package}
+  
+  The {\bf readr} package provides alternatives to the base {\tt
+    read.***} functions that are
+  \begin{itemize}
+  \item 10 times faster (according to
+    \url{http://blog.rstudio.org/2015/04/09/readr-0-1-0/})
+  \item more consistent
+  \item more flexible column specification
+  \item \dots
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{p{4cm}p{6cm}}
+      {\tt read\_csv}   & Separated by {\tt ,} \\
+      {\tt read\_csv2}  & Separated by {\tt ;} decimal point {\tt ,} \\
+      {\tt read\_tsv} & Separated by tabs    \\
+      {\tt read\_delim} & Separated by arbitrary delimiter    \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\bf readr} package}
+  
+  Three important arguments (similar for all functions)
+  \begin{description}
+  \item[{\tt file}] File name
+  \item[{\tt col\_names}] column name; equivalent to {\tt header}.
+    \begin{itemize}
+    \item {\tt TRUE} $\Leftrightarrow$ \verb|header = TRUE| in base R
+    \item {\tt FALSE}
+    \item A character vector to use as column names
+    \end{itemize}
+  \item[{\tt col\_types}] Override the default column types
+  \end{description}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Writing Data}
+  \begin{itemize}\setlength\parskip{10pt}
+  \item The {\tt save} function can be used to save R objects
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{save}\hlstd{(a_data_set, x, y,} \hlkwc{file} \hlstd{=} \hlstr{"my_data.rda"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+  \item The {\tt write} function
+    \begin{itemize}
+    \item Takes an R object and the name of a file or a connection as arguments
+    \item Writes a ASCII representation of the object
+    \item The {\tt ncolumns} argument specifies the number of values
+      to write on each line
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Writing Data}
+  \begin{itemize}
+  \item The {\tt write.table} function
+    \begin{itemize}
+    \item Requires the name of a data set or matrix (if no file is
+      specified, {\tt write.table()} writes into the console)
+    \item The {\tt file} argument specifies the destination. {\tt
+        file} can also be a connection
+    \item {\tt row.names} and {\tt col.names} specify whether to write
+      the rows' and columns' names, respectively
+    \item {\tt sep} specifies the separator. Default is blank 
+    \item {\tt write.csv} and {\tt write.csv2} available for writing
+      comma-separated files
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Your Turn}
+  \begin{itemize}
+  \item The zip file {\tt data.zip} contains several versions of the
+    same (fake) data set
+    \begin{itemize}
+    \item {\tt data1.rda} can be opened using \verb=load()= and will
+      serve as reference
+    \item {\tt data2} to {\tt data5} are ASCII files
+    \item {\tt data6.xls} is an Excel file that is rather realistic
+    \end{itemize}
+  \item Read all the data sets in R and check whether they compare to
+    the original using, e.g., 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{all}\hlstd{(dd1} \hlopt{==} \hlstd{dd2)} \hlcom{# dd2 being another data set}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+ 
+  \end{itemize}
+  
+\end{frame}
+
+
+
+\section{Factors and Dates}
+
+\begin{frame}[fragile]
+  \ft{Factors}
+  \begin{itemize}
+  \item Factor are variables in R that take on a limited number of
+    different values
+    \begin{itemize}
+    \item Categorical variables
+    \item Ordinal variables
+    \end{itemize}
+  \item Factors are useful for statistical modelling as ordinal
+    variables should be treated differently than continuous variables
+  \item Factors are also useful for statistical report
+    generation. Think SAS labels
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Factors}
+  \begin{itemize}
+  \item Factors are stored internally as numeric values
+
+  \item A corresponding set of characters is used for displaying
+  \end{itemize}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{aa} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"cats"}\hlstd{,} \hlstr{"dogs"}\hlstd{,} \hlstr{"apples"}\hlstd{))}
+\hlstd{aa}
+\end{alltt}
+\begin{verbatim}
+## [1] cats   dogs   apples
+## Levels: apples cats dogs
+\end{verbatim}
+\begin{alltt}
+\hlkwd{as.integer}\hlstd{(aa)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2 3 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Factor Creation}
+  \begin{itemize}
+  \item Factors are created using the {\tt factor} function
+  \item The {\tt levels} argument permits to control the order
+  \item The {\tt labels} argument is used to change the levels' names
+  \item \verb|ordered = TRUE| creates an ordered factor (ordinal
+    variable)
+  \end{itemize}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hlstd{(}\hlnum{21324}\hlstd{)}
+\hlstd{data} \hlkwb{<-} \hlkwd{sample}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),} \hlnum{10}\hlstd{,} \hlnum{TRUE}\hlstd{)}
+\hlstd{f0} \hlkwb{<-} \hlkwd{factor}\hlstd{(data)}
+\hlstd{f1} \hlkwb{<-} \hlkwd{factor}\hlstd{(data,} \hlkwc{levels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{1}\hlstd{))}
+\hlstd{f2} \hlkwb{<-} \hlkwd{factor}\hlstd{(data,} \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"I"}\hlstd{,} \hlstr{"II"}\hlstd{,} \hlstr{"III"}\hlstd{))}
+\hlstd{f3} \hlkwb{<-} \hlkwd{factor}\hlstd{(data,} \hlkwc{levels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{1}\hlstd{),}
+             \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"II"}\hlstd{,} \hlstr{"III"}\hlstd{,} \hlstr{"I"}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(f0)}
+\end{alltt}
+\begin{verbatim}
+## f0
+## 1 2 3 
+## 4 3 3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(f1)}
+\end{alltt}
+\begin{verbatim}
+## f1
+## 2 3 1 
+## 3 3 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(f2)}
+\end{alltt}
+\begin{verbatim}
+## f2
+##   I  II III 
+##   4   3   3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(f3)}
+\end{alltt}
+\begin{verbatim}
+## f3
+##  II III   I 
+##   3   3   4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Factors}
+  
+  \begin{itemize}
+  \item The \verb=levels()= function can be used to change the labels
+    once a factor has been created
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{levels}\hlstd{(f0)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"I"}\hlstd{,} \hlstr{"II"}\hlstd{,} \hlstr{"III"}\hlstd{)}
+\hlstd{f0}
+\end{alltt}
+\begin{verbatim}
+##  [1] II  I   III III III I   I   II  I   II 
+## Levels: I II III
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item The reference level of a factor can be changed using the
+  \verb=relevel= function
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{f0} \hlkwb{<-} \hlkwd{relevel}\hlstd{(f0,} \hlstr{"II"}\hlstd{)}
+\hlstd{f0}
+\end{alltt}
+\begin{verbatim}
+##  [1] II  I   III III III I   I   II  I   II 
+## Levels: II I III
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Ordered Factors}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hlstd{(}\hlnum{433443534}\hlstd{)}
+\hlstd{mon} \hlkwb{<-} \hlkwd{sample}\hlstd{(month.name,} \hlnum{29}\hlstd{,} \hlnum{TRUE}\hlstd{)}
+\hlkwd{table}\hlstd{(}\hlkwd{factor}\hlstd{(mon))}
+\end{alltt}
+\begin{verbatim}
+## 
+##     April    August  December  February   January      July      June 
+##         3         2         5         2         3         3         2 
+##     March       May  November September 
+##         1         3         3         2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mon2} \hlkwb{<-} \hlkwd{factor}\hlstd{(mon,} \hlkwc{levels} \hlstd{= month.name,}
+               \hlkwc{ordered} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlkwd{table}\hlstd{(mon2)}
+\end{alltt}
+\begin{verbatim}
+## mon2
+##   January  February     March     April       May      June      July 
+##         3         2         1         3         3         2         3 
+##    August September   October  November  December 
+##         2         2         0         3         5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+{\small Order operator can be used with ordered factors}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{When Factors Are a PITA}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hlstd{(}\hlnum{423423}\hlstd{)}
+\hlstd{ff} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{sample}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{TRUE}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{mean}\hlstd{(ff)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in mean.default(ff): argument is not numeric or logical: returning NA}}\begin{verbatim}
+## [1] NA
+\end{verbatim}
+\begin{alltt}
+\hlstd{ff} \hlopt{+} \hlnum{10}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in Ops.factor(ff, 10): '+' not meaningful for factors}}\begin{verbatim}
+##  [1] NA NA NA NA NA NA NA NA NA NA
+\end{verbatim}
+\begin{alltt}
+\hlkwd{c}\hlstd{(ff,} \hlnum{10}\hlstd{)} \hlcom{# Not a factor anymore}
+\end{alltt}
+\begin{verbatim}
+##  [1]  1  2  1  1  2  1  3  1  2  3 10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+  
+\begin{frame}[fragile]
+  \ft{When Factors Are a PITA}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(a} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{sample}\hlstd{(letters,} \hlnum{10}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+##  [1] a u o j i h d g n d
+## Levels: a d g h i j n o u
+\end{verbatim}
+\begin{alltt}
+\hlstd{(b} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{sample}\hlstd{(letters,} \hlnum{10}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+##  [1] t y k g v k p b d d
+## Levels: b d g k p t v y
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{c}\hlstd{(a, b)}
+\end{alltt}
+\begin{verbatim}
+##  [1] 1 9 8 6 5 4 2 3 7 2 6 8 4 3 7 4 5 1 2 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\pause
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlkwd{as.character}\hlstd{(a),} \hlkwd{as.character}\hlstd{(b)))}
+\end{alltt}
+\begin{verbatim}
+##  [1] a u o j i h d g n d t y k g v k p b d d
+## Levels: a b d g h i j k n o p t u v y
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Factors}
+  \begin{itemize}
+  \item Pros
+    \begin{itemize}
+    \item Needed for modelling categorical variable
+    \item Memory efficient, i.e., factors only need to store values as
+      integer and the unique levels as character strings
+    \item Nice output
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(}\hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),} \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Healthy"}\hlstd{,} \hlstr{"Diseased"}\hlstd{,} \hlstr{"Dead"}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+## 
+##  Healthy Diseased     Dead 
+##        1        1        1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    \end{itemize}
+  \item Cons
+    \begin{itemize}
+    \item Require to be cautious for some data manipulation
+    \end{itemize}
+  \item I'd recommend reading data using the option
+    \verb|stringsAsFactors=FALSE| and transform variables into factors
+    as needed
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Dates}
+  
+  R provides several options to deal with dates, which is a
+  challenging problem, i.e., time zones, daylight savings, leap
+  second, \dots
+  
+  \begin{itemize}
+  \item \verb=as.Date= handles dates without time
+  \item The {\bf chron} package handles dates and times, but without
+    support for time zones
+  \item The {\tt POSIXct} and {\tt POSIXlt} allow for dates and times
+    with control for time zones
+  \item The {\bf lubridate} packages is supposed to facilitate the use
+    of dates and times in R
+  \end{itemize}
+  {\bf Rule of thumb:} Use the simplest technique possible. If you
+  only have dates, use {\tt as.Date}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Dates}
+  \fst{{\tt as.Date}}
+  
+  \begin{itemize}
+  \item {\tt as.Date} accepts a variety of input style through the
+    {\tt format} argument
+  \item Default is {\tt yyyy-mm-dd}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{as.Date}\hlstd{(}\hlstr{"2014-06-12"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "2014-06-12"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{as.Date}\hlstd{(}\hlstr{"12.6.2014"}\hlstd{,} \hlkwc{format} \hlstd{=} \hlstr{"%d.%m.%Y"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "2014-06-12"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{as.Date}\hlstd{(}\hlstr{"12 June 14"}\hlstd{,} \hlkwc{format} \hlstd{=} \hlstr{"%d %B %y"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "2014-06-12"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+See {\tt ?strptime} for a complete list of format symbols
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Dates}
+  \fst{{\tt as.Date}}
+  
+  \begin{itemize}
+  \item Internally, dates are stored as the number of days since
+    January 1, 1970
+  \item {\tt as.numeric} can be used to convert a date to its numeric form
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{as.integer}\hlstd{(}\hlkwd{as.Date}\hlstd{(}\hlstr{"2014-06-12"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] 16233
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \item The \verb=weekdays= and \verb=months= functions can be used to
+    extract the dates' components
+  \item Calculation on dates: See \verb=?Ops.Date=. Addition,
+    subtraction, logical operations (\verb|==|, \verb=<=, \dots) are
+    available
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Dates}
+  \fst{{\tt POSIXct} and {\tt POSIXlt}}
+  
+  \begin{itemize}
+  \item \verb=POSIXct= is represented as seconds since January 1, 1970 GMT
+  \item \verb=POSIXlt= is represented as a list
+    \vspace{0.3cm}
+    
+    $\rightarrow$ Use \verb=POSIXct= for calculation and
+    \verb=POSIXlt= for extracting date components
+  \end{itemize}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(t1} \hlkwb{<-} \hlkwd{as.POSIXct}\hlstd{(}\hlstr{"2014-06-12 10:15:00"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] "2014-06-12 10:15:00 CEST"
+\end{verbatim}
+\begin{alltt}
+\hlstd{(t2} \hlkwb{<-} \hlkwd{as.POSIXlt}\hlstd{(}\hlstr{"2014-06-12 10:15:00"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] "2014-06-12 10:15:00 CEST"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Dates}
+  \fst{{\tt POSIXct} and {\tt POSIXlt}}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## Internal representation of t2}
+\hlkwd{str}\hlstd{(}\hlkwd{unclass}\hlstd{(t2))}
+\end{alltt}
+\begin{verbatim}
+## List of 11
+##  $ sec   : num 0
+##  $ min   : int 15
+##  $ hour  : int 10
+##  $ mday  : int 12
+##  $ mon   : int 5
+##  $ year  : int 114
+##  $ wday  : int 4
+##  $ yday  : int 162
+##  $ isdst : int 1
+##  $ zone  : chr "CEST"
+##  $ gmtoff: int NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Your Turn}
+  
+  Consider the data set {\tt data7.csv}
+  \begin{enumerate}
+  \item Read the data
+  \item Compute the age of the patients
+  \item \verb=CO_DIABETES= equals 1 if patients have diabetes,
+    otherwise 0
+    \begin{itemize}
+    \item Create a factor {\tt Diabetes} with levels {\tt Yes} and
+      {\tt No} with reference value {\tt No}
+    \end{itemize}
+  \item \verb=CO_LIVER= equals 1 for mild liver disease, 2 for
+    severe liver disease and 0 for no liver disease
+    \begin{itemize}
+    \item Create a factor \verb=Liver_Disease= with levels
+      \verb=Mild=, \verb=Severe=, \verb=No= with reference value
+      \verb=No= 
+    \end{itemize}
+  \item Create a factor \verb=Gender= with levels \verb=Female=
+    (\verb|sex == 0|) and \verb=Male= (\verb|sex == 1|)
+
+  \end{enumerate}
+
+  
+\end{frame}
+
+\section{Data Manipulation}
+
+\begin{frame}[fragile]
+  \ft{Subscripting}
+  
+  \begin{itemize}
+  \item Logical subscripts
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nums} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{12}\hlstd{,} \hlnum{9}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{14}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{16}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{9}\hlstd{)}
+\hlstd{nums} \hlopt{>} \hlnum{10}
+\end{alltt}
+\begin{verbatim}
+## [1]  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nums[nums} \hlopt{>} \hlnum{10}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 12 14 16
+\end{verbatim}
+\begin{alltt}
+\hlkwd{which}\hlstd{(nums} \hlopt{>} \hlnum{10}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 4 6
+\end{verbatim}
+\begin{alltt}
+\hlstd{nums[}\hlkwd{which}\hlstd{(nums} \hlopt{>} \hlnum{10}\hlstd{)]}
+\end{alltt}
+\begin{verbatim}
+## [1] 12 14 16
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+ 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nums[nums} \hlopt{>} \hlnum{10}\hlstd{]} \hlkwb{<-} \hlnum{0}
+\hlstd{nums}
+\end{alltt}
+\begin{verbatim}
+## [1] 0 9 8 0 7 0 3 2 9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Subscripting Matrices and Arrays}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(mat} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{12}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{3}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mat[,} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{1}\hlstd{)]}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    9    1
+## [2,]   10    2
+## [3,]   11    3
+## [4,]   12    4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Subscripting Matrices and Arrays}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mat[,} \hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 2 3 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mat[,} \hlnum{1}\hlstd{,} \hlkwc{drop} \hlstd{=} \hlnum{FALSE}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##      [,1]
+## [1,]    1
+## [2,]    2
+## [3,]    3
+## [4,]    4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mat[mat} \hlopt{>} \hlnum{4}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1]  5  6  7  8  9 10 11 12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Lists}
+  
+  Lists are the most general R object. 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(ll} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{3}\hlstd{,} \hlkwc{b} \hlstd{= month.name[}\hlnum{1}\hlopt{:}\hlnum{5}\hlstd{],} \hlkwc{c} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{TRUE}\hlstd{,} \hlnum{FALSE}\hlstd{),}
+            \hlkwc{d} \hlstd{=} \hlkwd{data.frame}\hlstd{(}\hlkwc{y} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{5}\hlstd{),} \hlkwc{x} \hlstd{=} \hlkwd{rbinom}\hlstd{(}\hlnum{5}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{.5}\hlstd{))))}
+\end{alltt}
+\begin{verbatim}
+## $a
+## [1] 1 2 3
+## 
+## $b
+## [1] "January"  "February" "March"    "April"    "May"     
+## 
+## $c
+## [1]  TRUE FALSE
+## 
+## $d
+##            y x
+## 1 -1.1065764 0
+## 2  1.6957258 0
+## 3 -1.0641906 1
+## 4 -0.0415854 1
+## 5  0.8534742 0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Lists}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{class}\hlstd{(ll[[}\hlnum{4}\hlstd{]]);} \hlkwd{class}\hlstd{(ll[[}\hlstr{"d"}\hlstd{]]);} \hlkwd{class}\hlstd{(ll}\hlopt{$}\hlstd{d)}
+\end{alltt}
+\begin{verbatim}
+## [1] "data.frame"
+## [1] "data.frame"
+## [1] "data.frame"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{class}\hlstd{(ll[}\hlnum{4}\hlstd{])}
+\end{alltt}
+\begin{verbatim}
+## [1] "list"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{ll[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)]}
+\end{alltt}
+\begin{verbatim}
+## $a
+## [1] 1 2 3
+## 
+## $c
+## [1]  TRUE FALSE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Subscripting Data Frames}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hlstd{(}\hlnum{4234234}\hlstd{)}
+\hlstd{(df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{c}\hlstd{(}\hlkwd{rnorm}\hlstd{(}\hlnum{3}\hlstd{),} \hlnum{NA}\hlstd{,} \hlnum{3}\hlstd{),}
+                 \hlkwc{y} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwd{rexp}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{0.01}\hlstd{),} \hlnum{NA}\hlstd{,} \hlnum{3}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+##            x         y
+## 1  1.7547348        NA
+## 2 -0.3676785 108.34508
+## 3 -1.5529115  85.43826
+## 4         NA        NA
+## 5  3.0000000   3.00000
+\end{verbatim}
+\begin{alltt}
+\hlstd{df}\hlopt{$}\hlstd{x}
+\end{alltt}
+\begin{verbatim}
+## [1]  1.7547348 -0.3676785 -1.5529115         NA  3.0000000
+\end{verbatim}
+\begin{alltt}
+\hlstd{df[,} \hlstr{"x"}\hlstd{,} \hlkwc{drop} \hlstd{=} \hlnum{FALSE}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##            x
+## 1  1.7547348
+## 2 -0.3676785
+## 3 -1.5529115
+## 4         NA
+## 5  3.0000000
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Subscripting Data Frames}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{df[df}\hlopt{$}\hlstd{y} \hlopt{>} \hlnum{10}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+##               x         y
+## NA           NA        NA
+## 2    -0.3676785 108.34508
+## 3    -1.5529115  85.43826
+## NA.1         NA        NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{df[}\hlopt{!}\hlkwd{is.na}\hlstd{(df}\hlopt{$}\hlstd{y)} \hlopt{&} \hlstd{df}\hlopt{$}\hlstd{y} \hlopt{>} \hlnum{10}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+##            x         y
+## 2 -0.3676785 108.34508
+## 3 -1.5529115  85.43826
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{subset}\hlstd{(df, y} \hlopt{>} \hlnum{10}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##            x         y
+## 2 -0.3676785 108.34508
+## 3 -1.5529115  85.43826
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Subscripting Data Frames}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{subset}\hlstd{(df, y} \hlopt{>} \hlnum{10}\hlstd{,} \hlkwc{select} \hlstd{= x)}
+\end{alltt}
+\begin{verbatim}
+##            x
+## 2 -0.3676785
+## 3 -1.5529115
+\end{verbatim}
+\begin{alltt}
+\hlkwd{subset}\hlstd{(df, y} \hlopt{>} \hlnum{10}\hlstd{,} \hlkwc{select} \hlstd{=} \hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##            x
+## 2 -0.3676785
+## 3 -1.5529115
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+{\small Order a data frame}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{df[}\hlkwd{order}\hlstd{(df}\hlopt{$}\hlstd{x), ]}
+\end{alltt}
+\begin{verbatim}
+##            x         y
+## 3 -1.5529115  85.43826
+## 2 -0.3676785 108.34508
+## 1  1.7547348        NA
+## 5  3.0000000   3.00000
+## 4         NA        NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Your Turn}
+  \begin{enumerate}
+  \item Compute a variable {\tt hypertension} that equals 1 if {\tt
+      DIAS} $>120$ {\bf and} {\tt SYS} $>80$
+  \item Compute a variable {\tt Hypotension} that equals 1 if {\tt
+      DIAS} $<100$ {\bf and} {\tt SYS} $<65$
+  \item Create a variable that equals 1 if the patient's {\tt CITY} is
+    in New York state (NY)
+  \item Create a data set that contains the patients that have
+    hypotension or hypertension don't live in New York state
+  \end{enumerate}
+\end{frame}
+
+\section{Data Aggregation}
+
+\begin{frame}[fragile]
+  \ft{Data Aggregation}
+  
+  \begin{itemize}
+  \item For simple tabulation and cross-tabulation, the \verb=table=,
+    \verb=ftable= and \verb=xtabs= functions are available
+  \item For more complex tasks, the available functions can be
+    classified into two groups
+    \begin{itemize}
+    \item Functions that operate on arrays and/or lists
+      (e.g., \verb=*apply=, \verb=sweep=)
+    \item Functions oriented towards data frames (e.g.,
+      \verb=aggregate=, \verb=by=)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt table} function}
+  
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{data}\hlstd{(iris)}
+
+\hlkwd{head}\hlstd{(iris)}
+\end{alltt}
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt table} function}
+  
+  \vspace{-0.5cm}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(iris}\hlopt{$}\hlstd{Species)}
+\end{alltt}
+\begin{verbatim}
+## 
+##     setosa versicolor  virginica 
+##         50         50         50
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(iris}\hlopt{$}\hlstd{Species, iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{6}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##             
+##              FALSE TRUE
+##   setosa        50    0
+##   versicolor    50    0
+##   virginica     41    9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{as.data.frame}\hlstd{(}\hlkwd{table}\hlstd{(iris}\hlopt{$}\hlstd{Species, iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{6}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##         Var1  Var2 Freq
+## 1     setosa FALSE   50
+## 2 versicolor FALSE   50
+## 3  virginica FALSE   41
+## 4     setosa  TRUE    0
+## 5 versicolor  TRUE    0
+## 6  virginica  TRUE    9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt table} function}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(iris}\hlopt{$}\hlstd{Species, iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{6}\hlstd{, iris}\hlopt{$}\hlstd{Sepal.Width} \hlopt{>} \hlnum{3.5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## , ,  = FALSE
+## 
+##             
+##              FALSE TRUE
+##   setosa        34    0
+##   versicolor    50    0
+##   virginica     41    6
+## 
+## , ,  = TRUE
+## 
+##             
+##              FALSE TRUE
+##   setosa        16    0
+##   versicolor     0    0
+##   virginica      0    3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt table} function}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{as.data.frame}\hlstd{(}\hlkwd{table}\hlstd{(iris}\hlopt{$}\hlstd{Species, iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{6}\hlstd{, iris}\hlopt{$}\hlstd{Sepal.Width} \hlopt{>} \hlnum{3.5}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##          Var1  Var2  Var3 Freq
+## 1      setosa FALSE FALSE   34
+## 2  versicolor FALSE FALSE   50
+## 3   virginica FALSE FALSE   41
+## 4      setosa  TRUE FALSE    0
+## 5  versicolor  TRUE FALSE    0
+## 6   virginica  TRUE FALSE    6
+## 7      setosa FALSE  TRUE   16
+## 8  versicolor FALSE  TRUE    0
+## 9   virginica FALSE  TRUE    0
+## 10     setosa  TRUE  TRUE    0
+## 11 versicolor  TRUE  TRUE    0
+## 12  virginica  TRUE  TRUE    3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt table} function}
+  \fst{{\tt addmargins}}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{tt} \hlkwb{<-} \hlkwd{table}\hlstd{(iris}\hlopt{$}\hlstd{Species, iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{6}\hlstd{)}
+
+\hlkwd{addmargins}\hlstd{(tt,} \hlkwc{margin} \hlstd{=} \hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##             
+##              FALSE TRUE
+##   setosa        50    0
+##   versicolor    50    0
+##   virginica     41    9
+##   Sum          141    9
+\end{verbatim}
+\begin{alltt}
+\hlkwd{addmargins}\hlstd{(tt,} \hlkwc{margin} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             
+##              FALSE TRUE Sum
+##   setosa        50    0  50
+##   versicolor    50    0  50
+##   virginica     41    9  50
+##   Sum          141    9 150
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt table} function}
+  \fst{{\tt prop.table}}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{prop.table}\hlstd{(tt,} \hlkwc{margin} \hlstd{=} \hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##             
+##              FALSE TRUE
+##   setosa      1.00 0.00
+##   versicolor  1.00 0.00
+##   virginica   0.82 0.18
+\end{verbatim}
+\begin{alltt}
+\hlkwd{prop.table}\hlstd{(tt,} \hlkwc{margin} \hlstd{=} \hlnum{2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##             
+##                  FALSE      TRUE
+##   setosa     0.3546099 0.0000000
+##   versicolor 0.3546099 0.0000000
+##   virginica  0.2907801 1.0000000
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt ftable} function}
+  
+  The \verb=ftable= function creates {\bf flat} tables
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ftable}\hlstd{(iris}\hlopt{$}\hlstd{Species, iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{6}\hlstd{, iris}\hlopt{$}\hlstd{Sepal.Width} \hlopt{>} \hlnum{3.5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                   FALSE TRUE
+##                             
+## setosa     FALSE     34   16
+##            TRUE       0    0
+## versicolor FALSE     50    0
+##            TRUE       0    0
+## virginica  FALSE     41    0
+##            TRUE       6    3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt xtabs} function}
+  
+  The \verb=xtabs= function produces similar results as the {\tt
+    table} function but uses the {\tt formula} interface
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{iris}\hlopt{$}\hlstd{sepal_width} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{as.integer}\hlstd{(iris}\hlopt{$}\hlstd{Sepal.Width} \hlopt{>} \hlnum{3.5}\hlstd{),}
+                           \hlkwc{levels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{),}
+                           \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"<= 3.5"}\hlstd{,} \hlstr{"> 3.5"}\hlstd{))}
+
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_width))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_width
+## Species      <= 3.5 > 3.5
+##   setosa         34    16
+##   versicolor     50     0
+##   virginica      47     3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{xtabs}\hlstd{(}\hlopt{~} \hlstd{Species} \hlopt{+} \hlstd{sepal_width, iris)}
+\end{alltt}
+\begin{verbatim}
+##             sepal_width
+## Species      <= 3.5 > 3.5
+##   setosa         34    16
+##   versicolor     50     0
+##   virginica      47     3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Missing values with {\tt table}}
+  \fst{The {\tt useNA} and {\tt exclude} Arguments}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{iris}\hlopt{$}\hlstd{sepal_widthNA} \hlkwb{<-} \hlstd{iris}\hlopt{$}\hlstd{sepal_width}
+\hlstd{iris}\hlopt{$}\hlstd{sepal_widthNA[}\hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{150}\hlstd{,} \hlnum{25}\hlstd{)]} \hlkwb{<-} \hlnum{NA}
+
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_widthNA))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_widthNA
+## Species      <= 3.5 > 3.5
+##   setosa         32    16
+##   versicolor     48     0
+##   virginica      45     3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_widthNA,} \hlkwc{useNA} \hlstd{=} \hlstr{"ifany"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_widthNA
+## Species      <= 3.5 > 3.5 <NA>
+##   setosa         32    16    2
+##   versicolor     48     0    2
+##   virginica      45     3    2
+\end{verbatim}
+\begin{alltt}
+\hlcom{## If there is NAs, they will be included}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Missing values with {\tt table}}
+  \fst{The {\tt useNA} and {\tt exclude} Arguments}
+  \vspace{-0.4cm}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_widthNA,} \hlkwc{useNA} \hlstd{=} \hlstr{"always"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_widthNA
+## Species      <= 3.5 > 3.5 <NA>
+##   setosa         32    16    2
+##   versicolor     48     0    2
+##   virginica      45     3    2
+##   <NA>            0     0    0
+\end{verbatim}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_width,} \hlkwc{useNA} \hlstd{=} \hlstr{"always"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_width
+## Species      <= 3.5 > 3.5 <NA>
+##   setosa         34    16    0
+##   versicolor     50     0    0
+##   virginica      47     3    0
+##   <NA>            0     0    0
+\end{verbatim}
+\begin{alltt}
+\hlcom{## An NA column is always included, even if there is no missing values}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The {\tt useNA} argument is specific to {\tt table}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Missing values with {\tt table}}
+  \fst{The {\tt useNA} and {\tt exclude} Arguments}
+  The \verb=exclude= argument
+  \begin{itemize}
+  \item By default, \verb|exclude = c(NA, NaN)|
+  \item E.g., \verb|exclude = NULL| to include missing values
+  \end{itemize}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_widthNA,} \hlkwc{exclude} \hlstd{=} \hlkwa{NULL}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_widthNA
+## Species      <= 3.5 > 3.5 <NA>
+##   setosa         32    16    2
+##   versicolor     48     0    2
+##   virginica      45     3    2
+##   <NA>            0     0    0
+\end{verbatim}
+\begin{alltt}
+\hlcom{## equivalent to useNA = "always"}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Missing values with {\tt table}}
+    \fst{The {\tt useNA} and {\tt exclude} Arguments}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_widthNA,} \hlkwc{exclude} \hlstd{=} \hlstr{"setosa"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_widthNA
+## Species      <= 3.5 > 3.5
+##   versicolor     48     0
+##   virginica      45     3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{table}\hlstd{(Species, sepal_widthNA,} \hlkwc{exclude} \hlstd{=} \hlstr{"setosa"}\hlstd{,} \hlkwc{useNA} \hlstd{=} \hlstr{"ifany"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             sepal_widthNA
+## Species      <= 3.5 > 3.5 <NA>
+##   versicolor     48     0    2
+##   virginica      45     3    2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{itemize}
+\item \verb|exclude = NULL| is equivalent to \verb|useNA="always"|
+\item \verb|exclude = "somethingElse"| only exclude level
+  \verb="somethingElse"= from the factor
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Road Map for Aggregation}
+  
+  Three things to consider
+  \begin{enumerate}
+  \item How are the groups that divide the data defined?
+  \item What is the nature of the data to be operated on?
+  \item What is the desired end result
+  \end{enumerate}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+  
+  \verb=sapply= or \verb=lapply= are the appropriate functions
+  \begin{itemize}
+  \item \verb=lapply= always returns a list
+  \item \verb=sapply= tries to ``simplify'' the output
+  \end{itemize}
+\pause
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{myList} \hlkwb{<-} \hlkwd{list}\hlstd{()}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{) \{}
+    \hlstd{myList[[i]]} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlkwc{n} \hlstd{=} \hlnum{3} \hlopt{*} \hlstd{i)}
+\hlstd{\}}
+\hlstd{myList}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+## [1]  0.3429579 -0.3193258  0.7808710
+## 
+## [[2]]
+## [1]  1.16866312  0.01419804  0.45813283 -0.43180622  0.34224696 -1.30745260
+## 
+## [[3]]
+## [1]  1.4005004 -1.7575754 -0.2415508  1.0928182 -1.1926425  1.8645074
+## [7] -0.3128976  0.8755070 -1.9690762
+## 
+## [[4]]
+##  [1]  1.1415283 -1.1269112 -2.2914106  0.9855559 -1.4959317  2.2773178
+##  [7]  0.5160894 -0.5481570 -0.6098171 -1.4302086  1.2207910 -1.7708338
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+
+  {\small Both for \verb=lapply= and \verb=sapply=, the first argument
+    is a list, the second argument is a function
+    
+    Third, fourth, \dots arguments are further arguments for the
+    function that is applied}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{lapply}\hlstd{(myList, length)}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+## [1] 3
+## 
+## [[2]]
+## [1] 6
+## 
+## [[3]]
+## [1] 9
+## 
+## [[4]]
+## [1] 12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sapply}\hlstd{(myList, length)}
+\end{alltt}
+\begin{verbatim}
+## [1]  3  6  9 12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{myList[[}\hlnum{2}\hlstd{]][}\hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{5}\hlstd{)]} \hlkwb{<-} \hlnum{NA}
+\hlkwd{sapply}\hlstd{(myList, mean)}
+\end{alltt}
+\begin{verbatim}
+## [1]  0.26816768          NA -0.02671217 -0.26099896
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sapply}\hlstd{(myList, mean,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1]  0.26816768 -0.13909942 -0.02671217 -0.26099896
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sapply}\hlstd{(myList, quantile,} \hlkwc{probs} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0.25}\hlstd{,} \hlnum{0.75}\hlstd{),} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##          [,1]       [,2]      [,3]      [,4]
+## 25% 0.0118160 -0.6507178 -1.192642 -1.446639
+## 75% 0.5619144  0.3028143  1.092818  1.024549
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## A user defined function}
+\hlkwd{lapply}\hlstd{(myList,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) \{}
+    \hlkwd{data.frame}\hlstd{(}
+        \hlkwc{Mean} \hlstd{=} \hlkwd{mean}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{),}
+        \hlkwc{SD} \hlstd{=} \hlkwd{sd}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{),}
+        \hlkwc{Min} \hlstd{=} \hlkwd{min}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{),}
+        \hlkwc{Max} \hlstd{=} \hlkwd{max}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{))}
+\hlstd{\})}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+##        Mean        SD        Min      Max
+## 1 0.2681677 0.5538984 -0.3193258 0.780871
+## 
+## [[2]]
+##         Mean       SD       Min      Max
+## 1 -0.1390994 1.030286 -1.307453 1.168663
+## 
+## [[3]]
+##          Mean       SD       Min      Max
+## 1 -0.02671217 1.411432 -1.969076 1.864507
+## 
+## [[4]]
+##        Mean       SD       Min      Max
+## 1 -0.260999 1.446369 -2.291411 2.277318
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## A user defined function}
+\hlkwd{sapply}\hlstd{(myList,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) \{}
+    \hlkwd{data.frame}\hlstd{(}
+        \hlkwc{Mean} \hlstd{=} \hlkwd{mean}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{),}
+        \hlkwc{SD} \hlstd{=} \hlkwd{sd}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{),}
+        \hlkwc{Min} \hlstd{=} \hlkwd{min}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{),}
+        \hlkwc{Max} \hlstd{=} \hlkwd{max}\hlstd{(x,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{))}
+\hlstd{\})}
+\end{alltt}
+\begin{verbatim}
+##      [,1]       [,2]       [,3]        [,4]     
+## Mean 0.2681677  -0.1390994 -0.02671217 -0.260999
+## SD   0.5538984  1.030286   1.411432    1.446369 
+## Min  -0.3193258 -1.307453  -1.969076   -2.291411
+## Max  0.780871   1.168663   1.864507    2.277318
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mySummary} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{na.rm} \hlstd{=} \hlnum{FALSE}\hlstd{) \{}
+    \hlkwd{data.frame}\hlstd{(}
+        \hlkwc{Mean} \hlstd{=} \hlkwd{mean}\hlstd{(x,} \hlkwc{na.rm} \hlstd{= na.rm),}
+        \hlkwc{SD} \hlstd{=} \hlkwd{sd}\hlstd{(x,} \hlkwc{na.rm} \hlstd{= na.rm),}
+        \hlkwc{Min} \hlstd{=} \hlkwd{min}\hlstd{(x,} \hlkwc{na.rm} \hlstd{= na.rm),}
+        \hlkwc{Max} \hlstd{=} \hlkwd{max}\hlstd{(x,} \hlkwc{na.rm} \hlstd{= na.rm))}
+\hlstd{\}}
+
+\hlkwd{sapply}\hlstd{(myList, mySummary,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##      [,1]       [,2]       [,3]        [,4]     
+## Mean 0.2681677  -0.1390994 -0.02671217 -0.260999
+## SD   0.5538984  1.030286   1.411432    1.446369 
+## Min  -0.3193258 -1.307453  -1.969076   -2.291411
+## Max  0.780871   1.168663   1.864507    2.277318
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+  
+  \verb=sapply= or \verb=lapply= can be used as alternative to
+  loops. This way you don't have to take care too much of the form of
+  the output
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## check type 1 error of the t-test}
+\hlstd{check_level} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{i}\hlstd{,} \hlkwc{n} \hlstd{=} \hlnum{100}\hlstd{) \{}
+    \hlstd{a} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(n)}
+    \hlstd{b} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(n)}
+    \hlstd{tt} \hlkwb{<-} \hlkwd{t.test}\hlstd{(a, b)}
+    \hlstd{tt}\hlopt{$}\hlstd{p.value} \hlopt{<} \hlnum{0.05}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nsimul} \hlkwb{<-} \hlnum{1000}
+\hlstd{res} \hlkwb{<-} \hlkwd{sapply}\hlstd{(}\hlnum{1}\hlopt{:}\hlstd{nsimul, check_level,} \hlkwc{n} \hlstd{=} \hlnum{100}\hlstd{)}
+\hlkwd{sum}\hlstd{(res)} \hlopt{/} \hlstd{nsimul}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.047
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined as Lists Elements}
+
+  For this kind of simple repetitive tasks, the \verb=replicate=
+  function can also be used
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{res2} \hlkwb{<-} \hlkwd{replicate}\hlstd{(nsimul,} \hlkwd{t.test}\hlstd{(}\hlkwd{rnorm}\hlstd{(}\hlnum{10}\hlstd{),} \hlkwd{rnorm}\hlstd{(}\hlnum{10}\hlstd{))}\hlopt{$}\hlstd{p.value} \hlopt{<} \hlnum{0.05}\hlstd{)}
+\hlkwd{sum}\hlstd{(res2)} \hlopt{/} \hlstd{nsimul}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.044
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{itemize}
+\item First argument is the number of replication
+\item Second argument is an {\em expression}, i.e., a piece of R
+  language and not a function 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined by Rows or Columns of a Matrix/Array}
+  
+  In this case, the {\tt apply} function is the logical choice. 
+  
+  The \verb=apply= function requires three arguments
+  \begin{itemize}
+  \item the array/matrix on which to operate
+  \item An index telling \verb=apply= which dimension to operate on (\verb=1=
+    on rows; \verb=2= on columns, \verb=c(1, 2)= on both
+  \item The function to use
+  \item Optionally further arguments to be used by the function that
+    we want to apply
+  \end{itemize}
+ 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{apply}\hlstd{(iris[,} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{],} \hlnum{2}\hlstd{, mean)}
+\end{alltt}
+\begin{verbatim}
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##     5.843333     3.057333     3.758000     1.199333
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined by Rows or Columns of a Matrix/Array}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{apply}\hlstd{(iris[,} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{],} \hlnum{2}\hlstd{, mySummary)}
+\end{alltt}
+\begin{verbatim}
+## $Sepal.Length
+##       Mean        SD Min Max
+## 1 5.843333 0.8280661 4.3 7.9
+## 
+## $Sepal.Width
+##       Mean        SD Min Max
+## 1 3.057333 0.4358663   2 4.4
+## 
+## $Petal.Length
+##    Mean       SD Min Max
+## 1 3.758 1.765298   1 6.9
+## 
+## $Petal.Width
+##       Mean        SD Min Max
+## 1 1.199333 0.7622377 0.1 2.5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Defined by Rows or Columns of a Matrix/Array}
+  \fst{{\tt rowSums}, {\tt colSums}, {\tt rowMeans}, {\tt colMeans}}
+  
+  These are specialised functions that are potentially way faster than
+  {\tt apply} (which is a general function)
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{colMeans}\hlstd{(iris[,} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{],} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##     5.843333     3.057333     3.758000     1.199333
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{colSums}\hlstd{(iris[,} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{]} \hlopt{>} \hlnum{2}\hlstd{,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##          150          149          100           23
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  
+  A very common operation
+  
+  A lot of choice in base R + a couple of additional packages that
+  facilitates these operations
+  
+  \begin{itemize}
+  \item \verb=aggregate=
+  \item \verb=tapply=, \verb=by=
+  \item {\em split-apply-combine} strategy
+    \begin{itemize}
+    \item \verb=split=, \verb=lapply=, \verb=do.call=
+    \item {\bf plyr}, {\bf dplyr} package
+    \item \dots
+    \end{itemize}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt aggregate}}
+  
+  A natural choice for data summaries of several variables
+  \begin{itemize}
+  \item First argument: A formula
+    \begin{itemize}
+    \item LHS: Variables to ``summarise''
+    \item RHS: Grouping variables
+    \end{itemize}
+  \item Second argument: A data frame
+  \item Third argument: Function to apply
+  \item \dots; Further arguments for {\tt FUN} 
+  \end{itemize}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{aggregate}\hlstd{(}\hlkwd{cbind}\hlstd{(Sepal.Length, Sepal.Width)} \hlopt{~} \hlstd{Species, iris, mean)}
+\end{alltt}
+\begin{verbatim}
+##      Species Sepal.Length Sepal.Width
+## 1     setosa        5.006       3.428
+## 2 versicolor        5.936       2.770
+## 3  virginica        6.588       2.974
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt aggregate}}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{iris}\hlopt{$}\hlstd{Petal.Length.f} \hlkwb{<-} \hlkwd{factor}\hlstd{(iris}\hlopt{$}\hlstd{Petal.Length} \hlopt{>} \hlnum{4.8}\hlstd{,}
+                              \hlkwc{levels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{TRUE}\hlstd{),}
+                              \hlkwc{labels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Small petals"}\hlstd{,} \hlstr{"Big petals"}\hlstd{))}
+\hlkwd{aggregate}\hlstd{(}\hlkwd{cbind}\hlstd{(Sepal.Length, Sepal.Width)} \hlopt{~} \hlstd{Species} \hlopt{+} \hlstd{Petal.Length.f,}
+          \hlkwc{data} \hlstd{= iris,} \hlkwc{FUN} \hlstd{= mean)}
+\end{alltt}
+\begin{verbatim}
+##      Species Petal.Length.f Sepal.Length Sepal.Width
+## 1     setosa   Small petals     5.006000    3.428000
+## 2 versicolor   Small petals     5.889130    2.765217
+## 3  virginica   Small petals     5.700000    2.766667
+## 4 versicolor     Big petals     6.475000    2.825000
+## 5  virginica     Big petals     6.644681    2.987234
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt tapply}}
+  
+  Returns an array with as many dimensions as there were vectors that
+  defined the groups, but can only process a single vector
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{tapply}\hlstd{(}\hlkwc{X} \hlstd{= Sepal.Length,}
+                  \hlkwc{INDEX} \hlstd{=} \hlkwd{list}\hlstd{(Species, Petal.Length.f),}
+                  \hlkwc{FUN} \hlstd{= mean))}
+\end{alltt}
+\begin{verbatim}
+##            Small petals Big petals
+## setosa          5.00600         NA
+## versicolor      5.88913   6.475000
+## virginica       5.70000   6.644681
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt tapply}}
+
+  Also works if FUN does not return a scalar
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(iris,} \hlkwd{tapply}\hlstd{(}\hlkwc{X} \hlstd{= Sepal.Length,}
+                  \hlkwc{INDEX} \hlstd{= Species,}
+                  \hlkwc{FUN} \hlstd{= range))}
+\end{alltt}
+\begin{verbatim}
+## $setosa
+## [1] 4.3 5.8
+## 
+## $versicolor
+## [1] 4.9 7.0
+## 
+## $virginica
+## [1] 4.9 7.9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt tapply}}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(tt} \hlkwb{<-} \hlkwd{with}\hlstd{(iris,} \hlkwd{tapply}\hlstd{(}\hlkwc{X} \hlstd{= Sepal.Length,}
+                        \hlkwc{INDEX} \hlstd{=} \hlkwd{list}\hlstd{(Species, Petal.Length.f),}
+                        \hlkwc{FUN} \hlstd{= range)))}
+\end{alltt}
+\begin{verbatim}
+##            Small petals Big petals
+## setosa     Numeric,2    NULL      
+## versicolor Numeric,2    Numeric,2 
+## virginica  Numeric,2    Numeric,2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+In this case, a matrix of lists is returned...
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt tapply}}
+
+  But individual elements can still be accessed
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{tt[[}\hlstr{"setosa"}\hlstd{,} \hlstr{"Small petals"}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+## [1] 4.3 5.8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{str}\hlstd{(tt)}
+\end{alltt}
+\begin{verbatim}
+## List of 6
+##  $ : num [1:2] 4.3 5.8
+##  $ : num [1:2] 4.9 7
+##  $ : num [1:2] 4.9 6.2
+##  $ : NULL
+##  $ : num [1:2] 6 6.9
+##  $ : num [1:2] 5.6 7.9
+##  - attr(*, "dim")= int [1:2] 3 2
+##  - attr(*, "dimnames")=List of 2
+##   ..$ : chr [1:3] "setosa" "versicolor" "virginica"
+##   ..$ : chr [1:2] "Small petals" "Big petals"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt by}}
+  
+  \begin{itemize}
+  \item {\tt by} is a version of \verb=tapply= oriented towards data
+    frames
+  \item First argument is a data frame, others are as in \verb=tapply=
+  \item \verb=by= returns a list
+  \end{itemize}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## Don't work, because iris is a data frame}
+\hlkwd{by}\hlstd{(iris[,} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{], iris}\hlopt{$}\hlstd{Species, mean)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in mean.default(data[x, , drop = FALSE], ...): argument is not numeric or logical: returning NA}}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in mean.default(data[x, , drop = FALSE], ...): argument is not numeric or logical: returning NA}}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in mean.default(data[x, , drop = FALSE], ...): argument is not numeric or logical: returning NA}}\begin{verbatim}
+## iris$Species: setosa
+## [1] NA
+## -------------------------------------------------------- 
+## iris$Species: versicolor
+## [1] NA
+## -------------------------------------------------------- 
+## iris$Species: virginica
+## [1] NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt by}}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(ex_by} \hlkwb{<-} \hlkwd{by}\hlstd{(iris[,} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{], iris[,} \hlstr{"Species"}\hlstd{], colMeans))}
+\end{alltt}
+\begin{verbatim}
+## iris[, "Species"]: setosa
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        5.006        3.428        1.462        0.246 
+## -------------------------------------------------------- 
+## iris[, "Species"]: versicolor
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        5.936        2.770        4.260        1.326 
+## -------------------------------------------------------- 
+## iris[, "Species"]: virginica
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        6.588        2.974        5.552        2.026
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{{\tt by}}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{do.call}\hlstd{(rbind, ex_by)}
+\end{alltt}
+\begin{verbatim}
+##            Sepal.Length Sepal.Width Petal.Length Petal.Width
+## setosa            5.006       3.428        1.462       0.246
+## versicolor        5.936       2.770        4.260       1.326
+## virginica         6.588       2.974        5.552       2.026
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{itemize}
+\item \verb=do.call= takes a {\em list} of arguments (second argument)
+\item and prepares a call to a function (first argument), using the
+  list elements as if they had been passed to the function as
+  individual arguments 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Groups Based on One or More Grouping Variables}
+  \fst{Split-Apply-Combine}
+  
+  Term coined by Hadley Wickham (author of the {\bf ggplot2}, {\bf plyr},
+  {\bf reshape}, {\bf dplyr}, \dots, packages)
+  \begin{description}
+  \item[Split] Divide the problem into smaller pieces
+  \item[Apply] Work on each pieces independently
+  \item[Combine] Recombine the pieces
+  \end{description}
+  A common problem for both programming and data analysis; many
+  implementations
+  \begin{itemize}
+  \item In base R: {\tt split()}, {\tt *apply()}, {\tt do.call()}
+  \item R-packages: {\bf plyr}, {\bf doBy}, {\bf dplyr}, {\bf
+      data.table} (to some extent) 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Split-Apply-Combine}
+  \fst{Base R}
+  \begin{itemize}
+  \item Split by species
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{s_iris} \hlkwb{<-} \hlkwd{split}\hlstd{(iris, iris}\hlopt{$}\hlstd{Species)}
+
+\hlcom{## s_iris is a list with number of items }
+\hlcom{## equal to the number of levels of iris$Species}
+\hlkwd{length}\hlstd{(s_iris)} \hlopt{==} \hlkwd{length}\hlstd{(}\hlkwd{levels}\hlstd{(iris}\hlopt{$}\hlstd{Species))}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Apply a function to each item of the list
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{s_means} \hlkwb{<-} \hlkwd{lapply}\hlstd{(s_iris,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{colMeans}\hlstd{(x[}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{]))}
+\hlstd{s_means[[}\hlnum{1}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        5.006        3.428        1.462        0.246
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Combine
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(res} \hlkwb{<-} \hlkwd{do.call}\hlstd{(rbind, s_means))}
+\end{alltt}
+\begin{verbatim}
+##            Sepal.Length Sepal.Width Petal.Length Petal.Width
+## setosa            5.006       3.428        1.462       0.246
+## versicolor        5.936       2.770        4.260       1.326
+## virginica         6.588       2.974        5.552       2.026
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Split-Apply-Combine}
+  \fst{Base R}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{myLM} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) \{}
+    \hlstd{temp} \hlkwb{<-} \hlkwd{lm}\hlstd{(Sepal.Length} \hlopt{~} \hlstd{Petal.Length, x)}
+    \hlkwd{summary}\hlstd{(temp)}\hlopt{$}\hlstd{coefficients}
+\hlstd{\}}
+
+\hlstd{(res} \hlkwb{<-} \hlkwd{lapply}\hlstd{(}\hlkwd{split}\hlstd{(iris, iris}\hlopt{$}\hlstd{Species), myLM))}
+\end{alltt}
+\begin{verbatim}
+## $setosa
+##               Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept)  4.2131682  0.4155888 10.137830 1.614927e-13
+## Petal.Length 0.5422926  0.2823153  1.920876 6.069778e-02
+## 
+## $versicolor
+##              Estimate Std. Error  t value     Pr(>|t|)
+## (Intercept)  2.407523  0.4462583 5.394909 2.075294e-06
+## Petal.Length 0.828281  0.1041364 7.953806 2.586190e-10
+## 
+## $virginica
+##               Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept)  1.0596591 0.46676645  2.270213 2.772289e-02
+## Petal.Length 0.9957386 0.08366764 11.901120 6.297786e-16
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \ft{Split-Apply-Combine}
+    \fst{The {\bf plyr} Package}
+    
+    The *apply functions in base R implement the split-apply-combine
+    strategy, but are inconsistent
+    \begin{itemize}
+    \item \verb=apply()= input {\tt arrays}; split by row and/or columns;
+      output {\tt array} 
+    \item \verb=lapply()= input {\tt list} or {\tt vector}; output
+      {\tt list}
+    \item \verb=sapply()= input {\tt list} or {\tt vector}; simplify
+      to vector
+    \item \verb=tapply= input {\tt data.frame}; output depends
+    \item \verb=rapply()=, \verb=vapply()=, \verb=mapply()=
+    \end{itemize}\pause\vspace{0.3cm}
+    {\bf plyr} brings some consistency: \verb=**ply()=
+    \begin{description}
+    \item[first *] Input type ({\tt a} array, {\tt d} data frame, {\tt
+        l} list)
+    \item[second *] Output type ({\tt a} array, {\tt d} data frame, {\tt
+        l} list, \verb=_= discard)
+    \end{description}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{{\bf plyr}}
+  \fst{{\tt a*ply()}}
+  
+  \verb=y <- a*ply(.data, .margins., .fun, ...)=
+  \vspace{0.5cm}
+  \begin{description}
+  \item[.data] An array
+  \item[.margins] Subscripts which the function gets applied over
+  \item[.fun] Function to apply to each piece
+  \end{description}
+  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+  (\verb|*=l|)
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{{\bf plyr}}
+  \fst{{\tt l*ply()}}
+  
+  \verb=y <- l*ply(.data, .fun, ...)=
+  \vspace{0.5cm}
+  \begin{description}
+  \item[.data] An list
+  \item[.fun] Function to apply to each item of the list
+  \end{description}
+  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+  (\verb|*=l|)
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{{\bf plyr}}
+  \fst{{\tt d*ply()}}
+  
+  \verb=y <- d*ply(.data, .variables, .fun, ...)=
+  \vspace{0.5cm}
+  \begin{description}
+  \item[.data] A data frame
+  \item[.variables] Variables defining the groups
+  \item[.fun] Function to apply to each group
+  \end{description}
+  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+  (\verb|*=l|)
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{{\bf plyr}}
+  \fst{{\tt d*ply()}}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(res} \hlkwb{<-} \hlkwd{ddply}\hlstd{(iris,} \hlstr{"Species"}\hlstd{, myLM))}
+\end{alltt}
+\begin{verbatim}
+##      Species  Estimate Std. Error   t value     Pr(>|t|)
+## 1     setosa 4.2131682 0.41558877 10.137830 1.614927e-13
+## 2     setosa 0.5422926 0.28231526  1.920876 6.069778e-02
+## 3 versicolor 2.4075231 0.44625834  5.394909 2.075294e-06
+## 4 versicolor 0.8282810 0.10413643  7.953806 2.586190e-10
+## 5  virginica 1.0596591 0.46676645  2.270213 2.772289e-02
+## 6  virginica 0.9957386 0.08366764 11.901120 6.297786e-16
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\pause \vspace{0.5cm} 
+The only problem with {\bf plyr} is that it
+is sometimes slow
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Your Turn}
+  
+  Consider \verb=WM_teams_2014.csv= data set that contains information
+  on each player of the World Cup 2014, e.g., age, club, country, caps
+  (number of plays for the national team)
+  \begin{enumerate}
+  \item Find the three oldest and youngest players for each country
+  \item Create a data set with the mean (with 95\% confidence
+    interval), median, 25\% and 75\% percentile of the players' age
+    stratified on country and position
+  \item Create a data set containing the clubs, number of players in
+    each club that participate in the world cup. The data set should
+    be ordered from highest to lowest
+  \end{enumerate}
+\end{frame}
+
+
+
+\end{document}
