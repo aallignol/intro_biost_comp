@@ -1,2 +1,2 @@
-55
+20
 data examples (1 to 6) for lecture on data manipulation 

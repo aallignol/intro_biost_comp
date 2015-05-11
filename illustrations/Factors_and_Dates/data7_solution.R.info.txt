@@ -1,2 +1,2 @@
-61
+30
 R file exercises lecture on factors and dates

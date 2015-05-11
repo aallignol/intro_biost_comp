@@ -26,7 +26,7 @@ col_names <- readLines("data6.csv", n = 2)[2]
 
 col_n <- strsplit(col_names, ",")
 
-dd6 <- read.csv("/tmp/data6.csv", stringsAsFactors = FALSE,
+dd6 <- read.csv("data6.csv", stringsAsFactors = FALSE,
                 na.strings = "", header = FALSE, skip = 7,
                 nrows = 50)
 names(dd6) <- col_n[[1]]
