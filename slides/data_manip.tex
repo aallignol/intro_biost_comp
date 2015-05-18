@@ -97,6 +97,11 @@
 \newcommand{\ft}[1]{\frametitle{#1}}
 \newcommand{\fst}[1]{\framesubtitle{#1}}
 
+\newenvironment{xframe}[1][]
+{\begin{frame}[fragile,environment=xframe]
+    \frametitle{#1}}
+  {\end{frame}}
+
 \title[Data Manipulation]{Data Manipulation}
 
 \author{Arthur Allignol}
@@ -939,6 +944,232 @@ See {\tt ?strptime} for a complete list of format symbols
 
   
 \end{frame}
+
+\section{Text Processing}
+
+\begin{xframe}
+  \ft{Introduction}
+  
+  \begin{description}
+  \item[Character:] A symbol in a written language, e.g, letters,
+    numbers, punctuation marks, space, newlines, \dots
+  \item[String:] A sequence of character bound together
+  \end{description}
+  Note that R does not distinguish between character and string
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{test} \hlkwb{<-} \hlstr{"a"} \hlcom{# or 'a'}
+\hlstd{test2} \hlkwb{<-} \hlstr{"apple"} \hlcom{# or 'apple'}
+\hlkwd{class}\hlstd{(test)}
+\end{alltt}
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{class}\hlstd{(test2)}
+\end{alltt}
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{xframe}
+
+\begin{xframe}
+  \ft{Making Strings}
+  
+  Use single or double quotes to construct a string
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstr{"cats"}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats"
+\end{verbatim}
+\begin{alltt}
+\hlstr{'cats and dogs'}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats and dogs"
+\end{verbatim}
+\begin{alltt}
+\hlstr{"cat's best friend"}
+\end{alltt}
+\begin{verbatim}
+## [1] "cat's best friend"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Use {\tt nchar} to get the length of a string
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{length}\hlstd{(}\hlstr{"cat's best friend"}\hlstd{);} \hlkwd{nchar}\hlstd{(}\hlstr{"cat's best friend"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+## [1] 17
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+ 
+\end{xframe}
+
+\begin{xframe}
+  \ft{Character-Valued Variables}
+  
+  Works just like other variables, e.g., 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# A vector}
+\hlstd{a} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"cats"}\hlstd{,} \hlstr{"and"}\hlstd{,} \hlstr{"dogs"}\hlstd{)}
+\hlstd{a[}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] "and"
+\end{verbatim}
+\begin{alltt}
+\hlstd{a[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)]}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats" "dogs"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Display characters
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{print}\hlstd{(a)}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats" "and"  "dogs"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{cat}\hlstd{(a)}
+\end{alltt}
+\begin{verbatim}
+## cats and dogs
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{xframe}
+
+\begin{xframe}
+  \ft{Substrings}
+  
+  The {\tt substr} permits to extract and/or replace substrings
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Extract}
+\hlstd{my_string} \hlkwb{<-} \hlstr{"cats don't like dogs"}
+\hlkwd{substr}\hlstd{(my_string,} \hlkwc{start} \hlstd{=} \hlnum{6}\hlstd{,} \hlkwc{stop} \hlstd{=} \hlnum{15}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "don't like"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Works with vectors}
+\hlstd{my_vector} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"cats"}\hlstd{,} \hlstr{"dogs"}\hlstd{,} \hlstr{"apple"}\hlstd{)}
+\hlkwd{substr}\hlstd{(my_vector,} \hlnum{2}\hlstd{,} \hlnum{2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "a" "o" "p"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{xframe}
+
+\begin{xframe}
+  \ft{Split Strings into Vectors}
+  
+  The {\tt strsplit} function permits to slit a string into a list
+  containing multiple strings based on a give delimiter
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{another_string} \hlkwb{<-} \hlstr{"cats, dogs and apples"}
+\hlkwd{strsplit}\hlstd{(another_string,} \hlkwc{split} \hlstd{=} \hlstr{","}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+## [1] "cats"             " dogs and apples"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{strsplit}\hlstd{(another_string,} \hlkwc{split} \hlstd{=} \hlstr{" "}\hlstd{)[[}\hlnum{1}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats,"  "dogs"   "and"    "apples"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{yet_another_string} \hlkwb{<-} \hlstr{"walk into a bar"}
+\hlkwd{strsplit}\hlstd{(}\hlkwd{c}\hlstd{(another_string, yet_another_string),} \hlkwc{split} \hlstd{=} \hlstr{" "}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+## [1] "cats,"  "dogs"   "and"    "apples"
+## 
+## [[2]]
+## [1] "walk" "into" "a"    "bar"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{xframe}
+
+\begin{xframe}
+  \ft{Build Strings from Multiple Parts}
+  \fst{The {\tt paste} function}
+  
+  The {\tt paste} function combines multiple strings into a single
+  strings. The {\tt sep} and {\tt collapse} arguments control the
+  separation. 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{paste}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"cats"}\hlstd{,} \hlstr{"dogs"}\hlstd{,} \hlstr{"apple"}\hlstd{),} \hlkwc{collapse} \hlstd{=} \hlstr{"|"}\hlstd{)} \hlcom{# BUT}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats|dogs|apple"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{paste}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"cats"}\hlstd{,} \hlstr{"dogs"}\hlstd{,} \hlstr{"apple"}\hlstd{),} \hlkwc{sep} \hlstd{=} \hlstr{"|"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats"  "dogs"  "apple"
+\end{verbatim}
+\begin{alltt}
+\hlcom{# collapse permits to concatenate strings from a single vector}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{paste}\hlstd{(}\hlstr{"cats"}\hlstd{,} \hlstr{"dogs"}\hlstd{,} \hlstr{"apple"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"|"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "cats|dogs|apple"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\end{xframe}
 
 \section{Data Manipulation}
 
@@ -2927,15 +3158,9 @@ Special symbol {\tt .N}
 \begin{alltt}
 \hlstd{(}\hlkwd{setkeyv}\hlstd{(tmp,} \hlkwd{c}\hlstd{(}\hlstr{"Species"}\hlstd{,} \hlstr{"Petal.Length.f"}\hlstd{)))}
 \end{alltt}
-\begin{verbatim}
-##       Species Petal.Length.f     mean        sd
-## 1:     setosa   Small petals 5.006000 0.3524897
-## 2: versicolor   Small petals 5.889130 0.5012111
-## 3: versicolor     Big petals 6.475000 0.4031129
-## 4:  virginica   Small petals 5.700000 0.7000000
-## 5:  virginica     Big petals 6.644681 0.5955664
-\end{verbatim}
-\end{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.table(x): object 'tmp' not found}}\end{kframe}
 \end{knitrout}
 \end{frame}
 

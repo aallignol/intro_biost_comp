@@ -48,6 +48,11 @@
 \newcommand{\ft}[1]{\frametitle{#1}}
 \newcommand{\fst}[1]{\framesubtitle{#1}}
 
+\newenvironment{xframe}[1][]
+{\begin{frame}[fragile,environment=xframe]
+    \frametitle{#1}}
+  {\end{frame}}
+
 \title[Data Manipulation]{Data Manipulation}
 
 \author{Arthur Allignol}
@@ -664,6 +669,112 @@ str(unclass(t2))
 
   
 \end{frame}
+
+\section{Text Processing}
+
+\begin{xframe}
+  \ft{Introduction}
+  
+  \begin{description}
+  \item[Character:] A symbol in a written language, e.g, letters,
+    numbers, punctuation marks, space, newlines, \dots
+  \item[String:] A sequence of character bound together
+  \end{description}
+  Note that R does not distinguish between character and string
+<<text_intro>>=
+test <- "a" # or 'a'
+test2 <- "apple" # or 'apple'
+class(test)
+class(test2)
+@ %def 
+
+\end{xframe}
+
+\begin{xframe}
+  \ft{Making Strings}
+  
+  Use single or double quotes to construct a string
+<<text_intro2>>=
+"cats"
+'cats and dogs'
+"cat's best friend"
+@ %def 
+Use {\tt nchar} to get the length of a string
+<<text_intro3>>=
+length("cat's best friend"); nchar("cat's best friend")
+@ %def 
+ 
+\end{xframe}
+
+\begin{xframe}
+  \ft{Character-Valued Variables}
+  
+  Works just like other variables, e.g., 
+<<>>=
+# A vector
+a <- c("cats", "and", "dogs")
+a[2]
+a[c(1, 3)]
+@ %def 
+Display characters
+<<>>=
+print(a)
+cat(a)
+@ %def 
+\end{xframe}
+
+\begin{xframe}
+  \ft{Substrings}
+  
+  The {\tt substr} permits to extract and/or replace substrings
+<<substr_extract>>=
+# Extract
+my_string <- "cats don't like dogs"
+substr(my_string, start = 6, stop = 15)
+@ %def 
+<<substr_extract2>>=
+# Works with vectors
+my_vector <- c("cats", "dogs", "apple")
+substr(my_vector, 2, 2)
+@ %def 
+\end{xframe}
+
+\begin{xframe}
+  \ft{Split Strings into Vectors}
+  
+  The {\tt strsplit} function permits to slit a string into a list
+  containing multiple strings based on a give delimiter
+<<strsplit_1>>=
+another_string <- "cats, dogs and apples"
+strsplit(another_string, split = ",")
+strsplit(another_string, split = " ")[[1]]
+@ %def 
+<<strsplit_2>>=
+yet_another_string <- "walk into a bar"
+strsplit(c(another_string, yet_another_string), split = " ")
+@ %def 
+
+\end{xframe}
+
+\begin{xframe}
+  \ft{Build Strings from Multiple Parts}
+  \fst{The {\tt paste} function}
+  
+  The {\tt paste} function combines multiple strings into a single
+  strings. The {\tt sep} and {\tt collapse} arguments control the
+  separation. 
+<<paste1>>=
+paste(c("cats", "dogs", "apple"), collapse = "|") # BUT
+paste(c("cats", "dogs", "apple"), sep = "|")
+# collapse permits to concatenate strings from a single vector
+@ %def 
+<<paste2>>=
+paste("cats", "dogs", "apple", sep = "|")
+@ %def 
+
+
+
+\end{xframe}
 
 \section{Data Manipulation}
 
