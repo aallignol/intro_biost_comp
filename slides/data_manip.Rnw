@@ -1,3 +1,4 @@
+% -*- mode: noweb; ess-noweb-default-code-mode: R-mode; -*-
 \documentclass[paper=screen,mathserif]{beamer}
 
 \usetheme{CambridgeUS} 
@@ -772,7 +773,146 @@ paste(c("cats", "dogs", "apple"), sep = "|")
 paste("cats", "dogs", "apple", sep = "|")
 @ %def 
 
+\end{xframe}
 
+\begin{xframe}
+  \ft{Build Strings from Multiple Parts}
+  
+  A more complicated example: Estimate plus 95\% confidence
+  interval
+<<paste_ci>>=
+est <- round(90.233982, 2)
+ci <- round(c(40.48992, 130.93774), 2)
+paste(est, " (95% CI [", ci[1], ", ", ci[2], "])", sep = "")
+@ %def 
+
+\end{xframe}
+
+\begin{xframe}
+  \ft{Search and Replace}
+  
+  R provides several functions for searching and replacing text
+  \begin{center}
+    {\small
+      \begin{tabular}{lp{8cm}} 
+        \toprule
+        {\tt grep}                 & Search for {\tt pattern} in a
+        vector {\tt x} and return the indices of matches or matching
+        string ({\tt value = TRUE})       \\[5pt]
+        {\tt grepl} & As grep but returns a logical vector \\[5pt]
+        {\tt regexpr} & Return character position of the first match
+        as well as length of the match. -1 is returned if no match \\[5pt]
+        {\tt gregexpr} & As {\tt regexpr} but reports all matches \\[5pt]
+        {\tt regexec} & Comparable to {\tt regexpr} but returns a list\\[5pt]
+        \midrule
+        {\tt sub} & Finds pattern in text and replaces first
+        match with specified string \\[5pt]
+        {\tt gsub} & As {\tt sub} but replaces all matches\\[5pt]
+        \bottomrule
+      \end{tabular}}
+  \end{center}
+\end{xframe}
+
+\begin{xframe}
+  \ft{Simple Matching}
+  
+<<match_simple>>=
+l <- c("apple", "banana", "grape", "10", "green.pepper")
+grep(pattern = "a", x = l)
+grep(pattern = "a", x = l, value = TRUE)
+grepl("a", l)
+regexpr("a", l)
+@ %def 
+
+\end{xframe}
+
+\begin{xframe}
+  \ft{Simple Matching}
+
+<<match_simple2, size = "tiny">>=
+regexpr("a", l)
+gregexpr("a", l)
+regexec("a", l)
+@ %def 
+
+\end{xframe}
+
+\begin{xframe}
+  \ft{Regular Expressions}
+  
+  A {\em regular expression} is a pattern that describes a set of
+  strings. It is more or less a grammar of text searching
+  
+  \begin{itemize}
+  \item {\tt .} represents any character
+<<reg1>>=
+grep("ap.", l, value = TRUE)
+grep("\\.p", l, value = TRUE)
+@ %def 
+\item {\tt +} represents one or more occurrence
+<<reg2>>=
+grep("ba+", l, value = TRUE)
+grep("p+", l, value = TRUE)
+@ %def 
+
+  \end{itemize}
+\end{xframe}
+
+\begin{xframe}
+  \ft{Regular Expressions}
+  
+  \begin{itemize}
+  \item {\tt *} represents 0 or more occurrence
+<<reg3>>=
+grep("a*p", l, value = TRUE)
+@ %def
+\item Group term with parentheses
+<<reg4>>=
+grep("(ap)+.", l, value = TRUE)
+@ %def 
+\item \verb=^= end of line; \verb=$= start of line
+<<reg5>>=
+grep("^g", l, value = TRUE)
+grep("e$", l, value = TRUE)
+@ %def 
+  \end{itemize}
+\end{xframe}
+
+\begin{xframe}
+  \ft{Regular Expressions}
+  
+  \begin{itemize}
+  \item {\tt |} logical OR
+<<reg6>>=
+grep("(ap)|(an)", l, value = TRUE)
+@ %def 
+\item \verb=[ ]= creates special character classes, e.g.,
+  \begin{itemize}
+  \item \verb=[a-z]= lower case letters
+  \item \verb=[a-gA-G0-5]= any of a to g, A to G, and 0 to 5
+  \item \verb=[^0-9]= anything except a digit
+  \end{itemize}
+<<reg7>>=
+grep("[a-c]", l, value = TRUE)
+grep("[^a-z]", l, value = TRUE)
+@ %def 
+
+  \end{itemize}
+\end{xframe}
+
+\begin{xframe}
+  \ft{Regular Expressions}
+  
+  \begin{itemize}
+  \item \verb={n}= match exactly {\tt n} times
+  \item \verb={n,}= match {\tt n} or more times
+  \item \verb={n,m}= match at least {\tt n}  times but no more than
+    {\tt m} times
+  \end{itemize}
+<<reg8>>=
+grep("e{2,}", l, value = TRUE)
+grep("p{2}.*r$", l, value = TRUE)
+@ %def 
 
 \end{xframe}
 
