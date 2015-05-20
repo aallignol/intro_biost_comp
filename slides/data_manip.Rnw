@@ -916,6 +916,27 @@ grep("p{2}.*r$", l, value = TRUE)
 
 \end{xframe}
 
+\begin{xframe}
+  \ft{Your Turn}
+  
+  Consider the {\tt babynames} data in package {\bf babynames}
+<<eval = FALSE>>=
+install.packages("babynames")
+require(babynames)
+text <- unique(babynames$name)
+@ %def 
+<<echo = FALSE>>=
+require(babynames)
+text <- unique(babynames$name)
+@ %def 
+Find in {\tt text}
+\begin{enumerate}
+\item All the names starting with L and with exactly 2 a's
+\item All the names with at least 2 y's
+\item All the names containing either Paris, London or Berlin
+\end{enumerate}
+\end{xframe}
+
 \section{Data Manipulation}
 
 \begin{frame}[fragile]

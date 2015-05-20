@@ -1492,7 +1492,7 @@ Display characters
 ## [1] "green.pepper"
 \end{verbatim}
 \begin{alltt}
-\hlkwd{grep}\hlstd{(}\hlstr{"p\{2\}.\{1,\}r$"}\hlstd{, l,} \hlkwc{value} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlkwd{grep}\hlstd{(}\hlstr{"p\{2\}.*r$"}\hlstd{, l,} \hlkwc{value} \hlstd{=} \hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ## [1] "green.pepper"
@@ -1500,6 +1500,26 @@ Display characters
 \end{kframe}
 \end{knitrout}
 
+\end{xframe}
+
+\begin{xframe}
+  \ft{Your Turn}
+  
+  Consider the {\tt babynames} data in package {\bf babynames}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlstr{"babynames"}\hlstd{)}
+\hlkwd{require}\hlstd{(babynames)}
+\hlstd{text} \hlkwb{<-} \hlstd{babynames}\hlopt{$}\hlstd{name}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Find in {\tt text}
+\begin{enumerate}
+\item All the names starting with L and with exactly 2 a's
+\end{enumerate}
 \end{xframe}
 
 \section{Data Manipulation}
@@ -3153,12 +3173,11 @@ is sometimes slow
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{unloadNamespace}\hlstd{(}\hlstr{"plyr"}\hlstd{)} \hlcom{# conflict with dplyr}
+\hlkwd{require}\hlstd{(dplyr)}
 \end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in unloadNamespace("{}plyr"{}): namespace 'plyr' is imported by 'reshape2' so cannot be unloaded}}\begin{alltt}
-\hlkwd{require}\hlstd{(dplyr)}
-
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: dplyr\\\#\# \\\#\# Attaching package: 'dplyr'\\\#\# \\\#\# The following object is masked from 'package:stats':\\\#\# \\\#\#\ \ \ \  filter\\\#\# \\\#\# The following objects are masked from 'package:base':\\\#\# \\\#\#\ \ \ \  intersect, setdiff, setequal, union}}\begin{alltt}
 \hlstd{iris} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Species)} \hlopt{%>%} \hlkwd{filter}\hlstd{(Petal.Length} \hlopt{>} \hlnum{4.8}\hlstd{)} \hlopt{%>%}
   \hlkwd{summarise}\hlstd{(}\hlkwc{mean_width} \hlstd{=} \hlkwd{mean}\hlstd{(Petal.Width))}
 \end{alltt}
@@ -3272,6 +3291,10 @@ leading to
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{require}\hlstd{(data.table)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: data.table\\\#\# data.table 1.9.4\ \ For help type: ?data.table\\\#\# *** NB: by=.EACHI is now explicit. See README to restore previous behaviour.\\\#\# \\\#\# Attaching package: 'data.table'\\\#\# \\\#\# The following objects are masked from 'package:dplyr':\\\#\# \\\#\#\ \ \ \  between, last}}\begin{alltt}
 \hlstd{(dt_iris} \hlkwb{<-} \hlkwd{data.table}\hlstd{(iris,} \hlkwc{key} \hlstd{=} \hlstr{"Species"}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
