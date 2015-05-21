@@ -650,22 +650,6 @@ str(unclass(t2))
   \begin{enumerate}
   \item Read the data
   \item Compute the age of the patients
-  \item \verb=CO_DIABETES= equals 1 if patients have diabetes,
-    otherwise 0
-    \begin{itemize}
-    \item Create a factor {\tt Diabetes} with levels {\tt Yes} and
-      {\tt No} with reference value {\tt No}
-    \end{itemize}
-  \item \verb=CO_LIVER= equals 1 for mild liver disease, 2 for
-    severe liver disease and 0 for no liver disease
-    \begin{itemize}
-    \item Create a factor \verb=Liver_Disease= with levels
-      \verb=Mild=, \verb=Severe=, \verb=No= with reference value
-      \verb=No= 
-    \end{itemize}
-  \item Create a factor \verb=Gender= with levels \verb=Female=
-    (\verb|sex == 0|) and \verb=Male= (\verb|sex == 1|)
-
   \end{enumerate}
 
   
@@ -933,7 +917,7 @@ Find in {\tt text}
 \begin{enumerate}
 \item All the names starting with L and with exactly 2 a's
 \item All the names with at least 2 y's
-\item All the names containing either Paris, London or Berlin
+\item All the names containing either 'Paris', 'London' or 'Berlin'
 \end{enumerate}
 \end{xframe}
 

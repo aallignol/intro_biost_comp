@@ -925,22 +925,6 @@ See {\tt ?strptime} for a complete list of format symbols
   \begin{enumerate}
   \item Read the data
   \item Compute the age of the patients
-  \item \verb=CO_DIABETES= equals 1 if patients have diabetes,
-    otherwise 0
-    \begin{itemize}
-    \item Create a factor {\tt Diabetes} with levels {\tt Yes} and
-      {\tt No} with reference value {\tt No}
-    \end{itemize}
-  \item \verb=CO_LIVER= equals 1 for mild liver disease, 2 for
-    severe liver disease and 0 for no liver disease
-    \begin{itemize}
-    \item Create a factor \verb=Liver_Disease= with levels
-      \verb=Mild=, \verb=Severe=, \verb=No= with reference value
-      \verb=No= 
-    \end{itemize}
-  \item Create a factor \verb=Gender= with levels \verb=Female=
-    (\verb|sex == 0|) and \verb=Male= (\verb|sex == 1|)
-
   \end{enumerate}
 
   
@@ -1511,7 +1495,7 @@ Display characters
 \begin{alltt}
 \hlkwd{install.packages}\hlstd{(}\hlstr{"babynames"}\hlstd{)}
 \hlkwd{require}\hlstd{(babynames)}
-\hlstd{text} \hlkwb{<-} \hlstd{babynames}\hlopt{$}\hlstd{name}
+\hlstd{text} \hlkwb{<-} \hlkwd{unique}\hlstd{(babynames}\hlopt{$}\hlstd{name)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1519,6 +1503,8 @@ Display characters
 Find in {\tt text}
 \begin{enumerate}
 \item All the names starting with L and with exactly 2 a's
+\item All the names with at least 2 y's
+\item All the names containing either 'Paris', 'London' or 'Berlin'
 \end{enumerate}
 \end{xframe}
 
@@ -3173,11 +3159,12 @@ is sometimes slow
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{unloadNamespace}\hlstd{(}\hlstr{"plyr"}\hlstd{)} \hlcom{# conflict with dplyr}
-\hlkwd{require}\hlstd{(dplyr)}
 \end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: dplyr\\\#\# \\\#\# Attaching package: 'dplyr'\\\#\# \\\#\# The following object is masked from 'package:stats':\\\#\# \\\#\#\ \ \ \  filter\\\#\# \\\#\# The following objects are masked from 'package:base':\\\#\# \\\#\#\ \ \ \  intersect, setdiff, setequal, union}}\begin{alltt}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in unloadNamespace("{}plyr"{}): namespace 'plyr' is imported by 'reshape2' so cannot be unloaded}}\begin{alltt}
+\hlkwd{require}\hlstd{(dplyr)}
+
 \hlstd{iris} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Species)} \hlopt{%>%} \hlkwd{filter}\hlstd{(Petal.Length} \hlopt{>} \hlnum{4.8}\hlstd{)} \hlopt{%>%}
   \hlkwd{summarise}\hlstd{(}\hlkwc{mean_width} \hlstd{=} \hlkwd{mean}\hlstd{(Petal.Width))}
 \end{alltt}
@@ -3291,10 +3278,6 @@ leading to
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{require}\hlstd{(data.table)}
-\end{alltt}
-
-
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: data.table\\\#\# data.table 1.9.4\ \ For help type: ?data.table\\\#\# *** NB: by=.EACHI is now explicit. See README to restore previous behaviour.\\\#\# \\\#\# Attaching package: 'data.table'\\\#\# \\\#\# The following objects are masked from 'package:dplyr':\\\#\# \\\#\#\ \ \ \  between, last}}\begin{alltt}
 \hlstd{(dt_iris} \hlkwb{<-} \hlkwd{data.table}\hlstd{(iris,} \hlkwc{key} \hlstd{=} \hlstr{"Species"}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
