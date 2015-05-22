@@ -1,0 +1,143 @@
+\documentclass[a4,11pt]{article}
+
+%% \title{Analysis of the {\ttfamily GSOEP9402} data}
+%% \author{Arthur Allignol}
+%% \date{}
+
+\usepackage{booktabs}
+\usepackage[osf]{sourcesanspro}
+\usepackage{sourcecodepro}
+\usepackage[T1]{fontenc}
+%\renewcommand*{\ttdefault}{sourcecodepro}
+\usepackage{subcaption}
+\usepackage{graphicx,rotating,epsfig,multirow,multicol,hhline}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{url}
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sfmath}
+
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+
+
+\def\bea{\begin{eqnarray*}}
+\def\eea{\end{eqnarray*}}
+%Dense format
+\setlength{\parindent}{0em} \setlength{\textwidth}{16cm} \setlength{\textheight}{25cm}
+\setlength{\topmargin}{-0.5cm} \setlength{\oddsidemargin}{0cm} \setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+\newcommand{\nat}{{\it I\hspace{-0.12cm}N}}
+\pagestyle{empty}
+
+
+\newcommand{\p}{{\rm P}}
+\newcommand{\erw}{{\rm E}}
+\newcommand{\var}{{\rm var}}
+\newcommand{\eins}{{\bf 1}}%{\mathbf{1}}
+\newcommand{\dif}{{\rm d}}
+\newcommand{\cif}{{\rm CIF}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\D}{\mathrm{d}}
+
+%Special commands:
+\newcommand{\Bin}{\operatorname{Bin}} % Binomial Distribution
+\newcommand{\NegBin}{\operatorname{NegBin}} % Negative Bin
+\newcommand{\HypGeom}{\operatorname{HypGeom}} % Hypergeometric Distribution
+\newcommand{\Pois}{\operatorname{Po}} % Hypergeometric Distribution
+\newcommand{\Po}{\operatorname{Po}} %
+\newcommand{\Exp}{\operatorname{Exp}} %
+\newcommand{\Par}{\operatorname{Par}} %
+\newcommand{\Ga}{\mathcal{G}a} %
+\newcommand{\Be}{\mathcal{B}e} %
+\newcommand{\Var}{\operatorname{Var}} %
+\newcommand{\E}{\operatorname{E}} %
+\newcommand{\Cov}{\operatorname{Cov}} %
+\newcommand{\MSE}{\operatorname{MSE}}
+
+\DeclareMathOperator{\Nor}{N} % Normal -
+\DeclareMathOperator{\Log}{Log} % Logistische Verteilung -
+\newcommand{\ml}[2][1]{% % für Maximum-Likelihood-Schätzer von #1
+\ifthenelse{#1 = 1}%
+ {\hat{#2}_{\scriptscriptstyle{ML}}}%
+ {\hat{#2}^{#1}_{\scriptscriptstyle{ML}}}% z.B. für sigmadach^2
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environment for Aufgaben
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{ka}
+
+
+\newtheorem{exercise}{Problem}
+\newenvironment{aufgabe}{\begin{exercise}\sf}{\end{exercise} \bigskip}
+
+\newcommand{\footer}{ \vfill
+  \mbox{}\hrulefill\\
+  Return your solutions until 28.5.2015, 10h00 s.t. per email at
+  \url{arthur.allignol@uni-ulm.de} You may turn in solutions in pairs
+  (two students, one solution; but not more than two). You may answer
+  in German or English}
+%\xxivtime   Uhrzeit für letzte Änderung
+
+\pagestyle{empty}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\renewcommand{\baselinestretch}{1}
+
+\hrulefill\\
+{\bf Introduction to biostatistical computing} \hspace{\fill} Summer term 2015\\
+Arthur Allignol \quad\quad Maria Umlauft \hspace{\fill} 21.5.2014\\[-1.2ex]
+\mbox{}\hrulefill\\
+\newline \renewcommand{\baselinestretch}{1}
+\setcounter{ka}{0} \vspace{-0.5cm}
+
+
+
+\begin{center}
+\large{{\bf Exercise Sheet 4}}
+\end{center}
+
+<<setup, include = FALSE>>=
+require(knitr)
+opts_chunk$set(fig.path = "graphics/", echo = TRUE, size = "small")
+require(xtable)
+@ 
+
+\begin{aufgabe}{{\bf Text processing: Nucleotide sequence}}
+  
+  The fasta format is an ubiquitous format for representing nucleotide
+  sequences. A typical fasta file starts with a single-line
+  description, followed by lines of sequence data. The description
+  line start with a {\tt >} and is directly followed by the name of
+  the sequence. Further information might be given after a blank
+  space. A sequence ends if a new line with a {\tt >} appears. More
+  information on the fasta format can be found at
+  \url{http://zhanglab.ccmb.med.umich.edu/FASTA/}
+  \begin{enumerate}
+  \item The file {\tt example.fasta} can be found on the SLC. It
+    contains three DNA sequences. Read the data into R (e.g., {\tt readLines})
+  \item Create a data.frame with 2 variables
+    \begin{description}
+    \item[{\tt seq\_name}:] This variable should contain the sequences'
+      id, i.e., everything after the > and before the first space
+    \item[{\tt sequence}:] The sequence in itself
+    \end{description}
+  \item Answer the following questions:
+    \begin{enumerate}
+    \item How long is each sequence?
+    \item How many A's, T's, G's and C's and  is there in each sequence?
+      Propose a simple graphic to display this information
+    \end{enumerate}
+  \item Transform the DNA sequences into RNA (change the T's in U's)
+  \end{enumerate}
+  
+\end{aufgabe}  
+
+\footer
+
+\end{document}
