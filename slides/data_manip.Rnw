@@ -108,7 +108,6 @@
 require(knitr)
 opts_chunk$set(fig.path = "graphics/", echo = TRUE, results = "markup",
                size = "scriptsize")
-require(plyr)
 require(Amisc)
 require(xtable)
 @ 
@@ -1655,91 +1654,91 @@ myLM <- function(x) {
 
 \end{frame}
 
-\begin{frame}[fragile]
-    \ft{Split-Apply-Combine}
-    \fst{The {\bf plyr} Package}
+%% \begin{frame}[fragile]
+%%     \ft{Split-Apply-Combine}
+%%     \fst{The {\bf plyr} Package}
     
-    The *apply functions in base R implement the split-apply-combine
-    strategy, but are inconsistent
-    \begin{itemize}
-    \item \verb=apply()= input {\tt arrays}; split by row and/or columns;
-      output {\tt array} 
-    \item \verb=lapply()= input {\tt list} or {\tt vector}; output
-      {\tt list}
-    \item \verb=sapply()= input {\tt list} or {\tt vector}; simplify
-      to vector
-    \item \verb=tapply= input {\tt data.frame}; output depends
-    \item \verb=rapply()=, \verb=vapply()=, \verb=mapply()=
-    \end{itemize}\pause\vspace{0.3cm}
-    {\bf plyr} brings some consistency: \verb=**ply()=
-    \begin{description}
-    \item[first *] Input type ({\tt a} array, {\tt d} data frame, {\tt
-        l} list)
-    \item[second *] Output type ({\tt a} array, {\tt d} data frame, {\tt
-        l} list, \verb=_= discard)
-    \end{description}
+%%     The *apply functions in base R implement the split-apply-combine
+%%     strategy, but are inconsistent
+%%     \begin{itemize}
+%%     \item \verb=apply()= input {\tt arrays}; split by row and/or columns;
+%%       output {\tt array} 
+%%     \item \verb=lapply()= input {\tt list} or {\tt vector}; output
+%%       {\tt list}
+%%     \item \verb=sapply()= input {\tt list} or {\tt vector}; simplify
+%%       to vector
+%%     \item \verb=tapply= input {\tt data.frame}; output depends
+%%     \item \verb=rapply()=, \verb=vapply()=, \verb=mapply()=
+%%     \end{itemize}\pause\vspace{0.3cm}
+%%     {\bf plyr} brings some consistency: \verb=**ply()=
+%%     \begin{description}
+%%     \item[first *] Input type ({\tt a} array, {\tt d} data frame, {\tt
+%%         l} list)
+%%     \item[second *] Output type ({\tt a} array, {\tt d} data frame, {\tt
+%%         l} list, \verb=_= discard)
+%%     \end{description}
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt a*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt a*ply()}}
   
-  \verb=y <- a*ply(.data, .margins., .fun, ...)=
-  \vspace{0.5cm}
-  \begin{description}
-  \item[.data] An array
-  \item[.margins] Subscripts which the function gets applied over
-  \item[.fun] Function to apply to each piece
-  \end{description}
-  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
-  (\verb|*=l|)
+%%   \verb=y <- a*ply(.data, .margins., .fun, ...)=
+%%   \vspace{0.5cm}
+%%   \begin{description}
+%%   \item[.data] An array
+%%   \item[.margins] Subscripts which the function gets applied over
+%%   \item[.fun] Function to apply to each piece
+%%   \end{description}
+%%   Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+%%   (\verb|*=l|)
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt l*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt l*ply()}}
   
-  \verb=y <- l*ply(.data, .fun, ...)=
-  \vspace{0.5cm}
-  \begin{description}
-  \item[.data] An list
-  \item[.fun] Function to apply to each item of the list
-  \end{description}
-  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
-  (\verb|*=l|)
+%%   \verb=y <- l*ply(.data, .fun, ...)=
+%%   \vspace{0.5cm}
+%%   \begin{description}
+%%   \item[.data] An list
+%%   \item[.fun] Function to apply to each item of the list
+%%   \end{description}
+%%   Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+%%   (\verb|*=l|)
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt d*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt d*ply()}}
   
-  \verb=y <- d*ply(.data, .variables, .fun, ...)=
-  \vspace{0.5cm}
-  \begin{description}
-  \item[.data] A data frame
-  \item[.variables] Variables defining the groups
-  \item[.fun] Function to apply to each group
-  \end{description}
-  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
-  (\verb|*=l|)
+%%   \verb=y <- d*ply(.data, .variables, .fun, ...)=
+%%   \vspace{0.5cm}
+%%   \begin{description}
+%%   \item[.data] A data frame
+%%   \item[.variables] Variables defining the groups
+%%   \item[.fun] Function to apply to each group
+%%   \end{description}
+%%   Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+%%   (\verb|*=l|)
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt d*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt d*ply()}}
 
-<<ddply1, size = "scriptsize">>=
-(res <- ddply(iris, "Species", myLM))
-@ %def 
+%% <<ddply1, size = "scriptsize">>=
+%% (res <- ddply(iris, "Species", myLM))
+%% @ %def 
 
-\pause \vspace{0.5cm} 
-The only problem with {\bf plyr} is that it
-is sometimes slow
-\end{frame}
+%% \pause \vspace{0.5cm} 
+%% The only problem with {\bf plyr} is that it
+%% is sometimes slow
+%% \end{frame}
 
 \begin{frame}
   \ft{The {\bf dplyr} package} 
@@ -1771,7 +1770,6 @@ is sometimes slow
   Compute the mean sepal width by species for flower whose petal
   length is longer than 4.8
 <<dlyr_1>>=
-unloadNamespace("plyr") # conflict with dplyr
 require(dplyr)
 
 iris %>% group_by(Species) %>% filter(Petal.Length > 4.8) %>%
@@ -1930,7 +1928,7 @@ dt_iris[, myFun(Sepal.Length), by = .(Species, Petal.Length.f)]
   Reorder the last output by {\tt Species} and {\tt Petal.Length.f}
 
 <<by_2>>=
-dt_iris[, myFun(Sepal.Length), by = .(Species, Petal.Length.f)]
+tmp <- dt_iris[, myFun(Sepal.Length), by = .(Species, Petal.Length.f)]
 (setkeyv(tmp, c("Species", "Petal.Length.f")))
 @ %def 
 \end{frame}
@@ -1962,8 +1960,6 @@ dt_iris[, Petal.Length.f := factor(Petal.Length > 4.8,
 \begin{frame}[fragile]
   \ft{Your Turn}
   
-  Other example (see dplyr examples)? 
-  
   Consider \verb=WM_teams_2014.csv= data set that contains information
   on each player of the World Cup 2014, e.g., age, club, country, caps
   (number of plays for the national team)
@@ -1977,9 +1973,5 @@ dt_iris[, Petal.Length.f := factor(Petal.Length > 4.8,
     be ordered from highest to lowest
   \end{enumerate}
 \end{frame}
-
-<<>>=
-
-@ %def 
 
 \end{document}

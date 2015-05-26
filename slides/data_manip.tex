@@ -313,8 +313,8 @@
 \hlstd{aa}
 \end{alltt}
 \begin{verbatim}
-## [1] "<!DOCTYPE html SYSTEM \"about:legacy-compat\">"                                                                           
-## [2] "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:my=\"mynames\" xmlns:gf=\"http://www.taz.de/namespace/gitfilter\"><!--"
+## [1] "<!DOCTYPE html SYSTEM \"about:legacy-compat\">"                                                                                                             
+## [2] "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:my=\"mynames\" xmlns:gf=\"http://www.taz.de/namespace/gitfilter\"><!-- DEBUG start 15:12:50+02:00--><!--"
 ## [3] "\t\tContent Management: openNewspaper www.opennewspaper.org based on TYPO3 www.typo3.org"
 \end{verbatim}
 \begin{alltt}
@@ -3027,104 +3027,91 @@ In this case, a matrix of lists is returned...
 
 \end{frame}
 
-\begin{frame}[fragile]
-    \ft{Split-Apply-Combine}
-    \fst{The {\bf plyr} Package}
+%% \begin{frame}[fragile]
+%%     \ft{Split-Apply-Combine}
+%%     \fst{The {\bf plyr} Package}
     
-    The *apply functions in base R implement the split-apply-combine
-    strategy, but are inconsistent
-    \begin{itemize}
-    \item \verb=apply()= input {\tt arrays}; split by row and/or columns;
-      output {\tt array} 
-    \item \verb=lapply()= input {\tt list} or {\tt vector}; output
-      {\tt list}
-    \item \verb=sapply()= input {\tt list} or {\tt vector}; simplify
-      to vector
-    \item \verb=tapply= input {\tt data.frame}; output depends
-    \item \verb=rapply()=, \verb=vapply()=, \verb=mapply()=
-    \end{itemize}\pause\vspace{0.3cm}
-    {\bf plyr} brings some consistency: \verb=**ply()=
-    \begin{description}
-    \item[first *] Input type ({\tt a} array, {\tt d} data frame, {\tt
-        l} list)
-    \item[second *] Output type ({\tt a} array, {\tt d} data frame, {\tt
-        l} list, \verb=_= discard)
-    \end{description}
+%%     The *apply functions in base R implement the split-apply-combine
+%%     strategy, but are inconsistent
+%%     \begin{itemize}
+%%     \item \verb=apply()= input {\tt arrays}; split by row and/or columns;
+%%       output {\tt array} 
+%%     \item \verb=lapply()= input {\tt list} or {\tt vector}; output
+%%       {\tt list}
+%%     \item \verb=sapply()= input {\tt list} or {\tt vector}; simplify
+%%       to vector
+%%     \item \verb=tapply= input {\tt data.frame}; output depends
+%%     \item \verb=rapply()=, \verb=vapply()=, \verb=mapply()=
+%%     \end{itemize}\pause\vspace{0.3cm}
+%%     {\bf plyr} brings some consistency: \verb=**ply()=
+%%     \begin{description}
+%%     \item[first *] Input type ({\tt a} array, {\tt d} data frame, {\tt
+%%         l} list)
+%%     \item[second *] Output type ({\tt a} array, {\tt d} data frame, {\tt
+%%         l} list, \verb=_= discard)
+%%     \end{description}
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt a*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt a*ply()}}
   
-  \verb=y <- a*ply(.data, .margins., .fun, ...)=
-  \vspace{0.5cm}
-  \begin{description}
-  \item[.data] An array
-  \item[.margins] Subscripts which the function gets applied over
-  \item[.fun] Function to apply to each piece
-  \end{description}
-  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
-  (\verb|*=l|)
+%%   \verb=y <- a*ply(.data, .margins., .fun, ...)=
+%%   \vspace{0.5cm}
+%%   \begin{description}
+%%   \item[.data] An array
+%%   \item[.margins] Subscripts which the function gets applied over
+%%   \item[.fun] Function to apply to each piece
+%%   \end{description}
+%%   Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+%%   (\verb|*=l|)
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt l*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt l*ply()}}
   
-  \verb=y <- l*ply(.data, .fun, ...)=
-  \vspace{0.5cm}
-  \begin{description}
-  \item[.data] An list
-  \item[.fun] Function to apply to each item of the list
-  \end{description}
-  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
-  (\verb|*=l|)
+%%   \verb=y <- l*ply(.data, .fun, ...)=
+%%   \vspace{0.5cm}
+%%   \begin{description}
+%%   \item[.data] An list
+%%   \item[.fun] Function to apply to each item of the list
+%%   \end{description}
+%%   Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+%%   (\verb|*=l|)
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt d*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt d*ply()}}
   
-  \verb=y <- d*ply(.data, .variables, .fun, ...)=
-  \vspace{0.5cm}
-  \begin{description}
-  \item[.data] A data frame
-  \item[.variables] Variables defining the groups
-  \item[.fun] Function to apply to each group
-  \end{description}
-  Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
-  (\verb|*=l|)
+%%   \verb=y <- d*ply(.data, .variables, .fun, ...)=
+%%   \vspace{0.5cm}
+%%   \begin{description}
+%%   \item[.data] A data frame
+%%   \item[.variables] Variables defining the groups
+%%   \item[.fun] Function to apply to each group
+%%   \end{description}
+%%   Returns an array (\verb|*=a|), a data.frame (\verb|*=d|), a list
+%%   (\verb|*=l|)
   
-\end{frame}
+%% \end{frame}
 
-\begin{frame}[fragile]
-  \ft{{\bf plyr}}
-  \fst{{\tt d*ply()}}
+%% \begin{frame}[fragile]
+%%   \ft{{\bf plyr}}
+%%   \fst{{\tt d*ply()}}
 
-\begin{knitrout}\scriptsize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{(res} \hlkwb{<-} \hlkwd{ddply}\hlstd{(iris,} \hlstr{"Species"}\hlstd{, myLM))}
-\end{alltt}
-\begin{verbatim}
-##      Species  Estimate Std. Error   t value     Pr(>|t|)
-## 1     setosa 4.2131682 0.41558877 10.137830 1.614927e-13
-## 2     setosa 0.5422926 0.28231526  1.920876 6.069778e-02
-## 3 versicolor 2.4075231 0.44625834  5.394909 2.075294e-06
-## 4 versicolor 0.8282810 0.10413643  7.953806 2.586190e-10
-## 5  virginica 1.0596591 0.46676645  2.270213 2.772289e-02
-## 6  virginica 0.9957386 0.08366764 11.901120 6.297786e-16
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+%% <<ddply1, size = "scriptsize">>=
+%% (res <- ddply(iris, "Species", myLM))
+%% @ %def 
 
-\pause \vspace{0.5cm} 
-The only problem with {\bf plyr} is that it
-is sometimes slow
-\end{frame}
+%% \pause \vspace{0.5cm} 
+%% The only problem with {\bf plyr} is that it
+%% is sometimes slow
+%% \end{frame}
 
 \begin{frame}
   \ft{The {\bf dplyr} package} 
@@ -3158,11 +3145,6 @@ is sometimes slow
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{unloadNamespace}\hlstd{(}\hlstr{"plyr"}\hlstd{)} \hlcom{# conflict with dplyr}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in unloadNamespace("{}plyr"{}): namespace 'plyr' is imported by 'reshape2' so cannot be unloaded}}\begin{alltt}
 \hlkwd{require}\hlstd{(dplyr)}
 
 \hlstd{iris} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Species)} \hlopt{%>%} \hlkwd{filter}\hlstd{(Petal.Length} \hlopt{>} \hlnum{4.8}\hlstd{)} \hlopt{%>%}
@@ -3482,22 +3464,18 @@ Special symbol {\tt .N}
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{dt_iris[,} \hlkwd{myFun}\hlstd{(Sepal.Length),} \hlkwc{by} \hlstd{=} \hlkwd{.}\hlstd{(Species, Petal.Length.f)]}
+\hlstd{tmp} \hlkwb{<-} \hlstd{dt_iris[,} \hlkwd{myFun}\hlstd{(Sepal.Length),} \hlkwc{by} \hlstd{=} \hlkwd{.}\hlstd{(Species, Petal.Length.f)]}
+\hlstd{(}\hlkwd{setkeyv}\hlstd{(tmp,} \hlkwd{c}\hlstd{(}\hlstr{"Species"}\hlstd{,} \hlstr{"Petal.Length.f"}\hlstd{)))}
 \end{alltt}
 \begin{verbatim}
 ##       Species Petal.Length.f     mean        sd
 ## 1:     setosa   Small petals 5.006000 0.3524897
 ## 2: versicolor   Small petals 5.889130 0.5012111
 ## 3: versicolor     Big petals 6.475000 0.4031129
-## 4:  virginica     Big petals 6.644681 0.5955664
-## 5:  virginica   Small petals 5.700000 0.7000000
+## 4:  virginica   Small petals 5.700000 0.7000000
+## 5:  virginica     Big petals 6.644681 0.5955664
 \end{verbatim}
-\begin{alltt}
-\hlstd{(}\hlkwd{setkeyv}\hlstd{(tmp,} \hlkwd{c}\hlstd{(}\hlstr{"Species"}\hlstd{,} \hlstr{"Petal.Length.f"}\hlstd{)))}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.table(x): object 'tmp' not found}}\end{kframe}
+\end{kframe}
 \end{knitrout}
 \end{frame}
 
@@ -3544,8 +3522,6 @@ Special symbol {\tt .N}
 \begin{frame}[fragile]
   \ft{Your Turn}
   
-  Other example (see dplyr examples)? 
-  
   Consider \verb=WM_teams_2014.csv= data set that contains information
   on each player of the World Cup 2014, e.g., age, club, country, caps
   (number of plays for the national team)
@@ -3559,7 +3535,5 @@ Special symbol {\tt .N}
     be ordered from highest to lowest
   \end{enumerate}
 \end{frame}
-
-
 
 \end{document}
