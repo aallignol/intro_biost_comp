@@ -14,6 +14,7 @@ dat$hypertension <- factor(as.integer(dat$DIAS > 120 & dat$SYS > 80),
                            levels = c(0, 1),
                            labels = c("No", "Yes"))
 
+hypertension <- ifelse(dat$DIAS > 120 & dat$SYS > 80, 1, 0)
 
 ### Compute a variable Hypotension that equals 1 if DIAS < 100 and SYS < 65
 dat$hypotension <- factor(as.integer(dat$DIAS < 100 & dat$SYS < 65),
@@ -45,3 +46,4 @@ dat <- within(dat,{
 ### or hypertension and don’t live in New York state
 dat_new <- dat[(dat$hypertension == "Yes" | dat$hypotension == "Yes") & !(dat$city == "In New York state"), ]
 
+dat_new_new <- subset(dat, (hypertension == "Yes" | hypotension == "Yes") & !(city == "In New York state"))

@@ -1,0 +1,160 @@
+\documentclass[a4,11pt]{article}
+
+%% \title{Analysis of the {\ttfamily GSOEP9402} data}
+%% \author{Arthur Allignol}
+%% \date{}
+
+\usepackage{booktabs}
+\usepackage[osf]{sourcesanspro}
+\usepackage{sourcecodepro}
+\usepackage[T1]{fontenc}
+%\renewcommand*{\ttdefault}{sourcecodepro}
+\usepackage{subcaption}
+\usepackage{graphicx,rotating,epsfig,multirow,multicol,hhline}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{url}
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sfmath}
+
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+
+
+\def\bea{\begin{eqnarray*}}
+\def\eea{\end{eqnarray*}}
+%Dense format
+\setlength{\parindent}{0em} \setlength{\textwidth}{16cm} \setlength{\textheight}{25cm}
+\setlength{\topmargin}{-0.5cm} \setlength{\oddsidemargin}{0cm} \setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+\newcommand{\nat}{{\it I\hspace{-0.12cm}N}}
+\pagestyle{empty}
+
+
+\newcommand{\p}{{\rm P}}
+\newcommand{\erw}{{\rm E}}
+\newcommand{\var}{{\rm var}}
+\newcommand{\eins}{{\bf 1}}%{\mathbf{1}}
+\newcommand{\dif}{{\rm d}}
+\newcommand{\cif}{{\rm CIF}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\D}{\mathrm{d}}
+
+%Special commands:
+\newcommand{\Bin}{\operatorname{Bin}} % Binomial Distribution
+\newcommand{\NegBin}{\operatorname{NegBin}} % Negative Bin
+\newcommand{\HypGeom}{\operatorname{HypGeom}} % Hypergeometric Distribution
+\newcommand{\Pois}{\operatorname{Po}} % Hypergeometric Distribution
+\newcommand{\Po}{\operatorname{Po}} %
+\newcommand{\Exp}{\operatorname{Exp}} %
+\newcommand{\Par}{\operatorname{Par}} %
+\newcommand{\Ga}{\mathcal{G}a} %
+\newcommand{\Be}{\mathcal{B}e} %
+\newcommand{\Var}{\operatorname{Var}} %
+\newcommand{\E}{\operatorname{E}} %
+\newcommand{\Cov}{\operatorname{Cov}} %
+\newcommand{\MSE}{\operatorname{MSE}}
+
+\DeclareMathOperator{\Nor}{N} % Normal -
+\DeclareMathOperator{\Log}{Log} % Logistische Verteilung -
+\newcommand{\ml}[2][1]{% % für Maximum-Likelihood-Schätzer von #1
+\ifthenelse{#1 = 1}%
+ {\hat{#2}_{\scriptscriptstyle{ML}}}%
+ {\hat{#2}^{#1}_{\scriptscriptstyle{ML}}}% z.B. für sigmadach^2
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environment for Aufgaben
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{ka}
+
+
+\newtheorem{exercise}{Problem}
+\newenvironment{aufgabe}{\begin{exercise}\sf}{\end{exercise} \bigskip}
+
+\newcommand{\footer}{ \vfill
+  \mbox{}\hrulefill\\
+  Return your solutions until 11.6.2015, 10h00 s.t. per email at
+  \url{arthur.allignol@uni-ulm.de} You may turn in solutions in pairs
+  (two students, one solution; but not more than two). You may answer
+  in German or English}
+%\xxivtime   Uhrzeit für letzte Änderung
+
+\pagestyle{empty}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\renewcommand{\baselinestretch}{1}
+
+\hrulefill\\
+{\bf Introduction to biostatistical computing} \hspace{\fill} Summer term 2015\\
+Arthur Allignol \quad\quad Maria Umlauft \hspace{\fill} 28.5.2014\\[-1.2ex]
+\mbox{}\hrulefill\\
+\newline \renewcommand{\baselinestretch}{1}
+\setcounter{ka}{0} \vspace{-0.5cm}
+
+
+
+\begin{center}
+\large{{\bf Exercise Sheet 5}}
+\end{center}
+
+<<setup, include = FALSE>>=
+require(knitr)
+opts_chunk$set(fig.path = "graphics/", echo = TRUE, size = "small")
+require(xtable)
+@ 
+
+\begin{aufgabe}{{\bf Data aggregation}}
+  
+  Consider the {\tt WM\_teams\_2014.csv} data set that contains
+  information on each player of the World Cup 2014, e.g., age, club,
+  country, caps (number of plays for the national team).
+  \begin{enumerate}
+  \item Use the {\tt aggregate} function to compute the mean and
+    median age of the players stratified on country and position
+  \item Create a data set that contains the clubs and number of
+    players in each club that participate in the world cup. The data
+    set should be ordered from highest to lowest
+  \end{enumerate}
+
+\end{aufgabe}
+
+\begin{aufgabe}{{\bf Simulation of confidence intervals}}
+  
+  The interpretation of a confidence interval at the 95\% level is
+  that, if an experiment were repeated a hundred times on multiple
+  samples, the calculated confidence interval for each sample would
+  encompass the true parameter 95\% of the time. We can check how this
+  works in practice in a simulation study.
+  \begin{enumerate}
+  \item The {\tt t.test()} function returns a list-like result. use
+    {\tt str()} and extract the one list component with the {\tt
+      conf.int}.  To see how to do this, simply look at t.test(X) for
+    a simple sample such as X <- 1:20.  For the interval of this one
+    sample, you should get a numeric vector of length 2 (of the two
+    interval end points)
+  \item Write a function that takes as argument a loop counter {\tt i}
+    and the sample size {\tt n} and 
+    \begin{itemize}
+    \item create a vector of $n$ random variables normally distributed with
+      mean 0 and standard deviation 1
+    \item Compute a t-test
+    \item returns whether the confidence interval contains the true
+      mean value (in this case 0).
+    \end{itemize}
+    You can take inspiration from the {\tt check\_level} function
+    defined in the lecture at p. 78
+  \item Run the simulation 1000 times and check the assumption
+
+  \end{enumerate}
+
+  
+\end{aufgabe}
+
+\footer
+
+\end{document}
