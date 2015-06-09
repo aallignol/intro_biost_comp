@@ -7,6 +7,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import datetime
+import os
 
 parser = argparse.ArgumentParser(description="Get velib data")
 parser.add_argument('-a', '--apikey',
@@ -17,7 +18,6 @@ parser.add_argument('-c', '--contract',
                     default = 'Paris')
 args = parser.parse_args()
 contract = args.contract
-print(contract)
 api_key = args.apikey
 
 my_url = "https://api.jcdecaux.com/vls/v1/stations?contract=" + contract + "&apiKey=" +api_key
@@ -39,6 +39,6 @@ for i in in_data:
 
 velib_data = pd.DataFrame.from_dict(in_data)
 
-data_name = "../data/velib_data_" + actual_time.strftime('%Y_%m_%d_%H') + ".csv"
+data_name = "/home/arthur/Documents/Ulm/Teaching/SS_2015/intro_biostat_comp/exam/velib/data/velib_data_" + actual_time.strftime('%Y_%m_%d_%H_%M') + ".csv"
 
 velib_data.to_csv(data_name, encoding = 'utf-8')

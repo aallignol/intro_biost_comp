@@ -1,0 +1,1 @@
+35 * * * * /home/arthur/Documents/Ulm/Teaching/SS_2015/intro_biostat_comp/exam/velib/prg/get_data.py -a 295d18a8594d2d70ad7fc667f431c9550c376f58
