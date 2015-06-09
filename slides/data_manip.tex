@@ -314,7 +314,7 @@
 \end{alltt}
 \begin{verbatim}
 ## [1] "<!DOCTYPE html SYSTEM \"about:legacy-compat\">"                                                                                                             
-## [2] "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:my=\"mynames\" xmlns:gf=\"http://www.taz.de/namespace/gitfilter\"><!-- DEBUG start 15:12:50+02:00--><!--"
+## [2] "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:my=\"mynames\" xmlns:gf=\"http://www.taz.de/namespace/gitfilter\"><!-- DEBUG start 17:00:48+02:00--><!--"
 ## [3] "\t\tContent Management: openNewspaper www.opennewspaper.org based on TYPO3 www.typo3.org"
 \end{verbatim}
 \begin{alltt}
@@ -1499,7 +1499,12 @@ Display characters
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: babynames}}\end{kframe}
+\end{knitrout}
 Find in {\tt text}
 \begin{enumerate}
 \item All the names starting with L and with exactly 2 a's
@@ -3146,7 +3151,10 @@ In this case, a matrix of lists is returned...
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{require}\hlstd{(dplyr)}
+\end{alltt}
 
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: dplyr\\\#\# \\\#\# Attaching package: 'dplyr'\\\#\# \\\#\# The following object is masked from 'package:stats':\\\#\# \\\#\#\ \ \ \  filter\\\#\# \\\#\# The following objects are masked from 'package:base':\\\#\# \\\#\#\ \ \ \  intersect, setdiff, setequal, union}}\begin{alltt}
 \hlstd{iris} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Species)} \hlopt{%>%} \hlkwd{filter}\hlstd{(Petal.Length} \hlopt{>} \hlnum{4.8}\hlstd{)} \hlopt{%>%}
   \hlkwd{summarise}\hlstd{(}\hlkwc{mean_width} \hlstd{=} \hlkwd{mean}\hlstd{(Petal.Width))}
 \end{alltt}
@@ -3260,6 +3268,10 @@ leading to
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{require}\hlstd{(data.table)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: data.table\\\#\# data.table 1.9.4\ \ For help type: ?data.table\\\#\# *** NB: by=.EACHI is now explicit. See README to restore previous behaviour.\\\#\# \\\#\# Attaching package: 'data.table'\\\#\# \\\#\# The following objects are masked from 'package:dplyr':\\\#\# \\\#\#\ \ \ \  between, last}}\begin{alltt}
 \hlstd{(dt_iris} \hlkwb{<-} \hlkwd{data.table}\hlstd{(iris,} \hlkwc{key} \hlstd{=} \hlstr{"Species"}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
@@ -3524,7 +3536,8 @@ Special symbol {\tt .N}
   
   Consider \verb=WM_teams_2014.csv= data set that contains information
   on each player of the World Cup 2014, e.g., age, club, country, caps
-  (number of plays for the national team)
+  (number of plays for the national team). Using {\bf dplyr} or {\bf
+    data.table}, 
   \begin{enumerate}
   \item Find the three oldest and youngest players for each country
   \item Create a data set with the mean (with 95\% confidence

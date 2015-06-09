@@ -1962,7 +1962,8 @@ dt_iris[, Petal.Length.f := factor(Petal.Length > 4.8,
   
   Consider \verb=WM_teams_2014.csv= data set that contains information
   on each player of the World Cup 2014, e.g., age, club, country, caps
-  (number of plays for the national team)
+  (number of plays for the national team). Using {\bf dplyr} or {\bf
+    data.table}, 
   \begin{enumerate}
   \item Find the three oldest and youngest players for each country
   \item Create a data set with the mean (with 95\% confidence

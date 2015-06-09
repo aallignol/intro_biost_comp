@@ -7,7 +7,6 @@ import argparse
 import numpy as np
 import pandas as pd
 import datetime
-import os
 
 parser = argparse.ArgumentParser(description="Get velib data")
 parser.add_argument('-a', '--apikey',
