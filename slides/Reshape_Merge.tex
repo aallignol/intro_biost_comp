@@ -1,0 +1,1023 @@
+\documentclass[paper=screen,mathserif]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+\usetheme{CambridgeUS} 
+\useinnertheme{circles}
+\useoutertheme[footline=authortitle,subsection = false]{miniframes}
+\setbeamercolor{palette tertiary}{fg=white, bg=white!42!black}
+\setbeamercolor{alerted text}{fg=red!73!black}
+
+%%%%%%
+%\usepackage{Sweave}
+\usepackage{natbib}     % for references
+\usepackage[osf]{sourcesanspro}
+\usepackage{sourcecodepro}
+\usepackage{booktabs}
+\usepackage{eulervm}
+%\renewcommand{\ttdefault}{sourcecodepro}
+\usepackage{import}
+\usepackage{prodint}
+\usepackage{bbm}
+\usepackage{tabularx}
+\usepackage{dcolumn}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{graphicx,rotating,epsfig,multirow,multicol,hhline}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+
+\usepackage{listings}
+\lstset{
+  basicstyle=\tiny\ttfamily, % Standardschrift
+  % numbers=left,               % Ort der Zeilennummern
+  %numberstyle=\tiny,          % Stil der Zeilennummern
+  % stepnumber=2,               % Abstand zwischen den Zeilennummern
+  numbersep=5pt,              % Abstand der Nummern zum Text
+  tabsize=2,                  % Groesse von Tabs
+  extendedchars=true,         %
+  breaklines=true,            % Zeilen werden Umgebrochen
+  keywordstyle=\color{blue},
+  frame=b,         
+  stringstyle=\color{white}\ttfamily, % Farbe der String
+  showspaces=false,           % Leerzeichen anzeigen ?
+  showtabs=false,             % Tabs anzeigen ?
+}
+
+\usepackage{subcaption}
+
+\newcommand{\ft}[1]{\frametitle{#1}}
+\newcommand{\fst}[1]{\framesubtitle{#1}}
+
+\newenvironment{xframe}[1][]
+{\begin{frame}[fragile,environment=xframe]
+    \frametitle{#1}}
+  {\end{frame}}
+
+
+\title[Reshape and Merge]{Data Reshaping and Merging}
+
+\author{Arthur Allignol}
+
+\institute[]{\scriptsize{\url{arthur.allignol@uni-ulm.de}}}
+
+\date{}
+%%%%%%
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+%%%%%% title page
+\newcommand{\titlep}{yes}  % for titlepagelayout
+
+{
+\renewcommand{\insertframenumber}{}   % no page number on titlepage
+\begin{frame}
+\addtocounter{framenumber}{-1}
+\titlepage
+\end{frame}
+}
+
+
+
+\section{Data Reshaping}
+
+\begin{frame}
+  \ft{Data Reshaping}
+  An important operation in R
+  \begin{itemize}
+  \item Most R functions expect their input (usually data frames) to
+    be arranged in particular ways
+  \item It is the responsibility of the user to ensure that the data
+    are in the appropriate form
+  \item For instance, data for multiple groups are organised as
+    columns, with a column for each group
+  \item Most R functions expect values to be in {\bf one} column with
+    an additional column specifying the groups  
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Long versus Wide Format} 
+  
+  Useful concept for, e.g., {\em longitudinal studies}, in which a
+  patient may have several measurements over time
+  \begin{description}
+  \item[Wide] If all the measurements for a single individual are in
+    the same row, the data are said to be {\bf wide}
+    \small{
+\begin{verbatim}
+id visit1 visit2
+1      90     95
+2      80     78
+\end{verbatim}}
+  \item[Long] If each measurement is in a different row, the data are
+    said to be in the {\bf long} format
+\small{
+\begin{verbatim}
+id visit measure
+ 1     1      90
+ 1     2      95
+ 2     1      80
+ 2     2      78
+\end{verbatim}}
+  \end{description}
+  Most data sets are delivered in the wide format, modelling is done
+  in the long format
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt stack} and {\tt unstack} Functions}
+  
+  \verb=stack= and \verb=unstack= are simple functions (i.e., not very
+  flexible) that permits to transform data in the wide format to long
+  (\verb=stack=) and vice versa (\verb=unstack=)
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{group1} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{5}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{5}\hlstd{),}
+                   \hlkwc{group2} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{5}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{5}\hlstd{),}
+                   \hlkwc{group3} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{5}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{5}\hlstd{))}
+\hlstd{data}
+\end{alltt}
+\begin{verbatim}
+##      group1    group2    group3
+## 1  8.236471 16.158070 13.601809
+## 2  7.347027 15.736366  9.069201
+## 3  9.594164  7.017513  1.338025
+## 4  5.673082  5.427388  3.025840
+## 5 19.368087  9.980503  1.914245
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt stack} and {\tt unstack} Functions}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{sdata} \hlkwb{<-} \hlkwd{stack}\hlstd{(data)}
+\hlkwd{head}\hlstd{(sdata)}
+\end{alltt}
+\begin{verbatim}
+##      values    ind
+## 1  8.236471 group1
+## 2  7.347027 group1
+## 3  9.594164 group1
+## 4  5.673082 group1
+## 5 19.368087 group1
+## 6 16.158070 group2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+{\small The select option permits to select variables from the
+  original data set}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{head}\hlstd{(}\hlkwd{stack}\hlstd{(data,} \hlkwc{select} \hlstd{=} \hlopt{-}\hlstd{group1))}
+\end{alltt}
+\begin{verbatim}
+##      values    ind
+## 1 16.158070 group2
+## 2 15.736366 group2
+## 3  7.017513 group2
+## 4  5.427388 group2
+## 5  9.980503 group2
+## 6 13.601809 group3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt stack} and {\tt unstack} Functions}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{stack}\hlstd{(data,} \hlkwc{select} \hlstd{=} \hlkwd{c}\hlstd{(group1, group3))}
+\end{alltt}
+\begin{verbatim}
+##       values    ind
+## 1   8.236471 group1
+## 2   7.347027 group1
+## 3   9.594164 group1
+## 4   5.673082 group1
+## 5  19.368087 group1
+## 6  13.601809 group3
+## 7   9.069201 group3
+## 8   1.338025 group3
+## 9   3.025840 group3
+## 10  1.914245 group3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt stack} and {\tt unstack} Functions}
+  
+  The \verb=unstack= function does the inverse operation
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{unstack}\hlstd{(sdata)}
+\end{alltt}
+\begin{verbatim}
+##      group1    group2    group3
+## 1  8.236471 16.158070 13.601809
+## 2  7.347027 15.736366  9.069201
+## 3  9.594164  7.017513  1.338025
+## 4  5.673082  5.427388  3.025840
+## 5 19.368087  9.980503  1.914245
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+{\small The \verb=form= argument is a formula that specifies the
+  vector to be unstacked (LHS) and the indicator of the groups to
+  create (RHS)} 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{unstack}\hlstd{(sdata,} \hlkwc{form} \hlstd{= values} \hlopt{~} \hlstd{ind)}
+\end{alltt}
+\begin{verbatim}
+##      group1    group2    group3
+## 1  8.236471 16.158070 13.601809
+## 2  7.347027 15.736366  9.069201
+## 3  9.594164  7.017513  1.338025
+## 4  5.673082  5.427388  3.025840
+## 5 19.368087  9.980503  1.914245
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+ 
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  
+  The \verb=reshape= function performs the long $\rightarrow$ wide and
+  wide $\rightarrow$ long transformations
+  \begin{itemize}
+  \item Motivated by longitudinal data (repeated measurements) 
+  \item Very flexible function (maybe too much)
+  \item {\color{gray} Google very useful for using this function} 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+  
+
+
+As an example, consider a data set on US personal expenditure
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{usp}
+\end{alltt}
+\begin{verbatim}
+##                  type  X1940  X1945 X1950 X1955 X1960
+## 1    Food and Tobacco 22.200 44.500 59.60  73.2 86.80
+## 2 Household Operation 10.500 15.500 29.00  36.5 46.20
+## 3  Medical and Health  3.530  5.760  9.71  14.0 21.10
+## 4       Personal Care  1.040  1.980  2.45   3.4  5.40
+## 5   Private Education  0.341  0.974  1.80   2.6  3.64
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+ 
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+  Useful arguments for wide to long transformations
+  \begin{itemize}
+  \item \verb=varying=: names of sets of variables in the wide format
+    that correspond to single variables in long format. Can be a list
+    of names (see later)
+  \item \verb=v.names=: The name we wish to give the variable
+    containing these values in our long dataset
+  \item \verb=timevar=: The name we wish to give the variable
+    describing the different times or metrics
+  \item \verb=times=: the values this variable will have
+  \item \verb=ids=: Values describing the different individuals
+  \item \verb=direction=: Character string indicating the direction of
+    the transformation; either \verb="wide"= or \verb="long"=
+  \item \verb=times=, \verb=split=, \verb=sep=
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+  
+  {\small Only specifying \verb=varying= (as a list of variable names) and
+  \verb=direction= works}
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{rr} \hlkwb{<-} \hlkwd{reshape}\hlstd{(usp,} \hlkwc{varying} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwd{names}\hlstd{(usp)[}\hlopt{-}\hlnum{1}\hlstd{]),} \hlkwc{direction} \hlstd{=} \hlstr{"long"}\hlstd{)}
+\hlkwd{head}\hlstd{(rr)}
+\end{alltt}
+\begin{verbatim}
+##                    type time  X1940 id
+## 1.1    Food and Tobacco    1 22.200  1
+## 2.1 Household Operation    1 10.500  2
+## 3.1  Medical and Health    1  3.530  3
+## 4.1       Personal Care    1  1.040  4
+## 5.1   Private Education    1  0.341  5
+## 1.2    Food and Tobacco    2 44.500  1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+{\small But}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{reshape}\hlstd{(usp,} \hlkwc{varying} \hlstd{=} \hlkwd{names}\hlstd{(usp)[}\hlopt{-}\hlnum{1}\hlstd{],} \hlkwc{direction} \hlstd{=} \hlstr{"long"}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in guess(varying): failed to guess time-varying variables from their names}}\end{kframe}
+\end{knitrout}
+{\small If \verb=varying= is a vector of column names, \verb=reshape=
+  attempts to guess the \verb=v.names= and \verb=times= from these names}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{rr2} \hlkwb{<-} \hlkwd{reshape}\hlstd{(usp,} \hlkwc{varying} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwd{names}\hlstd{(usp)[}\hlopt{-}\hlnum{1}\hlstd{]),} \hlkwc{idvar} \hlstd{=} \hlstr{"type"}\hlstd{,}
+               \hlkwc{times} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{1940}\hlstd{,} \hlnum{1960}\hlstd{,} \hlnum{5}\hlstd{),} \hlkwc{v.names} \hlstd{=} \hlstr{"expenditure"}\hlstd{,}
+               \hlkwc{direction} \hlstd{=} \hlstr{"long"}\hlstd{)}
+\hlkwd{head}\hlstd{(rr2)}
+\end{alltt}
+\begin{verbatim}
+##                                         type time expenditure
+## Food and Tobacco.1940       Food and Tobacco 1940      22.200
+## Household Operation.1940 Household Operation 1940      10.500
+## Medical and Health.1940   Medical and Health 1940       3.530
+## Personal Care.1940             Personal Care 1940       1.040
+## Private Education.1940     Private Education 1940       0.341
+## Food and Tobacco.1945       Food and Tobacco 1945      44.500
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{rr3} \hlkwb{<-} \hlkwd{reshape}\hlstd{(usp,} \hlkwc{varying} \hlstd{=} \hlkwd{names}\hlstd{(usp)[}\hlopt{-}\hlnum{1}\hlstd{],} \hlkwc{idvar} \hlstd{=} \hlstr{"type"}\hlstd{,}
+               \hlkwc{times} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{1940}\hlstd{,} \hlnum{1960}\hlstd{,} \hlnum{5}\hlstd{),} \hlkwc{v.names} \hlstd{=} \hlstr{"expenditure"}\hlstd{,}
+               \hlkwc{direction} \hlstd{=} \hlstr{"long"}\hlstd{)}
+\hlkwd{head}\hlstd{(rr3)}
+\end{alltt}
+\begin{verbatim}
+##                                         type time expenditure
+## Food and Tobacco.1940       Food and Tobacco 1940      22.200
+## Household Operation.1940 Household Operation 1940      10.500
+## Medical and Health.1940   Medical and Health 1940       3.530
+## Personal Care.1940             Personal Care 1940       1.040
+## Private Education.1940     Private Education 1940       0.341
+## Food and Tobacco.1945       Food and Tobacco 1945      44.500
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\pause
+
+Specifying a vector of names in \verb=varying= now works because we
+also specify how the resulting variable should be named
+(\verb=v.names=)
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+
+  The \verb=split= argument can be used to automatically determine the
+  values for the times and names for the variables containing the
+  values. It is a list with 3 components
+  \begin{itemize}
+  \item \verb=regexp=: regular expression used to split the names used
+    in \verb=varying=
+  \item \verb=include= Logical that decides whether splitting occurs
+    after the first character of the matched string
+  \item Optionally \verb=fixed=: Logical; Fixed-string matching
+  \end{itemize} 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{rr4} \hlkwb{<-} \hlkwd{reshape}\hlstd{(usp,} \hlkwc{varying} \hlstd{=} \hlkwd{names}\hlstd{(usp)[}\hlopt{-}\hlnum{1}\hlstd{],} \hlkwc{idvar} \hlstd{=} \hlstr{"type"}\hlstd{,}
+               \hlkwc{split} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwc{regexp} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{include} \hlstd{=} \hlnum{TRUE}\hlstd{),}
+               \hlkwc{direction} \hlstd{=} \hlstr{"long"}\hlstd{)}
+\hlkwd{head}\hlstd{(rr4)}
+\end{alltt}
+\begin{verbatim}
+##                                         type time      X
+## Food and Tobacco.1940       Food and Tobacco 1940 22.200
+## Household Operation.1940 Household Operation 1940 10.500
+## Medical and Health.1940   Medical and Health 1940  3.530
+## Personal Care.1940             Personal Care 1940  1.040
+## Private Education.1940     Private Education 1940  0.341
+## Food and Tobacco.1945       Food and Tobacco 1945 44.500
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+  
+  The \verb=sep= argument is sometimes useful to help \verb=reshape=
+  automagically find the \verb=v.names=
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{rr5} \hlkwb{<-} \hlkwd{reshape}\hlstd{(usp,} \hlkwc{varying} \hlstd{=} \hlkwd{names}\hlstd{(usp)[}\hlopt{-}\hlnum{1}\hlstd{],} \hlkwc{idvar} \hlstd{=} \hlstr{"type"}\hlstd{,}
+               \hlkwc{sep} \hlstd{=} \hlstr{""}\hlstd{,}
+               \hlkwc{direction} \hlstd{=} \hlstr{"long"}\hlstd{)}
+\hlkwd{head}\hlstd{(rr5)}
+\end{alltt}
+\begin{verbatim}
+##                                         type time      X
+## Food and Tobacco.1940       Food and Tobacco 1940 22.200
+## Household Operation.1940 Household Operation 1940 10.500
+## Medical and Health.1940   Medical and Health 1940  3.530
+## Personal Care.1940             Personal Care 1940  1.040
+## Private Education.1940     Private Education 1940  0.341
+## Food and Tobacco.1945       Food and Tobacco 1945 44.500
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Wide $\rightarrow$ Long Transformation}
+  
+  Reshape()'d data have additional attributes so that the inverse
+  transformation is easy 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{reshape}\hlstd{(rr2)}
+\end{alltt}
+\begin{verbatim}
+##                                         type  X1940  X1945 X1950 X1955
+## Food and Tobacco.1940       Food and Tobacco 22.200 44.500 59.60  73.2
+## Household Operation.1940 Household Operation 10.500 15.500 29.00  36.5
+## Medical and Health.1940   Medical and Health  3.530  5.760  9.71  14.0
+## Personal Care.1940             Personal Care  1.040  1.980  2.45   3.4
+## Private Education.1940     Private Education  0.341  0.974  1.80   2.6
+##                          X1960
+## Food and Tobacco.1940    86.80
+## Household Operation.1940 46.20
+## Medical and Health.1940  21.10
+## Personal Care.1940        5.40
+## Private Education.1940    3.64
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Long $\rightarrow$ Wide Transformation}
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{longdat} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{id} \hlstd{=} \hlkwd{as.integer}\hlstd{(}\hlkwd{mapply}\hlstd{(rep,} \hlnum{1}\hlopt{:}\hlnum{3}\hlstd{,} \hlnum{3}\hlstd{)),}
+                      \hlkwc{visit} \hlstd{=} \hlkwd{rep}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{3}\hlstd{,} \hlnum{3}\hlstd{),}
+                      \hlkwc{x} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{9}\hlstd{),} \hlkwc{y} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{9}\hlstd{))}
+\hlstd{longdat}
+\end{alltt}
+\begin{verbatim}
+##   id visit           x           y
+## 1  1     1 -0.81388880  2.13614580
+## 2  1     2  0.02367343  0.59968110
+## 3  1     3 -0.75318770  0.10254288
+## 4  2     1 -0.44997151  0.08131841
+## 5  2     2  1.20391574  1.42280041
+## 6  2     3 -0.85149491 -0.70167391
+## 7  3     1 -0.60408186  0.21489069
+## 8  3     2  0.18008182  0.97398995
+## 9  3     3 -0.94984086 -0.99838284
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Long $\rightarrow$ Wide Transformation}
+  
+  Arguments needed (beside the data set to reshape)
+  \begin{itemize}
+  \item \verb=idvar=: names of variable that define the experimental
+    units
+  \item \verb=v.names=: Variables that are used to create the multiple
+    variables in the wide format
+  \item \verb=timevar= identifies the ``time'' variable for the
+    repeated measurements
+  \item \verb=direction=: \verb="long"= or \verb="wide"=
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Long $\rightarrow$ Wide Transformation}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{widedat} \hlkwb{<-} \hlkwd{reshape}\hlstd{(longdat,} \hlkwc{idvar} \hlstd{=} \hlstr{"id"}\hlstd{,} \hlkwc{v.names} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"x"}\hlstd{,} \hlstr{"y"}\hlstd{),}
+                   \hlkwc{timevar} \hlstd{=} \hlstr{"visit"}\hlstd{,} \hlkwc{direction} \hlstd{=} \hlstr{"wide"}\hlstd{)}
+\hlstd{widedat}
+\end{alltt}
+\begin{verbatim}
+##   id        x.1        y.1        x.2       y.2        x.3        y.3
+## 1  1 -0.8138888 2.13614580 0.02367343 0.5996811 -0.7531877  0.1025429
+## 4  2 -0.4499715 0.08131841 1.20391574 1.4228004 -0.8514949 -0.7016739
+## 7  3 -0.6040819 0.21489069 0.18008182 0.9739900 -0.9498409 -0.9983828
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{The {\tt reshape} Function}
+  \fst{Long $\rightarrow$ Wide Transformation}
+
+  Wide to long transformation again easy from the reshape()'d data
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{reshape}\hlstd{(widedat)}
+\end{alltt}
+\begin{verbatim}
+##     id visit           x           y
+## 1.1  1     1 -0.81388880  2.13614580
+## 2.1  2     1 -0.44997151  0.08131841
+## 3.1  3     1 -0.60408186  0.21489069
+## 1.2  1     2  0.02367343  0.59968110
+## 2.2  2     2  1.20391574  1.42280041
+## 3.2  3     2  0.18008182  0.97398995
+## 1.3  1     3 -0.75318770  0.10254288
+## 2.3  2     3 -0.85149491 -0.70167391
+## 3.3  3     3 -0.94984086 -0.99838284
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Your Turn}
+
+  Consider the \verb=mammaca= data set
+  \begin{itemize}
+  \item Based on a real study on mammary carcinoma (the variable names
+    are authentic)
+  \item 65 women were followed for 4 visits
+  \item We want to look at the evolution of all the variables over the
+    visits
+  \end{itemize}
+  {\bf Reshape the data in the long format} 
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Your Turn}
+
+  Consider the {\tt transplant} data set. It contains informations on
+  the survival of patients on the waiting list for the Stanford heart
+  transplant program. Important variables are
+  \begin{description}
+    \item[{\tt fustat}] Follow up status (1 dead; 0 alive at the end
+      of the study)
+    \item[{\tt futime}] Follow up time
+    \item[{\tt wait.time}] Waiting time until transplant ({\tt NA} if
+      no transplant
+    \item[{\tt transplant}] Transplant status (0 no transplant, 1
+      transplanted at {\tt wait.time})
+  \end{description}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Your Turn}
+
+  To be analysed correctly, these data need to be transformed in some
+  kind of long format. Consider 2 individuals as illustration
+{\scriptsize
+\begin{verbatim}
+id   accept.dt      age surgery fustat futime wait.time transplant
+1   1967-11-15 30.84463       0      1     49        NA          0
+4   1968-03-28 40.26283       0      1     38        35          1
+\end{verbatim}}
+
+  The resulting data set should look like
+  {\scriptsize
+\begin{verbatim}
+id   accept.dt      age surgery status start stop transplant
+1   1967-11-15 30.84463       0      1     0   49          0
+2   1968-03-28 40.26283       0      0     0   35          0
+2   1968-03-28 40.26283       0      1     35  38          1
+\end{verbatim}}
+
+\end{frame}
+
+\section{Combining and Merging}
+
+\begin{frame}[fragile]
+  \ft{Combining Data Frames}
+  
+  At the most basic level, two or more data frames can be combined by
+  rows using \verb=rbind=, or by columns using \verb=cbind=
+  \begin{description}
+  \item[rbind] Data frames must have the same number of columns
+  \item[cbind] The data must have the same number of rows
+  \end{description} 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{d1} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{4}\hlstd{),} \hlkwc{y} \hlstd{=} \hlkwd{sample}\hlstd{(letters,} \hlnum{4}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{FALSE}\hlstd{))}
+\hlstd{d2} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{rnorm}\hlstd{(}\hlnum{4}\hlstd{),} \hlkwc{y} \hlstd{=} \hlkwd{sample}\hlstd{(letters,} \hlnum{4}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{FALSE}\hlstd{))}
+\hlstd{d1}
+\end{alltt}
+\begin{verbatim}
+##             x y
+## 1  0.51149711 w
+## 2  0.02354815 r
+## 3  0.40077915 f
+## 4 -0.22095408 n
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Combining Data Frames}  
+  \fst{{\tt cbind}}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{cbind}\hlstd{(d1, d2)}
+\end{alltt}
+\begin{verbatim}
+##             x y          x y
+## 1  0.51149711 w -1.0056397 z
+## 2  0.02354815 r -1.5335319 g
+## 3  0.40077915 f -1.2513303 c
+## 4 -0.22095408 n  0.6772757 r
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+{\small Duplicate column names are not detected}
+\pause 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{cbind}\hlstd{(d1,} \hlkwc{z} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##             x y z
+## 1  0.51149711 w 1
+## 2  0.02354815 r 2
+## 3  0.40077915 f 1
+## 4 -0.22095408 n 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+{\small Smaller vectors/data are recycled}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Combining Data Frames}  
+  \fst{{\tt rbind}}
+  
+  For using \verb=rbind=, names and classes of values to be joined
+  must match 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{rbind}\hlstd{(d1, d2)}
+\end{alltt}
+\begin{verbatim}
+##             x y
+## 1  0.51149711 w
+## 2  0.02354815 r
+## 3  0.40077915 f
+## 4 -0.22095408 n
+## 5 -1.00563975 z
+## 6 -1.53353187 g
+## 7 -1.25133028 c
+## 8  0.67727572 r
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Combining Data Frames}  
+  \fst{{\tt rbind}}
+  
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{d1}\hlopt{$}\hlstd{y} \hlkwb{<-} \hlkwd{factor}\hlstd{(d1}\hlopt{$}\hlstd{y)}
+\hlstd{d2}\hlopt{$}\hlstd{y} \hlkwb{<-} \hlkwd{factor}\hlstd{(d2}\hlopt{$}\hlstd{y)}
+\hlkwd{rbind}\hlstd{(d1, d2)}
+\end{alltt}
+\begin{verbatim}
+##             x y
+## 1  0.51149711 w
+## 2  0.02354815 r
+## 3  0.40077915 f
+## 4 -0.22095408 n
+## 5 -1.00563975 z
+## 6 -1.53353187 g
+## 7 -1.25133028 c
+## 8  0.67727572 r
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+It works!
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Combining Data Frames}  
+  \fst{{\tt rbind}}
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(d3} \hlkwb{<-} \hlkwd{rbind}\hlstd{(d1,} \hlkwd{data.frame}\hlstd{(}\hlkwc{x} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{12}\hlstd{)))}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in `[<-.factor`(`*tmp*`, ri, value = structure(c(4L, 3L, 1L, 2L, : invalid factor level, NA generated}}\begin{verbatim}
+##                    x    y
+## 1  0.511497108998716    w
+## 2 0.0235481470618808    r
+## 3  0.400779147687347    f
+## 4 -0.220954084894623    n
+## 5                  X <NA>
+\end{verbatim}
+\begin{alltt}
+\hlkwd{sapply}\hlstd{(d3, class)}
+\end{alltt}
+\begin{verbatim}
+##           x           y 
+## "character"    "factor"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{rbind}\hlstd{(d1,} \hlkwd{data.frame}\hlstd{(}\hlkwc{y} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{d} \hlstd{=} \hlnum{12}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in match.names(clabs, names(xi)): names do not match previous names}}\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Merge Data Frames}
+  
+  For more complicated tasks, the \verb=merge= function can be used
+  \begin{itemize}
+  \item The default behaviour of merge is to join together rows of the
+    data frames based on the values of all of the variables (columns)
+    that the data frames have in common ({\em natural join})
+  \item When called without argument, \verb=merge= only returns rows
+    which have observations in both data frames
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{dd1} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{a} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{5}\hlstd{,}\hlnum{6}\hlstd{),} \hlkwc{x} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{9}\hlstd{,}\hlnum{12}\hlstd{,}\hlnum{14}\hlstd{,}\hlnum{21}\hlstd{,}\hlnum{8}\hlstd{))}
+\hlstd{dd2} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{a}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{6}\hlstd{),}\hlkwc{y}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{8}\hlstd{,}\hlnum{14}\hlstd{,}\hlnum{19}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlkwd{merge}\hlstd{(dd1, dd2)}
+\end{alltt}
+\begin{verbatim}
+##   a  x  y
+## 1 1  9  8
+## 2 4 14 19
+## 3 6  8  2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Merge Data Frames}
+  
+  To change the default behaviour the arguments
+  \begin{itemize}
+  \item \verb|all = TRUE|: Includes all rows ({\em full outer join})
+  \item \verb|all.x = TRUE|: Includes all rows of the first data frame
+    ({\em left outer join})
+  \item \verb|all.y = TRUE|: Includes all rows of the second data frame
+    ({\em right outer join})
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Merge Data Frames}
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{merge}\hlstd{(dd1, dd2,} \hlkwc{all} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##   a  x  y
+## 1 1  9  8
+## 2 2 12 NA
+## 3 3 NA 14
+## 4 4 14 19
+## 5 5 21 NA
+## 6 6  8  2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\pause
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{merge}\hlstd{(dd1, dd2,} \hlkwc{all.x} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##   a  x  y
+## 1 1  9  8
+## 2 2 12 NA
+## 3 4 14 19
+## 4 5 21 NA
+## 5 6  8  2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\pause
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{merge}\hlstd{(dd1, dd2,} \hlkwc{all.y} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##   a  x  y
+## 1 1  9  8
+## 2 3 NA 14
+## 3 4 14 19
+## 4 6  8  2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \ft{Merge Data Frames}
+  \begin{itemize}
+  \item The \verb=by= argument permits to specify the name of the
+    variables that should be used for the merging.
+  \item If the merging variables have different names in the data
+    frames to merge, the \verb=by.x= and \verb=by.y= arguments can be
+    used
+  \end{itemize} 
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{dd1}\hlopt{$}\hlstd{PAT} \hlkwb{<-} \hlstd{letters[}\hlnum{1}\hlopt{:}\hlnum{5}\hlstd{]}
+\hlstd{dd2}\hlopt{$}\hlstd{id} \hlkwb{<-} \hlstd{letters[}\hlnum{3}\hlopt{:}\hlnum{6}\hlstd{]}
+\hlkwd{merge}\hlstd{(dd1, dd2,} \hlkwc{by.x} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"PAT"}\hlstd{),} \hlkwc{by.y} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"id"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##   PAT a.x  x a.y  y
+## 1   c   4 14   1  8
+## 2   d   5 21   3 14
+## 3   e   6  8   4 19
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\pause
+Note the new variables \verb=a.x= and \verb=a.y=
+  
+\end{frame}
+
+\begin{frame}
+  \ft{Your Turn}
+\end{frame}
+
+\end{document}
+
+
